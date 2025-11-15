@@ -25,7 +25,7 @@ namespace CurlDotNet.Core
         /// <summary>
         /// The target URL.
         /// </summary>
-        public string Url { get; set; }
+        public string Url { get; set; } = string.Empty;
 
         /// <summary>
         /// HTTP method (GET, POST, PUT, DELETE, etc.).
@@ -40,7 +40,7 @@ namespace CurlDotNet.Core
         /// <summary>
         /// Request body data.
         /// </summary>
-        public string Data { get; set; }
+        public string? Data { get; set; }
 
         /// <summary>
         /// Whether to URL encode the data (--data-urlencode flag).
@@ -50,7 +50,7 @@ namespace CurlDotNet.Core
         /// <summary>
         /// Binary data for upload.
         /// </summary>
-        public byte[] BinaryData { get; set; }
+        public byte[]? BinaryData { get; set; }
 
         /// <summary>
         /// Form data for multipart/form-data.
@@ -65,7 +65,7 @@ namespace CurlDotNet.Core
         /// <summary>
         /// Output file path (-o flag).
         /// </summary>
-        public string OutputFile { get; set; }
+        public string? OutputFile { get; set; }
 
         /// <summary>
         /// Whether to use remote filename for output (-O flag).
@@ -129,27 +129,27 @@ namespace CurlDotNet.Core
         /// <summary>
         /// User agent string (-A or --user-agent).
         /// </summary>
-        public string UserAgent { get; set; }
+        public string? UserAgent { get; set; }
 
         /// <summary>
         /// Referer header (-e or --referer).
         /// </summary>
-        public string Referer { get; set; }
+        public string? Referer { get; set; }
 
         /// <summary>
         /// Cookie string (-b or --cookie).
         /// </summary>
-        public string Cookie { get; set; }
+        public string? Cookie { get; set; }
 
         /// <summary>
         /// Cookie jar file path (-c or --cookie-jar).
         /// </summary>
-        public string CookieJar { get; set; }
+        public string? CookieJar { get; set; }
 
         /// <summary>
         /// Basic authentication (-u or --user).
         /// </summary>
-        public NetworkCredential Credentials { get; set; }
+        public NetworkCredential? Credentials { get; set; }
 
         /// <summary>
         /// Alias for Credentials for test compatibility.
@@ -168,7 +168,7 @@ namespace CurlDotNet.Core
         /// <summary>
         /// Proxy authentication (--proxy-user).
         /// </summary>
-        public NetworkCredential ProxyCredentials { get; set; }
+        public NetworkCredential? ProxyCredentials { get; set; }
 
         /// <summary>
         /// Maximum time in seconds (--max-time).
@@ -198,7 +198,7 @@ namespace CurlDotNet.Core
         /// <summary>
         /// Range of bytes to request (-r or --range).
         /// </summary>
-        public string Range { get; set; }
+        public string? Range { get; set; }
 
         /// <summary>
         /// Whether to use compressed encoding (--compressed).
@@ -208,17 +208,17 @@ namespace CurlDotNet.Core
         /// <summary>
         /// Certificate file for client authentication (--cert).
         /// </summary>
-        public string CertFile { get; set; }
+        public string? CertFile { get; set; }
 
         /// <summary>
         /// Certificate key file (--key).
         /// </summary>
-        public string KeyFile { get; set; }
+        public string? KeyFile { get; set; }
 
         /// <summary>
         /// CA certificate file (--cacert).
         /// </summary>
-        public string CaCertFile { get; set; }
+        public string? CaCertFile { get; set; }
 
         /// <summary>
         /// Alias for CaCertFile for test compatibility.
@@ -232,32 +232,32 @@ namespace CurlDotNet.Core
         /// <summary>
         /// Interface to use for outgoing connections (--interface).
         /// </summary>
-        public string Interface { get; set; }
+        public string? Interface { get; set; }
 
         /// <summary>
         /// HTTP version to use (--http1.0, --http1.1, --http2).
         /// </summary>
-        public string HttpVersion { get; set; }
+        public string? HttpVersion { get; set; }
 
         /// <summary>
         /// Request method override (-X flag value).
         /// </summary>
-        public string CustomMethod { get; set; }
+        public string? CustomMethod { get; set; }
 
         /// <summary>
         /// Write-out format string (-w or --write-out).
         /// </summary>
-        public string WriteOut { get; set; }
+        public string? WriteOut { get; set; }
 
         /// <summary>
         /// Progress callback handler.
         /// </summary>
-        public Action<double, long, long> ProgressHandler { get; set; }
+        public Action<double, long, long>? ProgressHandler { get; set; }
 
         /// <summary>
         /// The original command string.
         /// </summary>
-        public string OriginalCommand { get; set; }
+        public string? OriginalCommand { get; set; }
 
         /// <summary>
         /// Whether to show progress bar (--progress-bar).
@@ -272,7 +272,7 @@ namespace CurlDotNet.Core
         /// <summary>
         /// DNS servers to use (--dns-servers).
         /// </summary>
-        public string DnsServers { get; set; }
+        public string? DnsServers { get; set; }
 
         /// <summary>
         /// Resolve host to IP (--resolve).
@@ -302,7 +302,7 @@ namespace CurlDotNet.Core
         /// <summary>
         /// SOCKS proxy (--socks5).
         /// </summary>
-        public string Socks5Proxy { get; set; }
+        public string? Socks5Proxy { get; set; }
 
         /// <summary>
         /// Retry count (--retry).
