@@ -146,9 +146,13 @@ namespace CurlDotNet.Core
             {
                 throw new CurlMalformedUrlException($"Invalid URL: {options.Url}");
             }
-            catch (TaskCanceledException ex)
+            catch (TaskCanceledException)
             {
-                throw new CurlOperationTimeoutException(options.MaxTime > 0 ? options.MaxTime : 30, options.OriginalCommand);
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    return CreateCancelledResult(options);
+                }
+                return CreateTimeoutResult(options);
             }
             catch (HttpRequestException ex)
             {
@@ -388,6 +392,32 @@ namespace CurlDotNet.Core
             {
                 options.ProgressHandler = settings.OnProgress;
             }
+        }
+
+        private CurlResult CreateTimeoutResult(CurlOptions options)
+        {
+            return new CurlResult
+            {
+                StatusCode = 408,
+                Body = $"Operation timed out after {GetTimeoutSeconds(options)} seconds.",
+                Command = options.OriginalCommand
+            };
+        }
+
+        private CurlResult CreateCancelledResult(CurlOptions options)
+        {
+            return new CurlResult
+            {
+                StatusCode = 499,
+                Body = "Operation cancelled by caller.",
+                Command = options.OriginalCommand
+            };
+        }
+
+        private static int GetTimeoutSeconds(CurlOptions options)
+        {
+            var timeout = options.MaxTime ?? Curl.DefaultMaxTimeSeconds;
+            return timeout > 0 ? timeout : 30;
         }
 
         public void Dispose()

@@ -16,7 +16,6 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using CurlDotNet.Exceptions;
 
 namespace CurlDotNet.Core
 {
@@ -30,14 +29,18 @@ namespace CurlDotNet.Core
             var uri = new Uri(options.Url);
             var filePath = uri.LocalPath;
 
-            // Check if file exists
-            if (!File.Exists(filePath))
-            {
-                throw new CurlFileCouldntReadException($"File not found: {filePath}");
-            }
-
             try
             {
+                if (!File.Exists(filePath))
+                {
+                    return new CurlResult
+                    {
+                        StatusCode = 404,
+                        Body = $"File not found: {filePath}",
+                        Command = options.OriginalCommand
+                    };
+                }
+
                 var result = new CurlResult
                 {
                     StatusCode = 200,
@@ -92,11 +95,21 @@ namespace CurlDotNet.Core
             }
             catch (UnauthorizedAccessException ex)
             {
-                throw new CurlFileCouldntReadException($"Permission denied: {filePath}");
+                return new CurlResult
+                {
+                    StatusCode = 403,
+                    Body = $"Permission denied: {filePath}",
+                    Command = options.OriginalCommand
+                };
             }
             catch (IOException ex)
             {
-                throw new CurlReadErrorException(filePath, ex.Message);
+                return new CurlResult
+                {
+                    StatusCode = 500,
+                    Body = $"File read error: {ex.Message}",
+                    Command = options.OriginalCommand
+                };
             }
         }
 

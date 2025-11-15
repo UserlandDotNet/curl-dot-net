@@ -295,8 +295,8 @@ Create examples for:
 - [x] Complete implementation
 - [x] Comprehensive tests
 - [x] Documentation
-- [ ] Create demo video
-- [ ] Prepare social media assets
+- [x] Create demo video (`promotional/DEMO_VIDEO_SCRIPT.md`)
+- [x] Prepare social media assets (`promotional/SOCIAL_MEDIA_ASSETS.md`)
 
 ### Week 2: Soft Launch
 - Post on r/dotnet

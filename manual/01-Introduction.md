@@ -149,12 +149,13 @@ Console.WriteLine(result1.StatusCode);  // 200
 
 ## What's Next?
 
-- [Installation Guide](02-Installation.md) - Get started
-- [Quick Start](03-Quick-Start.md) - Your first curl command in C#
-- [Three Ways to Use CurlDotNet](04-Three-Ways.md) - Deep dive into each API
-- [Tutorials](README.md#tutorials) - Learn all major curl tasks
+- [Compatibility Matrix](04-Compatibility-Matrix.md) – Confirm your target runtime, Unity build, or Azure Functions SKU is supported before deploying.
+- [Microsoft & .NET Foundation](02-Microsoft-And-DotNet-Foundation.md) – Shareable rationale for architects, procurement, and InfoSec reviewers.
+- [LibCurl Playbook](05-LibCurl-Playbook.md) – Learn how to turn this API into reusable service clients with shared defaults, retries, and diagnostics.
+- [docs/ADVANCED.md](../docs/ADVANCED.md) – Deep dive into middleware, protocol handlers, and engine extensibility.
+- [Official curl tutorial](https://curl.se/docs/tutorial.html) – Refresh curl CLI semantics; every flag maps 1:1 inside CurlDotNet.
 
 ---
 
-**Next:** [Installation Guide →](02-Installation.md)
+**Next:** [Compatibility Matrix →](04-Compatibility-Matrix.md)
 

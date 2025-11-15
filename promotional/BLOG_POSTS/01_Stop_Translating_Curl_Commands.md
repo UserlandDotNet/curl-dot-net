@@ -315,7 +315,8 @@ Give it a try. Paste a curl command into your next .NET project. I think you'll 
 **Resources:**
 - [CurlDotNet on GitHub](https://github.com/jacob/curl-dot-net)
 - [NuGet Package](https://www.nuget.org/packages/CurlDotNet)
-- [Documentation](https://github.com/jacob/curl-dot-net#readme)
+- [Curl String Deep Dive Manual](../../manual/06-Curl-String-Deep-Dive.md)
+- [Fluent Builder Cookbook](../../manual/07-Fluent-Builder-Cookbook.md)
 
 **About the Author:** Jacob Mellor is a .NET developer passionate about making API integration simpler and more enjoyable. CurlDotNet is sponsored by IronSoftware.
 

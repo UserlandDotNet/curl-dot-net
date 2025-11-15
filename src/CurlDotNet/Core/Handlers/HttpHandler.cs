@@ -65,46 +65,39 @@ namespace CurlDotNet.Core
             var request = CreateRequest(options);
             var startTime = DateTime.UtcNow;
             var timings = new CurlTimings();
+            var verboseLog = options.Verbose ? new StringBuilder() : null;
 
             try
             {
                 // Configure timeout
                 using var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-                if (options.MaxTime > 0)
+                var timeoutSeconds = GetTimeoutSeconds(options);
+                if (timeoutSeconds > 0)
                 {
-                    cts.CancelAfter(TimeSpan.FromSeconds(options.MaxTime));
+                    cts.CancelAfter(TimeSpan.FromSeconds(timeoutSeconds));
                 }
+
+                AppendVerboseRequest(verboseLog, request);
 
                 // Send request
                 timings.PreTransfer = (DateTime.UtcNow - startTime).TotalMilliseconds;
                 var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cts.Token);
                 timings.StartTransfer = (DateTime.UtcNow - startTime).TotalMilliseconds;
+                AppendVerboseResponseHeaders(verboseLog, response);
 
                 // Handle redirects manually if needed
                 if (options.FollowLocation && IsRedirect(response.StatusCode))
                 {
-                    return await HandleRedirect(response, options, cts.Token, timings, startTime);
+                    return await HandleRedirect(response, request, options, cts.Token, timings, startTime, verboseLog);
                 }
 
-                // Read response
-                var result = await CreateResult(response, options, timings, startTime);
-
-                // Handle output file
-                if (!string.IsNullOrEmpty(options.OutputFile))
-                {
-                    await WriteOutputFile(result, options.OutputFile);
-                }
-
-                timings.Total = (DateTime.UtcNow - startTime).TotalMilliseconds;
-                result.Timings = timings;
-
-                return result;
+                return await BuildResultAsync(request, response, options, timings, startTime, cts.Token, verboseLog);
             }
             catch (TaskCanceledException)
             {
                 if (cancellationToken.IsCancellationRequested)
-                    throw new CurlAbortedByCallbackException("Operation cancelled");
-                throw new CurlOperationTimeoutException(options.MaxTime > 0 ? options.MaxTime : 30, options.OriginalCommand);
+                    return CreateCancelledResult(options);
+                return CreateTimeoutResult(options);
             }
             catch (HttpRequestException ex)
             {
@@ -174,6 +167,12 @@ namespace CurlDotNet.Core
             }
 
             return request;
+        }
+
+        private static int GetTimeoutSeconds(CurlOptions options)
+        {
+            var timeout = options.MaxTime ?? Curl.DefaultMaxTimeSeconds;
+            return timeout > 0 ? timeout : 30;
         }
 
         private HttpMethod GetHttpMethod(CurlOptions options)
@@ -257,14 +256,17 @@ namespace CurlDotNet.Core
             return null;
         }
 
-        private async Task<CurlResult> CreateResult(HttpResponseMessage response, CurlOptions options,
+        private async Task<(CurlResult Result, string? ResponseText, byte[]? ResponseBinary)> CreateResult(HttpResponseMessage response, CurlOptions options,
             CurlTimings timings, DateTime startTime)
         {
             var result = new CurlResult
             {
                 StatusCode = (int)response.StatusCode,
-                Headers = response.Headers.ToDictionary(h => h.Key, h => string.Join(", ", h.Value))
+                Headers = response.Headers.ToDictionary(h => h.Key, h => string.Join(", ", h.Value)),
+                Command = options.OriginalCommand
             };
+            string? responseText = null;
+            byte[]? responseBinary = null;
 
             // Add content headers
             if (response.Content != null)
@@ -279,23 +281,232 @@ namespace CurlDotNet.Core
                 {
                     if (IsTextContent(response.Content))
                     {
-                        result.Body = await response.Content.ReadAsStringAsync();
+                        responseText = await response.Content.ReadAsStringAsync();
                     }
                     else
                     {
-                        result.BinaryData = await response.Content.ReadAsByteArrayAsync();
+                        responseBinary = await response.Content.ReadAsByteArrayAsync();
                     }
                 }
             }
 
+            return (result, responseText, responseBinary);
+        }
+
+        private async Task<CurlResult> BuildResultAsync(HttpRequestMessage request, HttpResponseMessage response, CurlOptions options,
+            CurlTimings timings, DateTime startTime, CancellationToken cancellationToken, StringBuilder? verboseLog)
+        {
+            var (result, responseText, responseBinary) = await CreateResult(response, options, timings, startTime);
+            var downloadSize = responseBinary?.Length ?? (responseText != null ? Encoding.UTF8.GetByteCount(responseText) : 0);
+
+            await HandleOutputFilesAsync(options, result, responseText, responseBinary, cancellationToken);
+
+            result.Body = BuildFinalBody(options, request, response, responseText, verboseLog, downloadSize);
+            timings.Total = (DateTime.UtcNow - startTime).TotalMilliseconds;
+            result.Timings = timings;
+
             return result;
         }
 
-        private async Task<CurlResult> HandleRedirect(HttpResponseMessage response, CurlOptions options,
-            CancellationToken cancellationToken, CurlTimings timings, DateTime startTime)
+        private async Task HandleOutputFilesAsync(CurlOptions options, CurlResult result, string? responseText, byte[]? responseBinary, CancellationToken cancellationToken)
+        {
+            if (!string.IsNullOrEmpty(options.OutputFile))
+            {
+                await WriteOutputFile(options.OutputFile, responseText, responseBinary, cancellationToken);
+                result.OutputFiles.Add(options.OutputFile);
+            }
+            else if (options.UseRemoteFileName)
+            {
+                var remoteFile = DetermineRemoteFileName(options);
+                await WriteOutputFile(remoteFile, responseText, responseBinary, cancellationToken);
+                result.OutputFiles.Add(remoteFile);
+            }
+
+            result.BinaryData = responseBinary;
+        }
+
+        private async Task WriteOutputFile(string outputFile, string? body, byte[]? binary, CancellationToken cancellationToken)
+        {
+            if (binary != null)
+            {
+#if NETSTANDARD2_0 || NET48
+                await Task.Run(() => File.WriteAllBytes(outputFile, binary), cancellationToken);
+#else
+                await File.WriteAllBytesAsync(outputFile, binary, cancellationToken);
+#endif
+            }
+            else if (!string.IsNullOrEmpty(body))
+            {
+#if NETSTANDARD2_0 || NET48
+                await Task.Run(() => File.WriteAllText(outputFile, body), cancellationToken);
+#else
+                await File.WriteAllTextAsync(outputFile, body, cancellationToken);
+#endif
+            }
+        }
+
+        private string BuildFinalBody(CurlOptions options, HttpRequestMessage request, HttpResponseMessage response, string? responseText, StringBuilder? verboseLog, int downloadSize)
+        {
+            var builder = new StringBuilder();
+
+            if (options.Verbose && verboseLog != null)
+            {
+                builder.AppendLine(verboseLog.ToString().TrimEnd());
+            }
+
+            if (options.IncludeHeaders)
+            {
+                if (builder.Length > 0)
+                    builder.AppendLine();
+                builder.AppendLine(BuildHeaderBlock(response));
+            }
+
+            if (!string.IsNullOrEmpty(responseText))
+            {
+                if (builder.Length > 0)
+                    builder.AppendLine();
+                builder.Append(responseText);
+            }
+
+            if (!string.IsNullOrEmpty(options.WriteOut))
+            {
+                var writeOut = FormatWriteOut(options.WriteOut, response, options, downloadSize);
+                if (!string.IsNullOrWhiteSpace(writeOut))
+                {
+                    if (builder.Length > 0)
+                        builder.AppendLine();
+                    builder.Append(writeOut);
+                }
+            }
+
+            return builder.Length > 0
+                ? builder.ToString()
+                : responseText ?? string.Empty;
+        }
+
+        private string BuildHeaderBlock(HttpResponseMessage response)
+        {
+            var builder = new StringBuilder();
+            builder.AppendLine(BuildStatusLine(response));
+            foreach (var header in response.Headers)
+            {
+                builder.AppendLine($"{header.Key}: {string.Join(", ", header.Value)}");
+            }
+            if (response.Content != null)
+            {
+                foreach (var header in response.Content.Headers)
+                {
+                    builder.AppendLine($"{header.Key}: {string.Join(", ", header.Value)}");
+                }
+            }
+            return builder.ToString().TrimEnd();
+        }
+
+        private string BuildStatusLine(HttpResponseMessage response)
+        {
+            var version = response.Version != null ? $"{response.Version.Major}.{response.Version.Minor}" : "1.1";
+            return $"HTTP/{version} {(int)response.StatusCode} {response.ReasonPhrase}";
+        }
+
+        private void AppendVerboseRequest(StringBuilder? verboseLog, HttpRequestMessage request)
+        {
+            if (verboseLog == null)
+                return;
+
+            var uri = request.RequestUri;
+            verboseLog.AppendLine($"*   Trying {uri.Host}...");
+            verboseLog.AppendLine($"* Connected to {uri.Host} ({uri.Host}) port {uri.Port} (#0)");
+            verboseLog.AppendLine($"> {request.Method} {uri.PathAndQuery} HTTP/{request.Version?.ToString() ?? "1.1"}");
+
+            foreach (var header in request.Headers)
+            {
+                verboseLog.AppendLine($"> {header.Key}: {string.Join(", ", header.Value)}");
+            }
+            if (request.Content != null)
+            {
+                foreach (var header in request.Content.Headers)
+                {
+                    verboseLog.AppendLine($"> {header.Key}: {string.Join(", ", header.Value)}");
+                }
+            }
+            verboseLog.AppendLine(">");
+        }
+
+        private void AppendVerboseResponseHeaders(StringBuilder? verboseLog, HttpResponseMessage response)
+        {
+            if (verboseLog == null)
+                return;
+
+            verboseLog.AppendLine($"< {BuildStatusLine(response)}");
+            foreach (var header in response.Headers)
+            {
+                verboseLog.AppendLine($"< {header.Key}: {string.Join(", ", header.Value)}");
+            }
+            if (response.Content != null)
+            {
+                foreach (var header in response.Content.Headers)
+                {
+                    verboseLog.AppendLine($"< {header.Key}: {string.Join(", ", header.Value)}");
+                }
+            }
+            verboseLog.AppendLine("<");
+        }
+
+        private string FormatWriteOut(string format, HttpResponseMessage response, CurlOptions options, int downloadSize)
+        {
+            if (string.IsNullOrEmpty(format))
+                return string.Empty;
+
+            var formatted = format
+                .Replace("\\n", Environment.NewLine)
+                .Replace("\\t", "\t");
+
+            formatted = formatted
+                .Replace("%{http_code}", ((int)response.StatusCode).ToString())
+                .Replace("%{size_download}", downloadSize.ToString())
+                .Replace("%{url_effective}", options.Url ?? string.Empty)
+                .Replace("%{content_type}", response.Content?.Headers?.ContentType?.MediaType ?? string.Empty);
+
+            return formatted;
+        }
+
+        private CurlResult CreateTimeoutResult(CurlOptions options)
+        {
+            return new CurlResult
+            {
+                StatusCode = 408,
+                Body = $"Operation timed out after {GetTimeoutSeconds(options)} seconds.",
+                Command = options.OriginalCommand
+            };
+        }
+
+        private CurlResult CreateCancelledResult(CurlOptions options)
+        {
+            return new CurlResult
+            {
+                StatusCode = 499,
+                Body = "Operation cancelled by caller.",
+                Command = options.OriginalCommand
+            };
+        }
+
+        private string DetermineRemoteFileName(CurlOptions options)
+        {
+            var uri = new Uri(options.Url);
+            var fileName = Path.GetFileName(uri.LocalPath);
+            if (string.IsNullOrWhiteSpace(fileName))
+            {
+                fileName = "curl-download";
+            }
+            return Path.Combine(Directory.GetCurrentDirectory(), fileName);
+        }
+
+        private async Task<CurlResult> HandleRedirect(HttpResponseMessage response, HttpRequestMessage initialRequest, CurlOptions options,
+            CancellationToken cancellationToken, CurlTimings timings, DateTime startTime, StringBuilder? verboseLog)
         {
             var redirectCount = 0;
             var currentResponse = response;
+            var currentRequest = initialRequest;
 
             while (IsRedirect(currentResponse.StatusCode) && redirectCount < options.MaxRedirects)
             {
@@ -312,8 +523,10 @@ namespace CurlDotNet.Core
                 options.Url = newUrl;
                 redirectCount++;
 
-                var newRequest = CreateRequest(options);
-                currentResponse = await _httpClient.SendAsync(newRequest, cancellationToken);
+                currentRequest = CreateRequest(options);
+                AppendVerboseRequest(verboseLog, currentRequest);
+                currentResponse = await _httpClient.SendAsync(currentRequest, cancellationToken);
+                AppendVerboseResponseHeaders(verboseLog, currentResponse);
 
                 timings.Redirect = (DateTime.UtcNow - startTime).TotalMilliseconds;
             }
@@ -323,7 +536,7 @@ namespace CurlDotNet.Core
                 throw new CurlTooManyRedirectsException(redirectCount);
             }
 
-            return await CreateResult(currentResponse, options, timings, startTime);
+            return await BuildResultAsync(currentRequest, currentResponse, options, timings, startTime, cancellationToken, verboseLog);
         }
 
         private bool IsRedirect(HttpStatusCode statusCode)
@@ -371,27 +584,6 @@ namespace CurlDotNet.Core
             return null;
         }
 
-        private async Task WriteOutputFile(CurlResult result, string outputFile)
-        {
-            if (result.BinaryData != null)
-            {
-#if NETSTANDARD2_0 || NET48
-                await Task.Run(() => File.WriteAllBytes(outputFile, result.BinaryData));
-#else
-                await File.WriteAllBytesAsync(outputFile, result.BinaryData);
-#endif
-            }
-            else if (!string.IsNullOrEmpty(result.Body))
-            {
-#if NETSTANDARD2_0 || NET48
-                await Task.Run(() => File.WriteAllText(outputFile, result.Body));
-#else
-                await File.WriteAllTextAsync(outputFile, result.Body);
-#endif
-            }
-            result.OutputFiles.Add(outputFile);
-        }
-
         private static HttpClient CreateDefaultHttpClient()
         {
             var handler = new HttpClientHandler
@@ -401,6 +593,7 @@ namespace CurlDotNet.Core
             };
 
             return new HttpClient(handler);
+        }
         }
     }
 }

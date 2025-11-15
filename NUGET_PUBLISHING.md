@@ -162,8 +162,8 @@ Update `PackageReleaseNotes` to describe what changed.
 - [ ] XML documentation is complete
 - [ ] Package builds successfully: `dotnet pack -c Release`
 - [ ] Package tested locally
-- [ ] API key is valid
-- [ ] Repository URL is correct in .csproj
+- [ ] API key is valid _(maintainer task)_
+- [x] Repository URL is correct in `.csproj` (`src/CurlDotNet/CurlDotNet.csproj`)
 
 ## Troubleshooting
 
