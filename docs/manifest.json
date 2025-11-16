@@ -1,5 +1,5 @@
 {
-  "source_base_path": "/Users/jacob/Documents/GitHub/curl-dot-net/docfx",
+  "source_base_path": "/Users/jacob/Documents/GitHub/curl-dot-net/build/docfx",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
