@@ -71,3 +71,4 @@ USERLAND_ESTIMATION_TABLE.md
 # Promotional content (internal use)
 promotional/
 .env
+promotion.md
