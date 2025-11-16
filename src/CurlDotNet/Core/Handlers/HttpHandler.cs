@@ -354,16 +354,22 @@ namespace CurlDotNet.Core
                 builder.AppendLine(verboseLog.ToString().TrimEnd());
             }
 
+            // Include headers BEFORE body when -i flag is used (like curl)
             if (options.IncludeHeaders)
             {
                 if (builder.Length > 0)
                     builder.AppendLine();
                 builder.AppendLine(BuildHeaderBlock(response));
+                // Add empty line between headers and body
+                if (!string.IsNullOrEmpty(responseText))
+                {
+                    builder.AppendLine();
+                }
             }
 
             if (!string.IsNullOrEmpty(responseText))
             {
-                if (builder.Length > 0)
+                if (!options.IncludeHeaders && builder.Length > 0)
                     builder.AppendLine();
                 builder.Append(responseText);
             }

@@ -386,21 +386,51 @@ namespace CurlDotNet.Core
                         optionToken = arg.Substring(0, equalsIndex);
                     }
 
-                    var optionName = NormalizeOption(optionToken);
-                    var needsValue = NeedsValue(optionName);
-                    var value = inlineValue;
+                    // Handle combined short options like -sS, -sSL etc.
+                    if (optionToken.StartsWith("-") && !optionToken.StartsWith("--") && optionToken.Length > 2)
+                    {
+                        // Split into individual options
+                        foreach (char c in optionToken.Substring(1))
+                        {
+                            var singleOption = "-" + c;
+                            var normalizedOption = NormalizeOption(singleOption);
+                            var singleNeedsValue = NeedsValue(normalizedOption);
 
-                    if (needsValue && string.IsNullOrEmpty(inlineValue))
-                    {
-                        if (i + 1 < args.Count && !args[i + 1].StartsWith("-"))
-                    {
-                        value = args[++i];
+                            if (singleNeedsValue)
+                            {
+                                // If this short option needs a value, use the inline value or next arg
+                                var singleValue = inlineValue;
+                                if (string.IsNullOrEmpty(inlineValue) && i + 1 < args.Count && !args[i + 1].StartsWith("-"))
+                                {
+                                    singleValue = args[++i];
+                                }
+                                ProcessOption(normalizedOption, singleValue, options, ref methodSpecified);
+                                break; // Stop processing combined options if one needs a value
+                            }
+                            else
+                            {
+                                ProcessOption(normalizedOption, "", options, ref methodSpecified);
+                            }
                         }
                     }
-
-                    if (!ProcessOption(optionName, value, options, ref methodSpecified))
+                    else
                     {
-                        // Unknown option - ignore but do not consume URL arguments
+                        var optionName = NormalizeOption(optionToken);
+                        var needsValue = NeedsValue(optionName);
+                        var value = inlineValue;
+
+                        if (needsValue && string.IsNullOrEmpty(inlineValue))
+                        {
+                            if (i + 1 < args.Count && !args[i + 1].StartsWith("-"))
+                            {
+                                value = args[++i];
+                            }
+                        }
+
+                        if (!ProcessOption(optionName, value, options, ref methodSpecified))
+                        {
+                            // Unknown option - ignore but do not consume URL arguments
+                        }
                     }
                 }
                 else if (string.IsNullOrEmpty(options.Url))
@@ -739,6 +769,13 @@ namespace CurlDotNet.Core
             {
                 var key = header.Substring(0, colonIndex).Trim();
                 var value = header.Substring(colonIndex + 1).Trim();
+
+                // Special handling for User-Agent header
+                if (key.Equals("User-Agent", StringComparison.OrdinalIgnoreCase))
+                {
+                    options.UserAgent = value;
+                }
+
                 options.Headers[key] = value;
             }
         }

@@ -86,6 +86,12 @@ namespace CurlDotNet.Core
         /// </summary>
         public async Task<CurlResult> ExecuteAsync(string command, CancellationToken cancellationToken)
         {
+            // Validate command
+            if (string.IsNullOrWhiteSpace(command))
+            {
+                throw new ArgumentException("Command cannot be null or empty", nameof(command));
+            }
+
             var options = _parser.Parse(command);
             return await ExecuteAsync(options, cancellationToken);
         }

@@ -2,13 +2,16 @@
 
 [![NuGet](https://img.shields.io/nuget/v/CurlDotNet.svg)](https://www.nuget.org/packages/CurlDotNet/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/CurlDotNet.svg)](https://www.nuget.org/packages/CurlDotNet/)
+[![Documentation](https://img.shields.io/badge/Docs-GitHub%20Pages-blue.svg)](https://jacob-mellor.github.io/curl-dot-net/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![.NET 10 Ready](https://img.shields.io/badge/.NET%2010-Ready-success.svg)](manual/04-Compatibility-Matrix.md)
-[![Tests](https://img.shields.io/badge/Tests-225%2F240%20(93.75%25)-green.svg)](tests/README.md)
+[![Tests](https://img.shields.io/badge/Tests-228%2F240%20(95%25)-yellow.svg)](tests/README.md)
 [![.NET Standard 2.0](https://img.shields.io/badge/.NET%20Standard%202.0-Universal-blue.svg)](manual/04-Compatibility-Matrix.md)
 [![Build Status](https://img.shields.io/badge/Build-Passing-success.svg)](build/README.md)
 [![UserlandDotNet Vision](https://img.shields.io/badge/Userland-.NET%20Tooling-512BD4.svg)](manual/03-Future-Vision-UserlandDotNet.md)
 [![Sponsored by IronSoftware](https://img.shields.io/badge/Sponsored%20by-IronSoftware-red.svg)](https://ironsoftware.com)
+
+📚 **[Full Documentation](https://jacob-mellor.github.io/curl-dot-net/)** | 🚀 **[Getting Started](https://jacob-mellor.github.io/curl-dot-net/articles/getting-started.html)** | 📖 **[API Reference](https://jacob-mellor.github.io/curl-dot-net/api/)**
 
 ## 🌟 The Revolution: Copy & Paste curl Commands Directly into C#
 
@@ -178,7 +181,8 @@ using (var curl = new LibCurl())
 
 ## 🎯 Test Coverage & Quality
 
-**Current Test Status:** 225 passing out of 240 tests **(93.75% success rate)**
+**Current Test Status:** 228 passing out of 240 tests **(95% success rate)**
+⚠️ **Note:** Working towards 100% test pass rate for v1.0.1
 
 CurlDotNet is tested across multiple dimensions:
 - **Unit Tests:** Command parsing, option handling, protocol support
@@ -238,8 +242,8 @@ Visit [NuGet.org - CurlDotNet](https://www.nuget.org/packages/CurlDotNet/) to do
 ### System Requirements
 
 CurlDotNet requires:
-- **.NET Standard 2.0** or higher (supports .NET Framework 4.7.2+, .NET Core 2.0+, .NET 5.0+, .NET 6.0+, .NET 7.0+, .NET 8.0+)
-- **.NET 8.0** recommended for best performance and latest features
+- **.NET Standard 2.0** or higher (supports .NET Framework 4.7.2+, .NET Core 2.0+, .NET 5.0+, .NET 6.0+, .NET 7.0+, .NET 8.0+, .NET 10.0+)
+- **.NET 10.0** or **.NET 8.0** recommended for best performance and latest features
 - **.NET Framework 4.7.2** or higher on Windows
 - No external dependencies beyond standard .NET libraries
 
@@ -249,9 +253,10 @@ CurlDotNet is fully cross-platform and supports:
 
 | Platform | Version | Status | Notes |
 |----------|---------|--------|-------|
-| .NET 8.0 | 8.0+ | ✅ Full Support | Recommended, latest features |
-| .NET 6.0 | 6.0+ | ✅ Full Support | LTS support |
-| .NET 5.0 | 5.0+ | ✅ Full Support | Current |
+| .NET 10.0 | 10.0+ | ✅ Full Support | Latest features & performance |
+| .NET 8.0 | 8.0+ | ✅ Full Support | Current LTS, recommended |
+| .NET 6.0 | 6.0+ | ✅ Full Support | Previous LTS |
+| .NET 5.0 | 5.0+ | ✅ Full Support | Out of support |
 | .NET Core 3.1 | 3.1+ | ✅ Full Support | Legacy LTS |
 | .NET Standard 2.0 | 2.0+ | ✅ Full Support | Maximum compatibility |
 | .NET Framework | 4.7.2+ | ✅ Full Support | Windows only |
@@ -984,14 +989,24 @@ CurlDotNet is actively developed and maintained, with regular updates, bug fixes
 
 CurlDotNet is the first module in **UserlandDotNet**—a suite that will reimagine classic Linux tools (curl, grep, awk, sed, tar, etc.) as pure .NET libraries that plug into PowerShell, MAUI, ASP.NET, Azure Functions, and beyond. The goal is simple: give Microsoft developers the same command-chain power they enjoy on Linux, but with better tooling, IntelliSense, and deployment. Follow the roadmap in [manual/03-Future-Vision-UserlandDotNet.md](manual/03-Future-Vision-UserlandDotNet.md) and the upcoming [UserlandDotNet](https://github.com/UserlandDotNet) organization.
 
-## 📚 Additional Resources
+## 📚 Documentation
 
-### Documentation
+### 🌐 Online Documentation
 
-- **[Manual](manual/README.md)** – Comprehensive guides and tutorials (Markdown + DocFX).
-- **[API Reference](https://github.com/jacob-mellor/curl-dot-net)** – Generated XML/DocFX API docs.
-- **[Examples](examples/README.md)** – Real-world code examples in C#, F#, and VB.NET.
-- **[Advanced Features](docs/ADVANCED.md)** – Middleware, protocol extensions, fluent builder hooks.
+Visit our comprehensive documentation at **[https://jacob-mellor.github.io/curl-dot-net/](https://jacob-mellor.github.io/curl-dot-net/)**
+
+The documentation includes:
+- **[Getting Started Guide](https://jacob-mellor.github.io/curl-dot-net/articles/getting-started.html)** - Quick start tutorial
+- **[Installation Guide](https://jacob-mellor.github.io/curl-dot-net/articles/installation.html)** - Platform-specific setup
+- **[API Reference](https://jacob-mellor.github.io/curl-dot-net/api/)** - Complete API documentation
+- **[Examples](https://jacob-mellor.github.io/curl-dot-net/articles/examples.html)** - Real-world code samples
+- **[Migration Guide](https://jacob-mellor.github.io/curl-dot-net/articles/migration-guide.html)** - Migrate from HttpClient
+
+### 📖 Local Documentation
+
+- **[Manual](manual/README.md)** – Comprehensive guides and tutorials
+- **[Examples](examples/README.md)** – Code examples in C#, F#, and VB.NET
+- **[Advanced Features](docs/ADVANCED.md)** – Middleware, protocols, and extensions
 
 ### Related Resources
 

@@ -1,0 +1,4 @@
+- Never release if there's a red test. Always update the README with the testing status and code coverage. On every iteration or commit, try and improve the code coverage even by 1%.
+- Fixing tests is always the priority on a to-do list. If there's any broken test, that is the first item that happens
+- The purpose of an error message is not to tell the user that there's an exception but to help them fix the problem
+- Every error message should link to an appropriate documentation page online
