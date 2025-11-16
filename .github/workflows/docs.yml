@@ -28,16 +28,40 @@ jobs:
     - name: Install DocFX
       run: dotnet tool install -g docfx
 
-    - name: Build API Documentation
+    - name: Build Documentation
       run: |
         cd build/docfx
         docfx metadata
         docfx build
 
-    - name: Copy Markdown Documentation
+    - name: Verify Build Output
       run: |
-        # Copy markdown docs to build output
-        cp -r docs/* build/docfx/_site/
+        echo "Checking built documentation structure..."
+        ls -la build/docfx/_site/
+        ls -la build/docfx/_site/articles/ || echo "No articles directory yet"
+
+    - name: Create articles index redirect
+      run: |
+        # Ensure articles/index.html exists for proper navigation
+        if [ ! -f "build/docfx/_site/articles/index.html" ]; then
+          echo "Creating articles index redirect..."
+          mkdir -p build/docfx/_site/articles
+          cat > build/docfx/_site/articles/index.html << 'EOF'
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8">
+            <title>Articles - CurlDotNet</title>
+            <meta http-equiv="refresh" content="0; url=README.html">
+            <link rel="canonical" href="README.html">
+        </head>
+        <body>
+            <h1>Redirecting to Articles...</h1>
+            <p>If you are not redirected automatically, <a href="README.html">click here</a>.</p>
+        </body>
+        </html>
+        EOF
+        fi
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
