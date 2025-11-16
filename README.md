@@ -1,5 +1,9 @@
 # CurlDotNet - Pure .NET Implementation of curl for C# Developers
 
+<div align="center">
+  <img src="build/cueldotneticon.png" alt="CurlDotNet Logo" width="200" />
+</div>
+
 [![NuGet](https://img.shields.io/nuget/v/CurlDotNet.svg)](https://www.nuget.org/packages/CurlDotNet/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/CurlDotNet.svg)](https://www.nuget.org/packages/CurlDotNet/)
 [![Documentation](https://img.shields.io/badge/Docs-GitHub%20Pages-blue.svg)](https://jacob-mellor.github.io/curl-dot-net/)
