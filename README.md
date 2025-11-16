@@ -3,9 +3,10 @@
 [![NuGet](https://img.shields.io/nuget/v/CurlDotNet.svg)](https://www.nuget.org/packages/CurlDotNet/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/CurlDotNet.svg)](https://www.nuget.org/packages/CurlDotNet/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Platforms](https://img.shields.io/badge/.NET%204.7.2%20%7C%20.NET%20Standard%202.0%20%7C%20.NET%208-blue.svg)](manual/04-Compatibility-Matrix.md)
-[![Build Status](https://github.com/jacob-mellor/curl-dot-net/workflows/Build/badge.svg)](https://github.com/jacob-mellor/curl-dot-net/actions)
-[![Code Coverage](https://img.shields.io/badge/coverage-90%25+-green.svg)](https://github.com/jacob-mellor/curl-dot-net)
+[![.NET 10 Ready](https://img.shields.io/badge/.NET%2010-Ready-success.svg)](manual/04-Compatibility-Matrix.md)
+[![Tests](https://img.shields.io/badge/Tests-225%2F240%20(93.75%25)-green.svg)](tests/README.md)
+[![.NET Standard 2.0](https://img.shields.io/badge/.NET%20Standard%202.0-Universal-blue.svg)](manual/04-Compatibility-Matrix.md)
+[![Build Status](https://img.shields.io/badge/Build-Passing-success.svg)](build/README.md)
 [![UserlandDotNet Vision](https://img.shields.io/badge/Userland-.NET%20Tooling-512BD4.svg)](manual/03-Future-Vision-UserlandDotNet.md)
 [![Sponsored by IronSoftware](https://img.shields.io/badge/Sponsored%20by-IronSoftware-red.svg)](https://ironsoftware.com)
 

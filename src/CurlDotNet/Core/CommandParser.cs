@@ -318,11 +318,21 @@ namespace CurlDotNet.Core
                     continue;
                 }
 
-                // Windows-style escaped quotes: "" becomes "
+                // Windows-style escaped quotes: "" becomes " (when inside quotes)
                 if (c == '"' && next == '"' && inQuote && quoteChar == '"')
                 {
                     current.Append('"');
                     i += 2; // Skip both quotes
+                    continue;
+                }
+
+                // Also handle "" when not currently in quotes (Windows CMD style)
+                if (c == '"' && next == '"' && !inQuote)
+                {
+                    // This starts a quoted section with an immediate quote character
+                    inQuote = true;
+                    quoteChar = '"';
+                    i++; // Move to the second quote
                     continue;
                 }
 
