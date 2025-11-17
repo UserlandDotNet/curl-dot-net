@@ -252,7 +252,7 @@ Visit [NuGet.org - CurlDotNet](https://www.nuget.org/packages/CurlDotNet/) to do
 ### System Requirements
 
 CurlDotNet requires:
-- **.NET Standard 2.0** or higher (supports .NET Framework 4.7.2+, .NET Core 2.0+, .NET 5.0+, .NET 6.0+, .NET 7.0+, .NET 8.0+, .NET 10.0+)
+- **.NET Standard 2.0** or higher (supports .NET Framework 4.7.2+, .NET Core 2.0+, .NET 5.0+, .NET 6.0+, .NET 7.0+, .NET 8.0+, .NET 9.0+, .NET 10.0+)
 - **.NET 10.0** or **.NET 8.0** recommended for best performance and latest features
 - **.NET Framework 4.7.2** or higher on Windows
 - No external dependencies beyond standard .NET libraries
@@ -264,6 +264,7 @@ CurlDotNet is fully cross-platform and supports:
 | Platform | Version | Status | Notes |
 |----------|---------|--------|-------|
 | .NET 10.0 | 10.0+ | ✅ Full Support | Latest features & performance |
+| .NET 9.0 | 9.0+ | ✅ Full Support | Current stable release |
 | .NET 8.0 | 8.0+ | ✅ Full Support | Current LTS, recommended |
 | .NET 6.0 | 6.0+ | ✅ Full Support | Previous LTS |
 | .NET 5.0 | 5.0+ | ✅ Full Support | Out of support |
