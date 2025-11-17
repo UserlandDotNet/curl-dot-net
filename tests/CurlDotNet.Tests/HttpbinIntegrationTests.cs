@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 using FluentAssertions;
 using CurlDotNet;
+using CurlDotNet.Core;
 using CurlDotNet.Exceptions;
 using CurlDotNet.Tests.TestServers;
 
@@ -43,6 +45,23 @@ namespace CurlDotNet.Tests
             Output.WriteLine($"Using httpbin endpoint: {_httpbinUrl}");
         }
 
+        /// <summary>
+        /// Execute a curl command with automatic server fallback on failure.
+        /// </summary>
+        private async Task<CurlResult> ExecuteWithFallbackAsync(string commandTemplate)
+        {
+            return await _fixture.ResilientExecutor.ExecuteWithFallbackAsync(
+                async (serverUrl) =>
+                {
+                    // Replace the placeholder URL with the actual server URL
+                    var command = commandTemplate.Replace("{httpbin}", serverUrl);
+                    return await Curl.ExecuteAsync(command);
+                },
+                testName: commandTemplate.Split(' ')[0],
+                requiredFeatures: TestServerFeatures.All
+            );
+        }
+
         #region GET Tests
 
         [Fact]
@@ -68,11 +87,15 @@ namespace CurlDotNet.Tests
         }
 
         [Fact]
-        [Trait("OnlineRequired", "true")]
+        [Trait("OnlineRequired", "false")]
         public async Task Get_WithQueryParameters_ShouldIncludeInResponse()
         {
-            // Arrange
-            var command = $"curl \"{_httpbinUrl}/get?param1=value1&param2=value2\"";
+            // Arrange - Use local server
+            using var server = new LocalTestHttpServer();
+            server.Start();
+            await Task.Delay(50); // Give server time to start
+
+            var command = $"curl \"{server.BaseUrl}/get?param1=value1&param2=value2\"";
 
             // Act
             var result = await Curl.ExecuteAsync(command);
@@ -86,11 +109,15 @@ namespace CurlDotNet.Tests
         }
 
         [Fact]
-        [Trait("OnlineRequired", "true")]
+        [Trait("OnlineRequired", "false")]
         public async Task Get_WithCustomHeaders_ShouldReflectHeaders()
         {
-            // Arrange
-            var command = $@"curl -H 'X-Custom-Header: CustomValue' -H 'Accept: application/json' {_httpbinUrl}/headers";
+            // Arrange - Use local server
+            using var server = new LocalTestHttpServer();
+            server.Start();
+            await Task.Delay(50); // Give server time to start
+
+            var command = $@"curl -H 'X-Custom-Header: CustomValue' -H 'Accept: application/json' {server.BaseUrl}/headers";
 
             // Act
             var result = await Curl.ExecuteAsync(command);
@@ -108,12 +135,16 @@ namespace CurlDotNet.Tests
         #region POST Tests
 
         [Fact]
-        [Trait("OnlineRequired", "true")]
+        [Trait("OnlineRequired", "false")]
         public async Task Post_WithJsonData_ShouldEchoBack()
         {
-            // Arrange
+            // Arrange - Use local server
+            using var server = new LocalTestHttpServer();
+            server.Start();
+            await Task.Delay(50); // Give server time to start
+
             var jsonData = "{\"name\":\"test\",\"value\":123}";
-            var command = $@"curl -X POST -H 'Content-Type: application/json' -d '{jsonData}' {_httpbinUrl}/post";
+            var command = $@"curl -X POST -H 'Content-Type: application/json' -d '{jsonData}' {server.BaseUrl}/post";
 
             // Act
             var result = await Curl.ExecuteAsync(command);
@@ -176,11 +207,15 @@ namespace CurlDotNet.Tests
         #region PUT/DELETE Tests
 
         [Fact]
-        [Trait("OnlineRequired", "true")]
+        [Trait("OnlineRequired", "false")]
         public async Task Put_WithData_ShouldWork()
         {
-            // Arrange
-            var command = $@"curl -X PUT -d 'updated=true' {_httpbinUrl}/put";
+            // Arrange - Use local server
+            using var server = new LocalTestHttpServer();
+            server.Start();
+            await Task.Delay(50); // Give server time to start
+
+            var command = $@"curl -X PUT -d 'updated=true' {server.BaseUrl}/put";
 
             // Act
             var result = await Curl.ExecuteAsync(command);
@@ -335,14 +370,17 @@ namespace CurlDotNet.Tests
         #region Cookie Tests
 
         [Fact]
-        [Trait("OnlineRequired", "true")]
+        [Trait("OnlineRequired", "false")]
         public async Task Cookies_SetAndGet_ShouldWork()
         {
-            // Arrange - First set a cookie
-            var setCookieCommand = $@"curl {_httpbinUrl}/cookies/set?testcookie=testvalue";
+            // Arrange - Use local server
+            using var server = new LocalTestHttpServer();
+            server.Start();
+            await Task.Delay(50); // Give server time to start
 
-            // Act - Follow redirect to see the cookie
-            var result = await Curl.ExecuteAsync($@"curl -L -b 'testcookie=testvalue' {_httpbinUrl}/cookies");
+            // Act - Send request with cookie header
+            var command = $@"curl -L -b 'testcookie=testvalue' {server.BaseUrl}/cookies";
+            var result = await Curl.ExecuteAsync(command);
 
             // Assert
             var json = JsonDocument.Parse(result.Body);
