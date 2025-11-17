@@ -1,9 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('Windows'))">netstandard2.0;net472;net8.0;net10.0</TargetFrameworks>
-    <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('Windows'))">netstandard2.0;net8.0;net10.0</TargetFrameworks>
-    <!-- .NET 10 support added for promotional and future-proofing purposes -->
+    <!-- Default target frameworks -->
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('Windows')) AND '$(IncludeNet10)' != 'true'">netstandard2.0;net472;net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('Windows')) AND '$(IncludeNet10)' != 'true'">netstandard2.0;net8.0;net9.0</TargetFrameworks>
+
+    <!-- Optional .NET 10 support (set IncludeNet10=true to enable) -->
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('Windows')) AND '$(IncludeNet10)' == 'true'">netstandard2.0;net472;net8.0;net9.0;net10.0</TargetFrameworks>
+    <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('Windows')) AND '$(IncludeNet10)' == 'true'">netstandard2.0;net8.0;net9.0;net10.0</TargetFrameworks>
+    <!-- .NET 10 support is promotional/future-proofing - enable with: dotnet build -p:IncludeNet10=true -->
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -11,9 +16,9 @@
 
     <!-- Package Metadata -->
     <PackageId>CurlDotNet</PackageId>
-    <Version>1.2.8</Version>
-    <AssemblyVersion>1.2.8.0</AssemblyVersion>
-    <FileVersion>1.2.8.0</FileVersion>
+    <Version>1.2.10</Version>
+    <AssemblyVersion>1.2.10.0</AssemblyVersion>
+    <FileVersion>1.2.10.0</FileVersion>
 
     <!-- Authors and Sponsorship -->
     <Authors>Jacob Mellor;IronSoftware;Daniel Stenberg and curl contributors</Authors>
@@ -36,7 +41,8 @@ CurlDotNet brings the power of curl to .NET. Simply paste any curl command strin
 • Middleware and DI support
 
 📦 Supported Platforms:
-• .NET 10.0 (latest &amp; greatest!)
+• .NET 10.0 (future-ready, opt-in support!)
+• .NET 9.0 (latest &amp; greatest!)
 • .NET 8.0 (current LTS)
 • .NET Framework 4.7.2+ (Windows)
 • .NET Standard 2.0 (maximum compatibility)
