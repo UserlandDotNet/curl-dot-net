@@ -95,3 +95,4 @@ ACHIEVED.md
 nupkg/
 *.nupkg
 *.snupkg
+build_output.txt

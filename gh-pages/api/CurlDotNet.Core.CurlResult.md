@@ -425,7 +425,7 @@ Thrown when [Body](CurlDotNet.Core.CurlResult.md#CurlDotNet.Core.CurlResult.Body
 [System\.InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception 'System\.InvalidOperationException')  
 Thrown when JSON deserialization fails\.
 
-[JsonException](https://learn.microsoft.com/en-us/dotnet/api/jsonexception 'JsonException')  
+[System\.Exception](https://learn.microsoft.com/en-us/dotnet/api/system.exception 'System\.Exception')  
 Thrown when the JSON syntax is invalid\.
 
 ### Remarks
@@ -478,7 +478,7 @@ Access properties like: `dynamicObj.propertyName` or `dynamicObj["propertyName"]
 [System\.ArgumentNullException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentnullexception 'System\.ArgumentNullException')  
 Thrown when [Body](CurlDotNet.Core.CurlResult.md#CurlDotNet.Core.CurlResult.Body 'CurlDotNet\.Core\.CurlResult\.Body') is null or empty\.
 
-[JsonException](https://learn.microsoft.com/en-us/dotnet/api/jsonexception 'JsonException')  
+[System\.Exception](https://learn.microsoft.com/en-us/dotnet/api/system.exception 'System\.Exception')  
 Thrown when the JSON syntax is invalid\.
 
 ### Remarks
@@ -843,7 +843,7 @@ Thrown when [Body](CurlDotNet.Core.CurlResult.md#CurlDotNet.Core.CurlResult.Body
 [System\.InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception 'System\.InvalidOperationException')  
 Thrown when JSON deserialization fails or JSON doesn't match type [T](CurlDotNet.Core.CurlResult.md#CurlDotNet.Core.CurlResult.ParseJson_T_().T 'CurlDotNet\.Core\.CurlResult\.ParseJson\<T\>\(\)\.T')\.
 
-[JsonException](https://learn.microsoft.com/en-us/dotnet/api/jsonexception 'JsonException')  
+[System\.Exception](https://learn.microsoft.com/en-us/dotnet/api/system.exception 'System\.Exception')  
 Thrown when the JSON syntax is invalid\. See [System\.Exception\.InnerException](https://learn.microsoft.com/en-us/dotnet/api/system.exception.innerexception 'System\.Exception\.InnerException') for details\.
 
 ### Remarks
@@ -852,7 +852,7 @@ This method automatically detects whether to use System.Text.Json or Newtonsoft.
 
 For complex JSON structures, consider using [AsJsonDynamic\(\)](CurlDotNet.Core.CurlResult.md#CurlDotNet.Core.CurlResult.AsJsonDynamic() 'CurlDotNet\.Core\.CurlResult\.AsJsonDynamic\(\)') for exploration, then creating a typed class.
 
-If T doesn't match the JSON structure, properties that don't match will be left at their default values.
+If [T](CurlDotNet.Core.CurlResult.md#CurlDotNet.Core.CurlResult.ParseJson_T_().T 'CurlDotNet\.Core\.CurlResult\.ParseJson\<T\>\(\)\.T') doesn't match the JSON structure, properties that don't match will be left at their default values.
 
 ### See Also
 - [Alternative method name for parsing JSON](CurlDotNet.Core.CurlResult.md#CurlDotNet.Core.CurlResult.AsJson_T_() 'CurlDotNet\.Core\.CurlResult\.AsJson\<T\>\(\)')

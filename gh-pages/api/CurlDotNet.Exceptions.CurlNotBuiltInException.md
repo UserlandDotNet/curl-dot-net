@@ -16,6 +16,8 @@ Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system
 
 ## CurlNotBuiltInException\(string, string\) Constructor
 
+Initializes a new instance of the [CurlNotBuiltInException](CurlDotNet.Exceptions.CurlNotBuiltInException.md 'CurlDotNet\.Exceptions\.CurlNotBuiltInException') class\.
+
 ```csharp
 public CurlNotBuiltInException(string feature, string command=null);
 ```
@@ -25,14 +27,20 @@ public CurlNotBuiltInException(string feature, string command=null);
 
 `feature` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
+The feature that is not available in this build\.
+
 <a name='CurlDotNet.Exceptions.CurlNotBuiltInException.CurlNotBuiltInException(string,string).command'></a>
 
 `command` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The curl command that was executing when the error occurred\.
 ### Properties
 
 <a name='CurlDotNet.Exceptions.CurlNotBuiltInException.Feature'></a>
 
 ## CurlNotBuiltInException\.Feature Property
+
+Gets the feature that is not available
 
 ```csharp
 public string Feature { get; }

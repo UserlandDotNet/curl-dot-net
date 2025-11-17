@@ -16,6 +16,8 @@ Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system
 
 ## CurlFtpAcceptFailedException\(string, string\) Constructor
 
+Initializes a new instance of the CurlFtpAcceptFailedException class\.
+
 ```csharp
 public CurlFtpAcceptFailedException(string message, string command=null);
 ```
@@ -25,6 +27,10 @@ public CurlFtpAcceptFailedException(string message, string command=null);
 
 `message` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
+The error message that explains the reason for the exception\.
+
 <a name='CurlDotNet.Exceptions.CurlFtpAcceptFailedException.CurlFtpAcceptFailedException(string,string).command'></a>
 
 `command` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The curl command that caused the exception\.

@@ -21,6 +21,15 @@ Or via Package Manager:
 Install-Package CurlDotNet
 ```
 
+## 📊 Test Coverage
+
+**✅ 239 Unit Tests** - Comprehensive test suite ensuring reliability
+- Command parsing: 85+ tests
+- HTTP operations: 45+ tests
+- Integration tests: 22+ tests
+- Synthetic curl scenarios: 40+ tests
+- Error handling: 30+ tests
+
 ## 🚀 Quick Start Paths
 
 ### 🆕 Complete Beginner?

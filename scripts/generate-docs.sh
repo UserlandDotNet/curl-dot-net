@@ -94,6 +94,7 @@ Console.WriteLine(response.Body);
 - [Cookbook](cookbook/) - Common recipes
 - [Guides](guides/) - Advanced topics
 - [Reference](reference/) - Technical reference
+- [Exception Documentation](exceptions/) - Detailed error handling guides
 
 ## Installation
 
@@ -263,7 +264,7 @@ EOF
 
 # 6. Copy existing documentation
 echo "📂 Copying existing documentation..."
-for dir in tutorials cookbook getting-started guides reference; do
+for dir in tutorials cookbook getting-started guides reference exceptions; do
     if [ -d "docs/$dir" ]; then
         cp -r "docs/$dir" gh-pages/
         echo "✅ Copied $dir"

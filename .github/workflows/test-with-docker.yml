@@ -1,0 +1,96 @@
+name: Tests with Docker Services
+
+on:
+  push:
+    branches: [ dev, master ]
+  pull_request:
+    branches: [ dev, master ]
+
+jobs:
+  test-with-services:
+    name: Test with Local HTTP Services
+    runs-on: ubuntu-latest
+
+    # Use service containers for reliable testing
+    services:
+      httpbin:
+        image: kennethreitz/httpbin:latest
+        ports:
+          - 8080:80
+        options: >-
+          --health-cmd "curl -f http://localhost/get || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      echo-server:
+        image: hashicorp/http-echo:latest
+        ports:
+          - 8081:5678
+        options: >-
+          --health-cmd "wget --spider -q http://localhost:5678 || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup .NET SDK 8.0
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Wait for services to be ready
+      run: |
+        echo "Waiting for httpbin..."
+        for i in {1..30}; do
+          if curl -f http://localhost:8080/get > /dev/null 2>&1; then
+            echo "✅ httpbin is ready"
+            break
+          fi
+          echo "Waiting... ($i/30)"
+          sleep 1
+        done
+
+        echo "Waiting for echo server..."
+        for i in {1..30}; do
+          if curl -f http://localhost:8081 > /dev/null 2>&1; then
+            echo "✅ echo server is ready"
+            break
+          fi
+          echo "Waiting... ($i/30)"
+          sleep 1
+        done
+
+    - name: Test service connectivity
+      run: |
+        echo "Testing httpbin..."
+        curl -s http://localhost:8080/get | head -5
+
+        echo "Testing echo server..."
+        curl -s http://localhost:8081 | head -5
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build solution
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Run tests with local services
+      env:
+        HTTPBIN_URL: http://localhost:8080
+        ECHO_SERVER_URL: http://localhost:8081
+        USE_LOCAL_SERVICES: true
+      run: |
+        dotnet test --configuration Release --no-build \
+          --logger "console;verbosity=detailed" \
+          --filter "Category=Integration|Category=Http" \
+          -- xunit.parallelExecution.disable=true
+
+    - name: Test Results Summary
+      if: always()
+      run: |
+        echo "✅ Tests completed with local Docker services"
+        echo "📝 This ensures consistent, reliable test execution"

@@ -60,3 +60,14 @@ var response = await new CurlRequestBuilder()
     .WithRetry(3)
     .ExecuteAsync();
 ```
+
+---
+
+## Author
+
+**Jacob Mellor** - Senior Software Engineer at IronSoftware
+- [GitHub](https://github.com/jacob-mellor)
+- [IronSoftware Profile](https://ironsoftware.com/about-us/authors/jacobmellor/)
+- [LinkedIn](https://linkedin.com/in/jacob-mellor-iron-software)
+
+Sponsored by [IronSoftware](https://ironsoftware.com)

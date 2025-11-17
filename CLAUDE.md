@@ -26,7 +26,15 @@
   - Start of every todo list
   - End of every todo list
   - Before EVERY git commit
-- **Command**: `./scripts/test-all-locally.sh`
+- **NuGet Package Validation** (MANDATORY before commits):
+  - Run: `./scripts/test-nuget-package.sh`
+  - Ensures package builds correctly
+  - Verifies public API is accessible
+  - Tests basic functionality
+  - Returns proper error codes for CI/CD integration
+- **Commands**:
+  - `./scripts/test-all-locally.sh` - Full test suite
+  - `./scripts/test-nuget-package.sh` - NuGet package validation (run BEFORE commit)
 - **Philosophy**: Test locally, fix immediately with Claude, push working code
 - **CI/CD**: GitHub workflows are just a safety net, not primary testing
 
@@ -59,6 +67,7 @@
 ### Essential Scripts
 - `scripts/ship-it.sh` - Main deployment with auto-version bump
 - `scripts/test-all-locally.sh` - Comprehensive testing (run before commits)
+- `scripts/test-nuget-package.sh` - NuGet package validation (run before commits)
 - `scripts/smoke-test.sh` - Quick validation (30 seconds)
 - `scripts/test-local.sh` - Basic test runner
 - `scripts/sync-upstream.sh` - Sync with upstream fork
@@ -113,3 +122,13 @@
 - Use simple scripts over complex CI/CD
 - Fix issues locally with Claude for immediate resolution
 - Keep feedback loops as short as possible
+- never ignore CS1591: Missing XML comment for publicly visible type or member
+- Always fix it to the best of your ability doing the best job of documentation humanly possible
+- never  suppress  CS1591 warnings: And always fix on every single build cycle
+- Run final test suite to verify all tests pass no errors or skips or 
+  exceptions -> final todo
+  Run all examples too Fixing any warning or exceptions or buuild errors 
+  You will have to rebuild the documentation after too  because the XML 
+  surface has changed 
+
+As is the general instruction before finishing any to-do list

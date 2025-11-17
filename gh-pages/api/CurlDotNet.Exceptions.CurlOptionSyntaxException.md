@@ -16,6 +16,8 @@ Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system
 
 ## CurlOptionSyntaxException\(string, string\) Constructor
 
+Initializes a new instance of the [CurlOptionSyntaxException](CurlDotNet.Exceptions.CurlOptionSyntaxException.md 'CurlDotNet\.Exceptions\.CurlOptionSyntaxException') class\.
+
 ```csharp
 public CurlOptionSyntaxException(string option, string command=null);
 ```
@@ -25,6 +27,10 @@ public CurlOptionSyntaxException(string option, string command=null);
 
 `option` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
+The option that caused the syntax error\.
+
 <a name='CurlDotNet.Exceptions.CurlOptionSyntaxException.CurlOptionSyntaxException(string,string).command'></a>
 
 `command` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The curl command that caused the exception\.

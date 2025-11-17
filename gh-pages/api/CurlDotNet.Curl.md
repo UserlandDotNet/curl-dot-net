@@ -534,12 +534,12 @@ await Curl.Execute("");
 await Curl.Execute("   ");
 ```
 
-[CurlParseException](https://learn.microsoft.com/en-us/dotnet/api/curlparseexception 'CurlParseException')  
+[CurlParsingException](CurlDotNet.Exceptions.CurlParsingException.md 'CurlDotNet\.Exceptions\.CurlParsingException')  
 
 Thrown when the curl command can't be understood. Usually means typo or unsupported option.
 
 ```csharp
-// ❌ This will throw CurlParseException:
+// ❌ This will throw CurlParsingException:
 await Curl.Execute("curl --invalid-option https://example.com");
 ```
 
@@ -547,7 +547,7 @@ Error codes: CURLE_URL_MALFORMAT (3), CURLE_UNSUPPORTED_PROTOCOL (1)
 
 See: [curl error codes](https://curl.se/libcurl/c/libcurl-errors.html 'https://curl\.se/libcurl/c/libcurl\-errors\.html')
 
-[CurlDnsException](https://learn.microsoft.com/en-us/dotnet/api/curldnsexception 'CurlDnsException')  
+[CurlCouldntResolveHostException](CurlDotNet.Exceptions.CurlCouldntResolveHostException.md 'CurlDotNet\.Exceptions\.CurlCouldntResolveHostException')  
 
 Thrown when the hostname cannot be resolved (DNS failure).
 
@@ -556,7 +556,7 @@ try
 {
     await Curl.Execute("curl https://this-domain-does-not-exist.com");
 }
-catch (CurlDnsException ex)
+catch (Exceptions.CurlCouldntResolveHostException ex)
 {
     Console.WriteLine($"Could not find server: {ex.Hostname}");
 }
@@ -564,7 +564,7 @@ catch (CurlDnsException ex)
 
 Error code: CURLE_COULDNT_RESOLVE_HOST (6)
 
-[CurlTimeoutException](https://learn.microsoft.com/en-us/dotnet/api/curltimeoutexception 'CurlTimeoutException')  
+[CurlTimeoutException](CurlDotNet.Exceptions.CurlTimeoutException.md 'CurlDotNet\.Exceptions\.CurlTimeoutException')  
 
 Thrown when the operation takes longer than the timeout specified by [command](CurlDotNet.Curl.md#CurlDotNet.Curl.ExecuteAsync(string).command 'CurlDotNet\.Curl\.ExecuteAsync\(string\)\.command') (via `--max-time`) 
              or [DefaultMaxTimeSeconds](CurlDotNet.Curl.md#CurlDotNet.Curl.DefaultMaxTimeSeconds 'CurlDotNet\.Curl\.DefaultMaxTimeSeconds').
@@ -574,7 +574,7 @@ try
 {
     await Curl.ExecuteAsync("curl --max-time 5 https://very-slow-api.com");
 }
-catch (CurlTimeoutException ex)
+catch (Exceptions.CurlTimeoutException ex)
 {
     Console.WriteLine($"Timed out after {ex.Timeout} seconds");
 }
@@ -584,17 +584,17 @@ Error code: `CURLE_OPERATION_TIMEDOUT` (28)
 
 To cancel operations without waiting for timeout, use the [overload with ](CurlDotNet.Curl.md#CurlDotNet.Curl.ExecuteAsync(string,System.Threading.CancellationToken) 'CurlDotNet\.Curl\.ExecuteAsync\(string, System\.Threading\.CancellationToken\)').
 
-[CurlSslException](https://learn.microsoft.com/en-us/dotnet/api/curlsslexception 'CurlSslException')  
+[CurlSslException](CurlDotNet.Exceptions.CurlSslException.md 'CurlDotNet\.Exceptions\.CurlSslException')  
 
-Thrown for SSL/TLS certificate problems. This can occur when certificates are self-signed, expired, 
-             or don't match the domain. Check [CurlSslException\.CertificateError](https://learn.microsoft.com/en-us/dotnet/api/curlsslexception.certificateerror 'CurlSslException\.CertificateError') for details.
+Thrown for SSL/TLS certificate problems. This can occur when certificates are self-signed, expired,
+             or don't match the domain. Check [CertificateError](CurlDotNet.Exceptions.CurlSslException.md#CurlDotNet.Exceptions.CurlSslException.CertificateError 'CurlDotNet\.Exceptions\.CurlSslException\.CertificateError') for details.
 
 ```csharp
 try
 {
     await Curl.ExecuteAsync("curl https://self-signed-cert.example.com");
 }
-catch (CurlSslException ex)
+catch (Exceptions.CurlSslException ex)
 {
     Console.WriteLine($"SSL problem: {ex.Message}");
     if (ex.CertificateError != null)
@@ -607,10 +607,10 @@ Error codes: `CURLE_SSL_CONNECT_ERROR` (35), `CURLE_PEER_FAILED_VERIFICATION` (6
 
 <b>⚠️ WARNING:</b> Using `-k` or `--insecure` disables certificate validation and makes you vulnerable to man-in-the-middle attacks. Only use in development!
 
-[CurlException](https://learn.microsoft.com/en-us/dotnet/api/curlexception 'CurlException')  
+[CurlException](CurlDotNet.Exceptions.CurlException.md 'CurlDotNet\.Exceptions\.CurlException')  
 
-Base exception for all curl-related errors. All specific exceptions inherit from this. 
-             See [CurlException\.ErrorCode](https://learn.microsoft.com/en-us/dotnet/api/curlexception.errorcode 'CurlException\.ErrorCode') for the specific curl error code.
+Base exception for all curl-related errors. All specific exceptions inherit from this.
+             See [CurlErrorCode](CurlDotNet.Exceptions.CurlException.md#CurlDotNet.Exceptions.CurlException.CurlErrorCode 'CurlDotNet\.Exceptions\.CurlException\.CurlErrorCode') for the specific curl error code.
 
 Common error codes:
 
@@ -619,8 +619,8 @@ Common error codes:
 |The URL uses an unsupported protocol (not http, https, ftp, or file)|
 |The URL is malformed (missing protocol, invalid characters, etc.)|
 |DNS lookup failed - hostname doesn't exist|
-|Operation timed out (see [CurlTimeoutException](https://learn.microsoft.com/en-us/dotnet/api/curltimeoutexception 'CurlTimeoutException'))|
-|SSL certificate verification failed (see [CurlSslException](https://learn.microsoft.com/en-us/dotnet/api/curlsslexception 'CurlSslException'))|
+|Operation timed out (see [CurlTimeoutException](CurlDotNet.Exceptions.CurlTimeoutException.md 'CurlDotNet\.Exceptions\.CurlTimeoutException'))|
+|SSL certificate verification failed (see [CurlSslException](CurlDotNet.Exceptions.CurlSslException.md 'CurlDotNet\.Exceptions\.CurlSslException'))|
 
 For a complete list of all curl error codes, see [curl error codes](https://curl.se/libcurl/c/libcurl-errors.html 'https://curl\.se/libcurl/c/libcurl\-errors\.html').
 

@@ -1,0 +1,3 @@
+# exceptions
+
+Documentation for exceptions.

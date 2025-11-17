@@ -32,159 +32,17 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Setup .NET SDK 8.0
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: '8.0.x'
-
-    - name: Install DefaultDocumentation tool
-      run: dotnet tool install -g DefaultDocumentation.Console
-
-    - name: Build project with XML documentation
+    - name: Verify gh-pages folder exists
       run: |
-        echo "🔨 Building CurlDotNet with XML documentation..."
-        dotnet build src/CurlDotNet/CurlDotNet.csproj \
-          -c Release \
-          -p:GenerateDocumentationFile=true \
-          -v minimal
-
-    - name: Generate API documentation
-      run: |
-        echo "📚 Generating API documentation..."
-        mkdir -p gh-pages/api
-
-        # Generate class-level documentation
-        defaultdocumentation \
-          -a src/CurlDotNet/obj/Release/netstandard2.0/CurlDotNet.dll \
-          -o gh-pages/api \
-          --GeneratedPages "Types" \
-          --IncludeUndocumentedItems true \
-          --GeneratedAccessModifiers "Public, Protected"
-
-        echo "✅ Generated $(find gh-pages/api -name "*.md" | wc -l) documentation files"
-
-    - name: Setup Jekyll structure
-      run: |
-        echo "⚙️  Setting up Jekyll structure..."
-
-        # Create Jekyll config
-        cat > gh-pages/_config.yml << 'EOF'
-        title: CurlDotNet Documentation
-        description: Pure .NET implementation of curl for C#
-        baseurl: "/curl-dot-net"
-        url: "https://jacob-mellor.github.io"
-        theme: jekyll-theme-cayman
-        plugins:
-          - jekyll-sitemap
-          - jekyll-seo-tag
-        exclude:
-          - README.md
-          - .gitignore
-
-        # Author information
-        author:
-          name: Jacob Mellor
-          url: https://github.com/jacob-mellor
-          github: jacob-mellor
-          linkedin: jacob-mellor-iron-software
-
-        # SEO and social
-        social:
-          name: Jacob Mellor
-          links:
-            - https://github.com/jacob-mellor
-            - https://linkedin.com/in/jacob-mellor-iron-software
-            - https://ironsoftware.com/about-us/authors/jacobmellor/
-        EOF
-
-        # Create main index
-        cat > gh-pages/index.md << 'EOF'
-        ---
-        layout: default
-        title: CurlDotNet - Pure .NET curl for C#
-        ---
-
-        # CurlDotNet Documentation
-
-        A pure .NET implementation of curl for C#. No native dependencies, just clean C# code.
-
-        ## Quick Start
-
-        ```csharp
-        // Simple GET request
-        var response = await Curl.GetAsync("https://api.example.com/data");
-        Console.WriteLine(response.Body);
-        ```
-
-        ## Documentation
-
-        - [API Reference](api/) - Complete API documentation
-        - [Getting Started](getting-started/) - Installation and first steps
-        - [Tutorials](tutorials/) - Step-by-step guides
-        - [Cookbook](cookbook/) - Common recipes
-        - [Guides](guides/) - Advanced topics
-
-        ## Installation
-
-        ```bash
-        dotnet add package CurlDotNet
-        ```
-
-        ## Links
-
-        - [GitHub Repository](https://github.com/jacob-mellor/curl-dot-net)
-        - [NuGet Package](https://www.nuget.org/packages/CurlDotNet/)
-        - [Report Issues](https://github.com/jacob-mellor/curl-dot-net/issues)
-        EOF
-
-        # Create API index
-        cat > gh-pages/api/index.md << 'EOF'
-        ---
-        layout: default
-        title: API Reference
-        ---
-
-        # CurlDotNet API Reference
-
-        Complete API documentation for all classes and namespaces.
-
-        ## Main Classes
-
-        - [Curl](CurlDotNet.Curl.md) - Main entry point
-        - [CurlRequestBuilder](CurlDotNet.Core.CurlRequestBuilder.md) - Fluent request builder
-        - [CurlResult](CurlDotNet.Core.CurlResult.md) - Response object
-        - [CurlOptions](CurlDotNet.Core.CurlOptions.md) - Configuration options
-
-        ## Namespaces
-
-        - [CurlDotNet](CurlDotNet.md) - Main namespace
-        - [CurlDotNet.Core](CurlDotNet.Core.md) - Core functionality
-        - [CurlDotNet.Exceptions](CurlDotNet.Exceptions.md) - Exception types
-        - [CurlDotNet.Middleware](CurlDotNet.Middleware.md) - Middleware pipeline
-        - [CurlDotNet.Extensions](CurlDotNet.Extensions.md) - Extension methods
-        EOF
-
-    - name: Copy additional documentation
-      run: |
-        echo "📂 Copying additional documentation..."
-
-        # Copy docs folders if they exist
-        for folder in tutorials cookbook getting-started guides reference; do
-          if [ -d "docs/$folder" ]; then
-            cp -r "docs/$folder" gh-pages/
-            echo "✅ Copied $folder"
-          fi
-        done
-
-        # Ensure all directories have index files
-        for dir in gh-pages/*/; do
-          if [ ! -f "$dir/index.md" ] && [ ! -f "$dir/README.md" ]; then
-            dirname=$(basename "$dir")
-            echo "# $dirname" > "$dir/index.md"
-            echo "" >> "$dir/index.md"
-            echo "Documentation for $dirname." >> "$dir/index.md"
-          fi
-        done
+        echo "📂 Checking gh-pages folder..."
+        if [ ! -d "gh-pages" ]; then
+          echo "❌ gh-pages folder not found!"
+          echo "Run ./scripts/generate-docs.sh locally to create documentation"
+          exit 1
+        fi
+        echo "✅ gh-pages folder exists"
+        echo "📊 Found $(find gh-pages -name "*.md" | wc -l) markdown files"
+        echo "📁 Total size: $(du -sh gh-pages | cut -f1)"
 
     - name: Validate documentation
       run: |

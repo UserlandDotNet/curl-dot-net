@@ -36,10 +36,10 @@ jobs:
     - name: Build solution (Release)
       run: dotnet build --configuration Release --no-restore -p:CIBuild=true
 
-    # Step 5: Run smoke/integration tests only
-    # NOTE: This workflow runs ONLY smoke/integration tests - full unit test suite runs locally before push
-    - name: Run Smoke & Integration Tests
-      run: dotnet test --configuration Release --no-build --filter "Category=Smoke|Category=Integration" -p:CIBuild=true
+    # Step 5: Run DevOps/smoke tests only
+    # NOTE: This workflow runs ONLY DevOps category tests - reliable, fast tests for CI/CD
+    - name: Run DevOps & Smoke Tests
+      run: dotnet test --configuration Release --no-build --filter "Category=DevOps|Category=Smoke" -p:CIBuild=true
       continue-on-error: false  # Explicitly fail the workflow if tests fail
 
     # Optional: Report test results summary

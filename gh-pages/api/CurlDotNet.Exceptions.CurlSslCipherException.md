@@ -16,6 +16,8 @@ Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system
 
 ## CurlSslCipherException\(string, string\) Constructor
 
+Initializes a new instance of the [CurlSslCipherException](CurlDotNet.Exceptions.CurlSslCipherException.md 'CurlDotNet\.Exceptions\.CurlSslCipherException') class\.
+
 ```csharp
 public CurlSslCipherException(string cipher, string command=null);
 ```
@@ -25,14 +27,20 @@ public CurlSslCipherException(string cipher, string command=null);
 
 `cipher` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
+The name of the SSL cipher that could not be used\.
+
 <a name='CurlDotNet.Exceptions.CurlSslCipherException.CurlSslCipherException(string,string).command'></a>
 
 `command` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The curl command that caused the exception\.
 ### Properties
 
 <a name='CurlDotNet.Exceptions.CurlSslCipherException.CipherName'></a>
 
 ## CurlSslCipherException\.CipherName Property
+
+Gets the name of the SSL cipher that could not be used
 
 ```csharp
 public string CipherName { get; }

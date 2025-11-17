@@ -99,7 +99,7 @@ namespace CurlDotNet.Core
                     throw new CurlAbortedByCallbackException("Operation cancelled");
                 throw new CurlOperationTimeoutException(GetTimeoutSeconds(options), options.OriginalCommand);
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
                 var uri = new Uri(options.Url);
                 throw new CurlCouldntConnectException(uri.Host, uri.Port > 0 ? uri.Port : (uri.Scheme == "https" ? 443 : 80), options.OriginalCommand);

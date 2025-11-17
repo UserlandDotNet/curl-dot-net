@@ -96,7 +96,7 @@ namespace CurlDotNet.Core
 
                 return result;
             }
-            catch (UnauthorizedAccessException ex)
+            catch (UnauthorizedAccessException)
             {
                 throw new CurlFileCouldntReadException($"Permission denied: {filePath}");
             }

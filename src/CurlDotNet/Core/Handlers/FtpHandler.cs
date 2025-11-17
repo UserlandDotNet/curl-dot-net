@@ -141,7 +141,7 @@ namespace CurlDotNet.Core
                 var uri = new Uri(options.Url);
                 throw new CurlCouldntConnectException(uri.Host, uri.Port);
             }
-            catch (UriFormatException ex)
+            catch (UriFormatException)
             {
                 throw new CurlMalformedUrlException(options.Url);
             }
