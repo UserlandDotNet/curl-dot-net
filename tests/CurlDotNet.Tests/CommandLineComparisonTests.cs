@@ -108,7 +108,11 @@ namespace CurlDotNet.Tests
             process.BeginOutputReadLine();
             process.BeginErrorReadLine();
 
+#if NET472 || NET48 || NETFRAMEWORK
+            await Task.Run(() => process.WaitForExit());
+#else
             await process.WaitForExitAsync();
+#endif
 
             return new CommandLineResult
             {

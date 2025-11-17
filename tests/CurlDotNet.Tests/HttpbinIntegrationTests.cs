@@ -469,8 +469,13 @@ namespace CurlDotNet.Tests
                 ex.Should().Match<Exception>(e =>
                     e is CurlTimeoutException ||
                     e is TaskCanceledException ||
+#if NET472 || NET48 || NETFRAMEWORK
+                    e.Message.IndexOf("timeout", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    e.Message.IndexOf("timed out", StringComparison.OrdinalIgnoreCase) >= 0);
+#else
                     e.Message.Contains("timeout", StringComparison.OrdinalIgnoreCase) ||
                     e.Message.Contains("timed out", StringComparison.OrdinalIgnoreCase));
+#endif
             }
         }
 

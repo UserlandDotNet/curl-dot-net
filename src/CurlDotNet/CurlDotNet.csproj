@@ -15,13 +15,16 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <!-- Suppress NU5104: System.CommandLine doesn't have a stable release yet, only beta versions -->
     <!-- Suppress CS8625: Cannot convert null literal to non-nullable reference type -->
-    <NoWarn>$(NoWarn);NU5104;CS8625</NoWarn>
+    <!-- Suppress CS0672: Override of obsolete member (for GetObjectData serialization) -->
+    <!-- Suppress SYSLIB0051: Obsolete formatter-based serialization -->
+    <!-- Suppress SYSLIB0014: WebRequest is obsolete (needed for FTP support) -->
+    <NoWarn>$(NoWarn);NU5104;CS8625;CS0672;SYSLIB0051;SYSLIB0014</NoWarn>
 
     <!-- Package Metadata -->
     <PackageId>CurlDotNet</PackageId>
-    <Version>1.2.19</Version>
-    <AssemblyVersion>1.2.19.0</AssemblyVersion>
-    <FileVersion>1.2.19.0</FileVersion>
+    <Version>1.2.20</Version>
+    <AssemblyVersion>1.2.20.0</AssemblyVersion>
+    <FileVersion>1.2.20.0</FileVersion>
 
     <!-- Authors and Sponsorship -->
     <Authors>Jacob Mellor;IronSoftware;Daniel Stenberg and curl contributors</Authors>

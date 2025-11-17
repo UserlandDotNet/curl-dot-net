@@ -218,7 +218,7 @@ namespace CurlDotNet.Tests
         }
 
         [Fact]
-        public async Task CurlResult_DisposablePattern_WorksCorrectly()
+        public Task CurlResult_DisposablePattern_WorksCorrectly()
         {
             // Arrange
             var result = new CurlResult
@@ -239,6 +239,8 @@ namespace CurlDotNet.Tests
             // Assert - After disposal
             stream.Invoking(s => s.Read(new byte[1], 0, 1))
                 .Should().Throw<ObjectDisposedException>();
+
+            return Task.CompletedTask;
         }
 
         [Fact]

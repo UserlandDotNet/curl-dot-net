@@ -389,7 +389,7 @@ namespace CurlDotNet.Middleware
                     var waitTime = oldestRequest.AddSeconds(1) - DateTime.UtcNow;
                     if (waitTime > TimeSpan.Zero)
                     {
-                        Task.Delay(waitTime, cancellationToken).Wait(cancellationToken);
+                        await Task.Delay(waitTime, cancellationToken);
                     }
                 }
             }
