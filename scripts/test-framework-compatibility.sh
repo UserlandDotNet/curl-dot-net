@@ -145,9 +145,9 @@ if [ "$NETSTANDARD_PASS" = true ]; then
     echo "✨ Framework Compatibility Verified!"
     echo "   .NET Standard 2.0 build is compatible with:"
     echo "   • .NET Framework 4.7.2+"
+    echo "   • .NET Framework 4.8"
     echo "   • .NET Core 2.0+"
-    echo "   • Mono 5.4+"
-    echo "   • Xamarin"
+    echo "   • .NET 5.0+"
 elif [ "$NETSTANDARD_PASS" = "skipped" ]; then
     echo -e "${YELLOW}⚠️  .NET Standard:   Tests use .NET 8 specific APIs${NC}"
     echo "   Library builds for .NET Standard but tests require .NET 8"
