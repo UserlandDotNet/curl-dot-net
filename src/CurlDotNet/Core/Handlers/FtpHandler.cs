@@ -119,7 +119,7 @@ namespace CurlDotNet.Core
                     // Save to output file if specified
                     if (!string.IsNullOrEmpty(options.OutputFile))
                     {
-                        #if NETSTANDARD2_0
+                        #if NETSTANDARD2_0 || NET472 || NET48
                         await Task.Run(() => File.WriteAllText(options.OutputFile, result.Body), cancellationToken);
                         #else
                         await File.WriteAllTextAsync(options.OutputFile, result.Body, cancellationToken);

@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <!-- Default target frameworks including .NET 10 -->
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('Windows')) AND '$(CIBuild)' != 'true'">netstandard2.0;net472;net8.0;net9.0;net10.0</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('Windows')) AND '$(CIBuild)' != 'true'">netstandard2.0;net472;net48;net8.0;net9.0;net10.0</TargetFrameworks>
     <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('Windows')) AND '$(CIBuild)' != 'true'">netstandard2.0;net8.0;net9.0;net10.0</TargetFrameworks>
 
     <!-- CI target frameworks (GitHub runners don't have .NET 10 yet) -->
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('Windows')) AND '$(CIBuild)' == 'true'">netstandard2.0;net472;net8.0</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('Windows')) AND '$(CIBuild)' == 'true'">netstandard2.0;net472;net48;net8.0</TargetFrameworks>
     <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('Windows')) AND '$(CIBuild)' == 'true'">netstandard2.0;net8.0</TargetFrameworks>
     <!-- .NET 10 is released! GitHub CI runners don't have it yet, so CI uses CIBuild=true flag -->
     <LangVersion>8.0</LangVersion>
@@ -14,7 +14,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <!-- Suppress NU5104: System.CommandLine doesn't have a stable release yet, only beta versions -->
-    <NoWarn>$(NoWarn);NU5104</NoWarn>
+    <!-- Suppress CS8625: Cannot convert null literal to non-nullable reference type -->
+    <NoWarn>$(NoWarn);NU5104;CS8625</NoWarn>
 
     <!-- Package Metadata -->
     <PackageId>CurlDotNet</PackageId>
@@ -113,8 +114,26 @@ NuGet: https://www.nuget.org/packages/CurlDotNet/</PackageReleaseNotes>
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
 
+  <!-- Conditional package references for .NET Framework 4.8 -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+  </ItemGroup>
+
   <!-- Suppress nullable warnings for .NET Standard 2.0 -->
   <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <NoWarn>$(NoWarn);CS8618;CS8603;CS8625;CS8601;CS8604;CS8602;CS8600;CS8619;CS8620;CS8714;CS8762</NoWarn>
+    <DefineConstants>$(DefineConstants);NETSTANDARD2_0</DefineConstants>
+  </PropertyGroup>
+
+  <!-- Explicitly define constants for .NET Framework 4.7.2 -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net472'">
+    <DefineConstants>$(DefineConstants);NET472;NETFRAMEWORK</DefineConstants>
+    <NoWarn>$(NoWarn);CS8618;CS8603;CS8625;CS8601;CS8604;CS8602;CS8600;CS8619;CS8620;CS8714;CS8762</NoWarn>
+  </PropertyGroup>
+
+  <!-- Explicitly define constants for .NET Framework 4.8 -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net48'">
+    <DefineConstants>$(DefineConstants);NET48;NETFRAMEWORK</DefineConstants>
     <NoWarn>$(NoWarn);CS8618;CS8603;CS8625;CS8601;CS8604;CS8602;CS8600;CS8619;CS8620;CS8714;CS8762</NoWarn>
   </PropertyGroup>
 
