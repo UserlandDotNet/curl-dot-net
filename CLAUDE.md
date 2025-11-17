@@ -1,5 +1,17 @@
 # CurlDotNet Project Guidelines for Claude
 
+## 🚨 CRITICAL: VERSION BUMPING RULE 🚨
+
+### EVERY COMMIT MUST BUMP THE VERSION
+- **Every single commit** MUST increment the version in `src/CurlDotNet/CurlDotNet.csproj`
+- This includes ALL changes: documentation, typos, comments, examples, EVERYTHING
+- Increment the patch number: 1.2.3 → 1.2.4 → 1.2.5
+- The version bump happens BEFORE committing, not after
+- When PR is MERGED to master (not when created), it triggers automatic NuGet release
+- This ensures continuous delivery and every change is releasable
+
+**Example**: If current version is 1.2.3, your next commit bumps to 1.2.4
+
 ## Core Development Principles
 
 ### Testing & Quality

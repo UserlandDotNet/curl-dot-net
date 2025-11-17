@@ -11,9 +11,9 @@
 
     <!-- Package Metadata -->
     <PackageId>CurlDotNet</PackageId>
-    <Version>1.2.1</Version>
-    <AssemblyVersion>1.2.1.0</AssemblyVersion>
-    <FileVersion>1.2.1.0</FileVersion>
+    <Version>1.2.2</Version>
+    <AssemblyVersion>1.2.2.0</AssemblyVersion>
+    <FileVersion>1.2.2.0</FileVersion>
 
     <!-- Authors and Sponsorship -->
     <Authors>Jacob Mellor;IronSoftware;Daniel Stenberg and curl contributors</Authors>
@@ -58,13 +58,15 @@ CurlDotNet brings the power of curl to .NET. Simply paste any curl command strin
 
     <!-- Package Icon and Release Notes -->
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReleaseNotes>Version 1.2.1 - Documentation &amp; Usability Improvements
-📚 Enhanced documentation with NuGet package context on every page
-🔗 Fixed all documentation URLs to use GitHub Pages links
-📝 Added index pages for Tutorials and Cookbook sections (fixes 404s)
-✨ Improved developer onboarding experience
-🎯 Every documentation page now explains what CurlDotNet is and how to install
-📈 Test coverage maintained at 95% (228/240 tests passing)
+    <PackageReleaseNotes>Version 1.2.2 - Simplified Deployment &amp; Continuous Delivery
+🚀 Simplified deployment with single-script solution (deploy-simple.sh)
+📋 Added comprehensive examples based on cookbook recipes
+🔄 Implemented continuous delivery: every commit = new version
+✅ Added version bump rule: all changes trigger releases
+🛠️ New PR-based workflow: dev branch → PR → merge → auto-release
+📝 Created CONTRIBUTING.md and DEPLOY.md for clear workflows
+🧪 Added test-all-scripts.sh for local validation
+💡 Philosophy: Spend 80% coding, 20% deploying (not vice versa)
 💎 Sponsored by IronSoftware
 
 Documentation: https://jacob-mellor.github.io/curl-dot-net/
