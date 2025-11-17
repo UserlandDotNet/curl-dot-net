@@ -54,3 +54,4 @@
 - Treat documentation with the same rigor as code - test it, validate it, and maintain it
 - Remember before publishing when DocFX builds it creates static HTML in the _site directory which you can crawl and check for 404s. Check the quality of your own documentation, making sure every MD file from the doc section is accessible and crawlable from within there, and that you have a sitemap.xml file to match
 - We are working in https://github.com/jacob-mellor/curl-dot-net not https://github.com/UserlandDotNet/curl-dot-net/
+- Always work in dev git  branch -Less otherwise instructed. A PR from dev to master or main will cause the build of the NuGet package and the documentation etc. Those shell scripts will be run both locally and by GitHub Workflows or both
