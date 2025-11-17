@@ -40,11 +40,19 @@ namespace CurlDotNet.Tests
         private static readonly bool IsUnix = RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ||
                                               RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
 
+        private static readonly bool IsCI = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("CI")) ||
+                                           !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("GITHUB_ACTIONS"));
+
         public CommandLineComparisonTests(ITestOutputHelper output) : base(output)
         {
             if (!IsUnix)
             {
                 throw new SkipException("Command line comparison tests require Unix (macOS/Linux)");
+            }
+
+            if (IsCI)
+            {
+                throw new SkipException("Command line comparison tests are skipped in CI due to curl binary variations");
             }
         }
 
