@@ -11,9 +11,9 @@
 
     <!-- Package Metadata -->
     <PackageId>CurlDotNet</PackageId>
-    <Version>1.2.5</Version>
-    <AssemblyVersion>1.2.5.0</AssemblyVersion>
-    <FileVersion>1.2.5.0</FileVersion>
+    <Version>1.2.6</Version>
+    <AssemblyVersion>1.2.6.0</AssemblyVersion>
+    <FileVersion>1.2.6.0</FileVersion>
 
     <!-- Authors and Sponsorship -->
     <Authors>Jacob Mellor;IronSoftware;Daniel Stenberg and curl contributors</Authors>
@@ -58,7 +58,7 @@ CurlDotNet brings the power of curl to .NET. Simply paste any curl command strin
 
     <!-- Package Icon and Release Notes -->
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReleaseNotes>Version 1.2.5 - Clean Repository Structure &amp; Enhanced Testing
+    <PackageReleaseNotes>Version 1.2.6 - Improved Documentation &amp; Project Guidelines
 🚀 Simplified deployment with single-script solution (deploy-simple.sh)
 📋 Added comprehensive examples based on cookbook recipes
 🔄 Implemented continuous delivery: every commit = new version
