@@ -16,14 +16,15 @@ sed -i.bak "s/<AssemblyVersion>$CURRENT_VERSION.0<\/AssemblyVersion>/<AssemblyVe
 sed -i.bak "s/<FileVersion>$CURRENT_VERSION.0<\/FileVersion>/<FileVersion>$NEW_VERSION.0<\/FileVersion>/" $CSPROJ
 rm $CSPROJ.bak
 
-# Build, test, pack
-echo "🔨 Building..."
-dotnet build -c Release --verbosity quiet || { echo "❌ Build failed"; exit 1; }
+# Run comprehensive testing (required before every commit)
+echo "🧪 Running comprehensive tests..."
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+$DIR/test-all-locally.sh || {
+    echo "❌ Comprehensive tests failed - fix all issues before shipping!"
+    exit 1
+}
 
-echo "🧪 Running tests locally (faster than waiting for CI)..."
-dotnet test --no-build -c Release --verbosity minimal || { echo "❌ Tests failed - fix locally before pushing"; exit 1; }
-
-echo "📦 Packing..."
+echo "📦 Creating final package with new version..."
 dotnet pack -c Release -o nupkg --no-build --verbosity quiet
 
 echo "
