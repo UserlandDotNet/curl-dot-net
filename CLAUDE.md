@@ -35,6 +35,11 @@
 - **Commands**:
   - `./scripts/test-all-locally.sh` - Full test suite
   - `./scripts/test-nuget-package.sh` - NuGet package validation (run BEFORE commit)
+  - `./scripts/test-mono-framework.sh` - Test .NET Framework 4.7.2 with Mono (Jacob's Mac only)
+- **Mono Testing** (Jacob's Mac - run before deployment):
+  - Purpose: Verify .NET Framework 4.7.2 compatibility locally
+  - Note: Homebrew Mono has limitations, Windows CI provides full coverage
+  - Required environment: `export MONO_GAC_PREFIX="/opt/homebrew"`
 - **Philosophy**: Test locally, fix immediately with Claude, push working code
 - **CI/CD**: GitHub workflows are just a safety net, not primary testing
 
