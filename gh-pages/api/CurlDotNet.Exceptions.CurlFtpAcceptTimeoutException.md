@@ -1,5 +1,5 @@
 #### [CurlDotNet](index.md 'index')
-### [CurlDotNet\.Exceptions](CurlDotNet.Exceptions.md 'CurlDotNet\.Exceptions')
+### [CurlDotNet\.Exceptions](index.md#CurlDotNet.Exceptions 'CurlDotNet\.Exceptions')
 
 ## CurlFtpAcceptTimeoutException Class
 
@@ -10,7 +10,21 @@ public class CurlFtpAcceptTimeoutException : CurlDotNet.Exceptions.CurlTimeoutEx
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.Exception](https://learn.microsoft.com/en-us/dotnet/api/system.exception 'System\.Exception') &#129106; [CurlException](CurlDotNet.Exceptions.CurlException.md 'CurlDotNet\.Exceptions\.CurlException') &#129106; [CurlTimeoutException](CurlDotNet.Exceptions.CurlTimeoutException.md 'CurlDotNet\.Exceptions\.CurlTimeoutException') &#129106; CurlFtpAcceptTimeoutException
+### Constructors
 
-| Constructors | |
-| :--- | :--- |
-| [CurlFtpAcceptTimeoutException\(string, string\)](CurlDotNet.Exceptions.CurlFtpAcceptTimeoutException.CurlFtpAcceptTimeoutException(string,string).md 'CurlDotNet\.Exceptions\.CurlFtpAcceptTimeoutException\.CurlFtpAcceptTimeoutException\(string, string\)') | |
+<a name='CurlDotNet.Exceptions.CurlFtpAcceptTimeoutException.CurlFtpAcceptTimeoutException(string,string)'></a>
+
+## CurlFtpAcceptTimeoutException\(string, string\) Constructor
+
+```csharp
+public CurlFtpAcceptTimeoutException(string message, string command=null);
+```
+#### Parameters
+
+<a name='CurlDotNet.Exceptions.CurlFtpAcceptTimeoutException.CurlFtpAcceptTimeoutException(string,string).message'></a>
+
+`message` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='CurlDotNet.Exceptions.CurlFtpAcceptTimeoutException.CurlFtpAcceptTimeoutException(string,string).command'></a>
+
+`command` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')

@@ -1,5 +1,5 @@
 #### [CurlDotNet](index.md 'index')
-### [CurlDotNet\.Exceptions](CurlDotNet.Exceptions.md 'CurlDotNet\.Exceptions')
+### [CurlDotNet\.Exceptions](index.md#CurlDotNet.Exceptions 'CurlDotNet\.Exceptions')
 
 ## CurlBadFunctionArgumentException Class
 
@@ -10,11 +10,33 @@ public class CurlBadFunctionArgumentException : CurlDotNet.Exceptions.CurlExcept
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.Exception](https://learn.microsoft.com/en-us/dotnet/api/system.exception 'System\.Exception') &#129106; [CurlException](CurlDotNet.Exceptions.CurlException.md 'CurlDotNet\.Exceptions\.CurlException') &#129106; CurlBadFunctionArgumentException
+### Constructors
 
-| Constructors | |
-| :--- | :--- |
-| [CurlBadFunctionArgumentException\(string, string\)](CurlDotNet.Exceptions.CurlBadFunctionArgumentException.CurlBadFunctionArgumentException(string,string).md 'CurlDotNet\.Exceptions\.CurlBadFunctionArgumentException\.CurlBadFunctionArgumentException\(string, string\)') | |
+<a name='CurlDotNet.Exceptions.CurlBadFunctionArgumentException.CurlBadFunctionArgumentException(string,string)'></a>
 
-| Properties | |
-| :--- | :--- |
-| [ArgumentName](CurlDotNet.Exceptions.CurlBadFunctionArgumentException.ArgumentName.md 'CurlDotNet\.Exceptions\.CurlBadFunctionArgumentException\.ArgumentName') | |
+## CurlBadFunctionArgumentException\(string, string\) Constructor
+
+```csharp
+public CurlBadFunctionArgumentException(string argumentName, string command=null);
+```
+#### Parameters
+
+<a name='CurlDotNet.Exceptions.CurlBadFunctionArgumentException.CurlBadFunctionArgumentException(string,string).argumentName'></a>
+
+`argumentName` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='CurlDotNet.Exceptions.CurlBadFunctionArgumentException.CurlBadFunctionArgumentException(string,string).command'></a>
+
+`command` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+### Properties
+
+<a name='CurlDotNet.Exceptions.CurlBadFunctionArgumentException.ArgumentName'></a>
+
+## CurlBadFunctionArgumentException\.ArgumentName Property
+
+```csharp
+public string ArgumentName { get; }
+```
+
+#### Property Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')

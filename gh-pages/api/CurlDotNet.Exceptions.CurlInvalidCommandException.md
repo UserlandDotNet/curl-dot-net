@@ -1,5 +1,5 @@
 #### [CurlDotNet](index.md 'index')
-### [CurlDotNet\.Exceptions](CurlDotNet.Exceptions.md 'CurlDotNet\.Exceptions')
+### [CurlDotNet\.Exceptions](index.md#CurlDotNet.Exceptions 'CurlDotNet\.Exceptions')
 
 ## CurlInvalidCommandException Class
 
@@ -39,16 +39,99 @@ This exception indicates a problem with the curl command syntax, not a network o
 AI-Usage: Catch this to handle command syntax errors separately from execution errors.
 
 AI-Pattern: Validate commands before execution to avoid this exception.
+### Constructors
 
-| Constructors | |
-| :--- | :--- |
-| [CurlInvalidCommandException\(string, string, string\)](CurlDotNet.Exceptions.CurlInvalidCommandException.#ctor.md#CurlDotNet.Exceptions.CurlInvalidCommandException.CurlInvalidCommandException(string,string,string) 'CurlDotNet\.Exceptions\.CurlInvalidCommandException\.CurlInvalidCommandException\(string, string, string\)') | Initializes a new instance of the [CurlInvalidCommandException](CurlDotNet.Exceptions.CurlInvalidCommandException.md 'CurlDotNet\.Exceptions\.CurlInvalidCommandException') class\. |
-| [CurlInvalidCommandException\(SerializationInfo, StreamingContext\)](CurlDotNet.Exceptions.CurlInvalidCommandException.#ctor.md#CurlDotNet.Exceptions.CurlInvalidCommandException.CurlInvalidCommandException(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext) 'CurlDotNet\.Exceptions\.CurlInvalidCommandException\.CurlInvalidCommandException\(System\.Runtime\.Serialization\.SerializationInfo, System\.Runtime\.Serialization\.StreamingContext\)') | Initializes a new instance with serialized data\. |
+<a name='CurlDotNet.Exceptions.CurlInvalidCommandException.CurlInvalidCommandException(string,string,string)'></a>
 
-| Properties | |
-| :--- | :--- |
-| [InvalidPart](CurlDotNet.Exceptions.CurlInvalidCommandException.InvalidPart.md 'CurlDotNet\.Exceptions\.CurlInvalidCommandException\.InvalidPart') | Gets the part of the command that is invalid\. |
+## CurlInvalidCommandException\(string, string, string\) Constructor
 
-| Methods | |
-| :--- | :--- |
-| [GetObjectData\(SerializationInfo, StreamingContext\)](CurlDotNet.Exceptions.CurlInvalidCommandException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext).md 'CurlDotNet\.Exceptions\.CurlInvalidCommandException\.GetObjectData\(System\.Runtime\.Serialization\.SerializationInfo, System\.Runtime\.Serialization\.StreamingContext\)') | Sets the [System\.Runtime\.Serialization\.SerializationInfo](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.serializationinfo 'System\.Runtime\.Serialization\.SerializationInfo') with information about the exception\. |
+Initializes a new instance of the [CurlInvalidCommandException](CurlDotNet.Exceptions.CurlInvalidCommandException.md 'CurlDotNet\.Exceptions\.CurlInvalidCommandException') class\.
+
+```csharp
+public CurlInvalidCommandException(string message, string invalidPart=null, string command=null);
+```
+#### Parameters
+
+<a name='CurlDotNet.Exceptions.CurlInvalidCommandException.CurlInvalidCommandException(string,string,string).message'></a>
+
+`message` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The error message describing the invalid syntax\.
+
+<a name='CurlDotNet.Exceptions.CurlInvalidCommandException.CurlInvalidCommandException(string,string,string).invalidPart'></a>
+
+`invalidPart` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The specific part of the command that is invalid\.
+
+<a name='CurlDotNet.Exceptions.CurlInvalidCommandException.CurlInvalidCommandException(string,string,string).command'></a>
+
+`command` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The full curl command that failed to parse\.
+
+<a name='CurlDotNet.Exceptions.CurlInvalidCommandException.CurlInvalidCommandException(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)'></a>
+
+## CurlInvalidCommandException\(SerializationInfo, StreamingContext\) Constructor
+
+Initializes a new instance with serialized data\.
+
+```csharp
+protected CurlInvalidCommandException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);
+```
+#### Parameters
+
+<a name='CurlDotNet.Exceptions.CurlInvalidCommandException.CurlInvalidCommandException(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext).info'></a>
+
+`info` [System\.Runtime\.Serialization\.SerializationInfo](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.serializationinfo 'System\.Runtime\.Serialization\.SerializationInfo')
+
+<a name='CurlDotNet.Exceptions.CurlInvalidCommandException.CurlInvalidCommandException(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext).context'></a>
+
+`context` [System\.Runtime\.Serialization\.StreamingContext](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.streamingcontext 'System\.Runtime\.Serialization\.StreamingContext')
+### Properties
+
+<a name='CurlDotNet.Exceptions.CurlInvalidCommandException.InvalidPart'></a>
+
+## CurlInvalidCommandException\.InvalidPart Property
+
+Gets the part of the command that is invalid\.
+
+```csharp
+public string InvalidPart { get; }
+```
+
+#### Property Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The specific option, argument, or syntax element that caused the parsing error\.
+
+### Remarks
+
+This helps identify exactly what part of the command is wrong.
+
+AI-Usage: Use this to provide specific feedback about what needs to be corrected.
+### Methods
+
+<a name='CurlDotNet.Exceptions.CurlInvalidCommandException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)'></a>
+
+## CurlInvalidCommandException\.GetObjectData\(SerializationInfo, StreamingContext\) Method
+
+Sets the [System\.Runtime\.Serialization\.SerializationInfo](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.serializationinfo 'System\.Runtime\.Serialization\.SerializationInfo') with information about the exception\.
+
+```csharp
+public override void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);
+```
+#### Parameters
+
+<a name='CurlDotNet.Exceptions.CurlInvalidCommandException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext).info'></a>
+
+`info` [System\.Runtime\.Serialization\.SerializationInfo](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.serializationinfo 'System\.Runtime\.Serialization\.SerializationInfo')
+
+The serialization information\.
+
+<a name='CurlDotNet.Exceptions.CurlInvalidCommandException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext).context'></a>
+
+`context` [System\.Runtime\.Serialization\.StreamingContext](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.streamingcontext 'System\.Runtime\.Serialization\.StreamingContext')
+
+The streaming context\.
+
+Implements [GetObjectData\(SerializationInfo, StreamingContext\)](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable.getobjectdata#system-runtime-serialization-iserializable-getobjectdata(system-runtime-serialization-serializationinfo-system-runtime-serialization-streamingcontext) 'System\.Runtime\.Serialization\.ISerializable\.GetObjectData\(System\.Runtime\.Serialization\.SerializationInfo,System\.Runtime\.Serialization\.StreamingContext\)')

@@ -1,5 +1,5 @@
 #### [CurlDotNet](index.md 'index')
-### [CurlDotNet\.Core](CurlDotNet.Core.md 'CurlDotNet\.Core')
+### [CurlDotNet\.Core](index.md#CurlDotNet.Core 'CurlDotNet\.Core')
 
 ## CurlHttpException Class
 
@@ -25,13 +25,67 @@ public class CurlHttpException : System.Exception
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.Exception](https://learn.microsoft.com/en-us/dotnet/api/system.exception 'System\.Exception') &#129106; CurlHttpException
+### Constructors
 
-| Constructors | |
-| :--- | :--- |
-| [CurlHttpException\(string, int\)](CurlDotNet.Core.CurlHttpException.CurlHttpException(string,int).md 'CurlDotNet\.Core\.CurlHttpException\.CurlHttpException\(string, int\)') | Initializes a new instance of the CurlHttpException class\. |
+<a name='CurlDotNet.Core.CurlHttpException.CurlHttpException(string,int)'></a>
 
-| Properties | |
-| :--- | :--- |
-| [ResponseBody](CurlDotNet.Core.CurlHttpException.ResponseBody.md 'CurlDotNet\.Core\.CurlHttpException\.ResponseBody') | The response body \(may contain error details\) |
-| [ResponseHeaders](CurlDotNet.Core.CurlHttpException.ResponseHeaders.md 'CurlDotNet\.Core\.CurlHttpException\.ResponseHeaders') | The response headers |
-| [StatusCode](CurlDotNet.Core.CurlHttpException.StatusCode.md 'CurlDotNet\.Core\.CurlHttpException\.StatusCode') | The HTTP status code that caused the error |
+## CurlHttpException\(string, int\) Constructor
+
+Initializes a new instance of the CurlHttpException class\.
+
+```csharp
+public CurlHttpException(string message, int statusCode);
+```
+#### Parameters
+
+<a name='CurlDotNet.Core.CurlHttpException.CurlHttpException(string,int).message'></a>
+
+`message` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The error message\.
+
+<a name='CurlDotNet.Core.CurlHttpException.CurlHttpException(string,int).statusCode'></a>
+
+`statusCode` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The HTTP status code\.
+### Properties
+
+<a name='CurlDotNet.Core.CurlHttpException.ResponseBody'></a>
+
+## CurlHttpException\.ResponseBody Property
+
+The response body \(may contain error details\)
+
+```csharp
+public string ResponseBody { get; set; }
+```
+
+#### Property Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='CurlDotNet.Core.CurlHttpException.ResponseHeaders'></a>
+
+## CurlHttpException\.ResponseHeaders Property
+
+The response headers
+
+```csharp
+public System.Collections.Generic.Dictionary<string,string> ResponseHeaders { get; set; }
+```
+
+#### Property Value
+[System\.Collections\.Generic\.Dictionary&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')[,](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')
+
+<a name='CurlDotNet.Core.CurlHttpException.StatusCode'></a>
+
+## CurlHttpException\.StatusCode Property
+
+The HTTP status code that caused the error
+
+```csharp
+public int StatusCode { get; }
+```
+
+#### Property Value
+[System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')

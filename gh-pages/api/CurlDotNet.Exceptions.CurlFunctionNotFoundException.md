@@ -1,5 +1,5 @@
 #### [CurlDotNet](index.md 'index')
-### [CurlDotNet\.Exceptions](CurlDotNet.Exceptions.md 'CurlDotNet\.Exceptions')
+### [CurlDotNet\.Exceptions](index.md#CurlDotNet.Exceptions 'CurlDotNet\.Exceptions')
 
 ## CurlFunctionNotFoundException Class
 
@@ -10,11 +10,33 @@ public class CurlFunctionNotFoundException : CurlDotNet.Exceptions.CurlException
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.Exception](https://learn.microsoft.com/en-us/dotnet/api/system.exception 'System\.Exception') &#129106; [CurlException](CurlDotNet.Exceptions.CurlException.md 'CurlDotNet\.Exceptions\.CurlException') &#129106; CurlFunctionNotFoundException
+### Constructors
 
-| Constructors | |
-| :--- | :--- |
-| [CurlFunctionNotFoundException\(string, string\)](CurlDotNet.Exceptions.CurlFunctionNotFoundException.CurlFunctionNotFoundException(string,string).md 'CurlDotNet\.Exceptions\.CurlFunctionNotFoundException\.CurlFunctionNotFoundException\(string, string\)') | |
+<a name='CurlDotNet.Exceptions.CurlFunctionNotFoundException.CurlFunctionNotFoundException(string,string)'></a>
 
-| Properties | |
-| :--- | :--- |
-| [FunctionName](CurlDotNet.Exceptions.CurlFunctionNotFoundException.FunctionName.md 'CurlDotNet\.Exceptions\.CurlFunctionNotFoundException\.FunctionName') | |
+## CurlFunctionNotFoundException\(string, string\) Constructor
+
+```csharp
+public CurlFunctionNotFoundException(string functionName, string command=null);
+```
+#### Parameters
+
+<a name='CurlDotNet.Exceptions.CurlFunctionNotFoundException.CurlFunctionNotFoundException(string,string).functionName'></a>
+
+`functionName` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='CurlDotNet.Exceptions.CurlFunctionNotFoundException.CurlFunctionNotFoundException(string,string).command'></a>
+
+`command` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+### Properties
+
+<a name='CurlDotNet.Exceptions.CurlFunctionNotFoundException.FunctionName'></a>
+
+## CurlFunctionNotFoundException\.FunctionName Property
+
+```csharp
+public string FunctionName { get; }
+```
+
+#### Property Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')

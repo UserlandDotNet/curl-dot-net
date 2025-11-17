@@ -1,20 +1,18 @@
 ---
-layout: home
+layout: default
 title: CurlDotNet - Pure .NET curl for C#
 ---
 
-# CurlDotNet
+# CurlDotNet Documentation
 
-A pure .NET implementation of curl for C#, supporting .NET Standard 2.0, .NET 8.0, and .NET 10.0.
+A pure .NET implementation of curl for C#. No native dependencies, just clean C# code.
 
 ## Quick Start
 
 ```csharp
-using CurlDotNet;
-
-var curl = new Curl();
-var result = await curl.GetAsync("https://api.example.com/data");
-Console.WriteLine(result.Body);
+// Simple GET request
+var response = await Curl.GetAsync("https://api.example.com/data");
+Console.WriteLine(response.Body);
 ```
 
 ## Documentation
@@ -22,7 +20,9 @@ Console.WriteLine(result.Body);
 - [API Reference](api/) - Complete API documentation
 - [Getting Started](getting-started/) - Installation and first steps
 - [Tutorials](tutorials/) - Step-by-step guides
-- [Examples](examples/) - Code samples
+- [Cookbook](cookbook/) - Common recipes
+- [Guides](guides/) - Advanced topics
+- [Reference](reference/) - Technical reference
 
 ## Installation
 
@@ -35,6 +35,14 @@ Or via Package Manager:
 ```powershell
 Install-Package CurlDotNet
 ```
+
+## Why CurlDotNet?
+
+- **Pure C#** - No P/Invoke, no native dependencies
+- **curl Compatible** - Use curl command syntax directly
+- **Cross Platform** - Works on Windows, Linux, macOS
+- **Well Documented** - Comprehensive documentation with examples
+- **Feature Complete** - Supports all major curl options
 
 ## Links
 

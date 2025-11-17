@@ -1,5 +1,5 @@
 #### [CurlDotNet](index.md 'index')
-### [CurlDotNet\.Exceptions](CurlDotNet.Exceptions.md 'CurlDotNet\.Exceptions')
+### [CurlDotNet\.Exceptions](index.md#CurlDotNet.Exceptions 'CurlDotNet\.Exceptions')
 
 ## CurlMalformedUrlException Class
 
@@ -10,11 +10,33 @@ public class CurlMalformedUrlException : CurlDotNet.Exceptions.CurlException
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.Exception](https://learn.microsoft.com/en-us/dotnet/api/system.exception 'System\.Exception') &#129106; [CurlException](CurlDotNet.Exceptions.CurlException.md 'CurlDotNet\.Exceptions\.CurlException') &#129106; CurlMalformedUrlException
+### Constructors
 
-| Constructors | |
-| :--- | :--- |
-| [CurlMalformedUrlException\(string, string\)](CurlDotNet.Exceptions.CurlMalformedUrlException.CurlMalformedUrlException(string,string).md 'CurlDotNet\.Exceptions\.CurlMalformedUrlException\.CurlMalformedUrlException\(string, string\)') | |
+<a name='CurlDotNet.Exceptions.CurlMalformedUrlException.CurlMalformedUrlException(string,string)'></a>
 
-| Properties | |
-| :--- | :--- |
-| [MalformedUrl](CurlDotNet.Exceptions.CurlMalformedUrlException.MalformedUrl.md 'CurlDotNet\.Exceptions\.CurlMalformedUrlException\.MalformedUrl') | |
+## CurlMalformedUrlException\(string, string\) Constructor
+
+```csharp
+public CurlMalformedUrlException(string url, string command=null);
+```
+#### Parameters
+
+<a name='CurlDotNet.Exceptions.CurlMalformedUrlException.CurlMalformedUrlException(string,string).url'></a>
+
+`url` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='CurlDotNet.Exceptions.CurlMalformedUrlException.CurlMalformedUrlException(string,string).command'></a>
+
+`command` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+### Properties
+
+<a name='CurlDotNet.Exceptions.CurlMalformedUrlException.MalformedUrl'></a>
+
+## CurlMalformedUrlException\.MalformedUrl Property
+
+```csharp
+public string MalformedUrl { get; }
+```
+
+#### Property Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')

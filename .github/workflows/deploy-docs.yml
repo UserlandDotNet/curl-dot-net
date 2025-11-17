@@ -1,11 +1,16 @@
 name: Deploy Documentation to GitHub Pages
 
 on:
+  # Trigger on merge to master/main
   push:
-    branches: [ dev, master, main ]
+    branches: [ master, main ]
+
+  # Trigger on PR merge
   pull_request:
     branches: [ master, main ]
     types: [closed]
+
+  # Allow manual trigger
   workflow_dispatch:
 
 permissions:
@@ -14,10 +19,11 @@ permissions:
   id-token: write
 
 jobs:
-  deploy-docs:
-    name: Deploy Documentation
+  deploy-documentation:
+    name: Build and Deploy Documentation
     runs-on: ubuntu-latest
-    # Only deploy on push or merged PRs
+
+    # Only run on push or merged PRs (not on PR open/update)
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
 
     steps:
@@ -26,16 +32,176 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Setup .NET
+    - name: Setup .NET SDK 8.0
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
 
-    - name: Make scripts executable
-      run: chmod +x scripts/*.sh
+    - name: Install DefaultDocumentation tool
+      run: dotnet tool install -g DefaultDocumentation.Console
 
-    - name: Generate documentation
-      run: ./scripts/generate-docs.sh
+    - name: Build project with XML documentation
+      run: |
+        echo "🔨 Building CurlDotNet with XML documentation..."
+        dotnet build src/CurlDotNet/CurlDotNet.csproj \
+          -c Release \
+          -p:GenerateDocumentationFile=true \
+          -v minimal
+
+    - name: Generate API documentation
+      run: |
+        echo "📚 Generating API documentation..."
+        mkdir -p gh-pages/api
+
+        # Generate class-level documentation
+        defaultdocumentation \
+          -a src/CurlDotNet/obj/Release/netstandard2.0/CurlDotNet.dll \
+          -o gh-pages/api \
+          --GeneratedPages "Types" \
+          --IncludeUndocumentedItems true \
+          --GeneratedAccessModifiers "Public, Protected"
+
+        echo "✅ Generated $(find gh-pages/api -name "*.md" | wc -l) documentation files"
+
+    - name: Setup Jekyll structure
+      run: |
+        echo "⚙️  Setting up Jekyll structure..."
+
+        # Create Jekyll config
+        cat > gh-pages/_config.yml << 'EOF'
+        title: CurlDotNet Documentation
+        description: Pure .NET implementation of curl for C#
+        baseurl: "/curl-dot-net"
+        url: "https://jacob-mellor.github.io"
+        theme: jekyll-theme-cayman
+        plugins:
+          - jekyll-sitemap
+          - jekyll-seo-tag
+        exclude:
+          - README.md
+          - .gitignore
+        EOF
+
+        # Create main index
+        cat > gh-pages/index.md << 'EOF'
+        ---
+        layout: default
+        title: CurlDotNet - Pure .NET curl for C#
+        ---
+
+        # CurlDotNet Documentation
+
+        A pure .NET implementation of curl for C#. No native dependencies, just clean C# code.
+
+        ## Quick Start
+
+        ```csharp
+        // Simple GET request
+        var response = await Curl.GetAsync("https://api.example.com/data");
+        Console.WriteLine(response.Body);
+        ```
+
+        ## Documentation
+
+        - [API Reference](api/) - Complete API documentation
+        - [Getting Started](getting-started/) - Installation and first steps
+        - [Tutorials](tutorials/) - Step-by-step guides
+        - [Cookbook](cookbook/) - Common recipes
+        - [Guides](guides/) - Advanced topics
+
+        ## Installation
+
+        ```bash
+        dotnet add package CurlDotNet
+        ```
+
+        ## Links
+
+        - [GitHub Repository](https://github.com/jacob-mellor/curl-dot-net)
+        - [NuGet Package](https://www.nuget.org/packages/CurlDotNet/)
+        - [Report Issues](https://github.com/jacob-mellor/curl-dot-net/issues)
+        EOF
+
+        # Create API index
+        cat > gh-pages/api/index.md << 'EOF'
+        ---
+        layout: default
+        title: API Reference
+        ---
+
+        # CurlDotNet API Reference
+
+        Complete API documentation for all classes and namespaces.
+
+        ## Main Classes
+
+        - [Curl](CurlDotNet.Curl.md) - Main entry point
+        - [CurlRequestBuilder](CurlDotNet.Core.CurlRequestBuilder.md) - Fluent request builder
+        - [CurlResult](CurlDotNet.Core.CurlResult.md) - Response object
+        - [CurlOptions](CurlDotNet.Core.CurlOptions.md) - Configuration options
+
+        ## Namespaces
+
+        - [CurlDotNet](CurlDotNet.md) - Main namespace
+        - [CurlDotNet.Core](CurlDotNet.Core.md) - Core functionality
+        - [CurlDotNet.Exceptions](CurlDotNet.Exceptions.md) - Exception types
+        - [CurlDotNet.Middleware](CurlDotNet.Middleware.md) - Middleware pipeline
+        - [CurlDotNet.Extensions](CurlDotNet.Extensions.md) - Extension methods
+        EOF
+
+    - name: Copy additional documentation
+      run: |
+        echo "📂 Copying additional documentation..."
+
+        # Copy docs folders if they exist
+        for folder in tutorials cookbook getting-started guides reference; do
+          if [ -d "docs/$folder" ]; then
+            cp -r "docs/$folder" gh-pages/
+            echo "✅ Copied $folder"
+          fi
+        done
+
+        # Ensure all directories have index files
+        for dir in gh-pages/*/; do
+          if [ ! -f "$dir/index.md" ] && [ ! -f "$dir/README.md" ]; then
+            dirname=$(basename "$dir")
+            echo "# $dirname" > "$dir/index.md"
+            echo "" >> "$dir/index.md"
+            echo "Documentation for $dirname." >> "$dir/index.md"
+          fi
+        done
+
+    - name: Validate documentation
+      run: |
+        echo "🔍 Validating documentation..."
+
+        # Check for required files
+        ERRORS=0
+
+        if [ ! -f "gh-pages/_config.yml" ]; then
+          echo "❌ Missing _config.yml"
+          ERRORS=$((ERRORS + 1))
+        fi
+
+        if [ ! -f "gh-pages/index.md" ]; then
+          echo "❌ Missing index.md"
+          ERRORS=$((ERRORS + 1))
+        fi
+
+        # Count documentation files
+        MD_COUNT=$(find gh-pages -name "*.md" | wc -l)
+        echo "📊 Generated $MD_COUNT markdown files"
+
+        if [ $MD_COUNT -lt 10 ]; then
+          echo "⚠️  Warning: Only $MD_COUNT files generated (expected more)"
+        fi
+
+        if [ $ERRORS -gt 0 ]; then
+          echo "❌ Validation failed with $ERRORS errors"
+          exit 1
+        else
+          echo "✅ Documentation validation passed"
+        fi
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
@@ -50,12 +216,40 @@ jobs:
           📚 Deploy documentation from ${{ github.ref_name }}
 
           Commit: ${{ github.sha }}
-          Timestamp: ${{ github.event.head_commit.timestamp }}
-        enable_jekyll: true
-        cname: ''  # Add your custom domain here if you have one
+          Time: ${{ github.event.head_commit.timestamp }}
 
-# Notes:
-# - Documentation is generated locally into gh-pages folder
-# - Workflow deploys from gh-pages folder to gh-pages branch
-# - Main branch stays clean - no Jekyll files
-# - GitHub Pages serves from gh-pages branch automatically
+          Triggered by: ${{ github.event_name }}
+          ${{ github.event_name == 'pull_request' && format('PR #{0}: {1}', github.event.pull_request.number, github.event.pull_request.title) || '' }}
+        enable_jekyll: true
+        cname: ''  # Add custom domain if you have one
+
+    - name: Report deployment status
+      if: success()
+      run: |
+        echo "========================================="
+        echo "✅ Documentation deployed successfully!"
+        echo "========================================="
+        echo ""
+        echo "📚 View documentation at:"
+        echo "   https://jacob-mellor.github.io/curl-dot-net/"
+        echo ""
+        echo "ℹ️  Note: GitHub Pages may take 2-10 minutes to update"
+        echo ""
+        echo "📊 Deployment summary:"
+        echo "   - Branch: ${{ github.ref_name }}"
+        echo "   - Commit: ${{ github.sha }}"
+        echo "   - Triggered by: ${{ github.event_name }}"
+
+# Workflow Summary:
+# ================
+# 1. Triggers on push to master/main or merged PRs
+# 2. Builds project with XML documentation
+# 3. Generates API docs using DefaultDocumentation
+# 4. Creates Jekyll structure in gh-pages folder
+# 5. Validates documentation
+# 6. Deploys to gh-pages branch
+# 7. GitHub Pages serves from gh-pages branch
+#
+# The gh-pages folder in the repository is temporary and only
+# used during the workflow. The actual deployment goes to the
+# gh-pages branch, which GitHub Pages uses to serve the site.

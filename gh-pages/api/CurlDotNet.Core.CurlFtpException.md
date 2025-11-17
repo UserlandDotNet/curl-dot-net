@@ -1,5 +1,5 @@
 #### [CurlDotNet](index.md 'index')
-### [CurlDotNet\.Core](CurlDotNet.Core.md 'CurlDotNet\.Core')
+### [CurlDotNet\.Core](index.md#CurlDotNet.Core 'CurlDotNet\.Core')
 
 ## CurlFtpException Class
 
@@ -10,11 +10,41 @@ public class CurlFtpException : CurlDotNet.Exceptions.CurlException
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.Exception](https://learn.microsoft.com/en-us/dotnet/api/system.exception 'System\.Exception') &#129106; [CurlException](CurlDotNet.Exceptions.CurlException.md 'CurlDotNet\.Exceptions\.CurlException') &#129106; CurlFtpException
+### Constructors
 
-| Constructors | |
-| :--- | :--- |
-| [CurlFtpException\(string, int\)](CurlDotNet.Core.CurlFtpException.CurlFtpException(string,int).md 'CurlDotNet\.Core\.CurlFtpException\.CurlFtpException\(string, int\)') | Initializes a new instance of the CurlFtpException class\. |
+<a name='CurlDotNet.Core.CurlFtpException.CurlFtpException(string,int)'></a>
 
-| Properties | |
-| :--- | :--- |
-| [FtpStatusCode](CurlDotNet.Core.CurlFtpException.FtpStatusCode.md 'CurlDotNet\.Core\.CurlFtpException\.FtpStatusCode') | Gets the FTP status code\. |
+## CurlFtpException\(string, int\) Constructor
+
+Initializes a new instance of the CurlFtpException class\.
+
+```csharp
+public CurlFtpException(string message, int ftpStatusCode);
+```
+#### Parameters
+
+<a name='CurlDotNet.Core.CurlFtpException.CurlFtpException(string,int).message'></a>
+
+`message` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The error message\.
+
+<a name='CurlDotNet.Core.CurlFtpException.CurlFtpException(string,int).ftpStatusCode'></a>
+
+`ftpStatusCode` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The FTP status code\.
+### Properties
+
+<a name='CurlDotNet.Core.CurlFtpException.FtpStatusCode'></a>
+
+## CurlFtpException\.FtpStatusCode Property
+
+Gets the FTP status code\.
+
+```csharp
+public int FtpStatusCode { get; }
+```
+
+#### Property Value
+[System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')

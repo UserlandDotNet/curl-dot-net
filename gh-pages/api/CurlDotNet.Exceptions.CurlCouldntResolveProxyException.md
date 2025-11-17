@@ -1,5 +1,5 @@
 #### [CurlDotNet](index.md 'index')
-### [CurlDotNet\.Exceptions](CurlDotNet.Exceptions.md 'CurlDotNet\.Exceptions')
+### [CurlDotNet\.Exceptions](index.md#CurlDotNet.Exceptions 'CurlDotNet\.Exceptions')
 
 ## CurlCouldntResolveProxyException Class
 
@@ -10,11 +10,33 @@ public class CurlCouldntResolveProxyException : CurlDotNet.Exceptions.CurlExcept
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.Exception](https://learn.microsoft.com/en-us/dotnet/api/system.exception 'System\.Exception') &#129106; [CurlException](CurlDotNet.Exceptions.CurlException.md 'CurlDotNet\.Exceptions\.CurlException') &#129106; CurlCouldntResolveProxyException
+### Constructors
 
-| Constructors | |
-| :--- | :--- |
-| [CurlCouldntResolveProxyException\(string, string\)](CurlDotNet.Exceptions.CurlCouldntResolveProxyException.CurlCouldntResolveProxyException(string,string).md 'CurlDotNet\.Exceptions\.CurlCouldntResolveProxyException\.CurlCouldntResolveProxyException\(string, string\)') | |
+<a name='CurlDotNet.Exceptions.CurlCouldntResolveProxyException.CurlCouldntResolveProxyException(string,string)'></a>
 
-| Properties | |
-| :--- | :--- |
-| [ProxyHost](CurlDotNet.Exceptions.CurlCouldntResolveProxyException.ProxyHost.md 'CurlDotNet\.Exceptions\.CurlCouldntResolveProxyException\.ProxyHost') | |
+## CurlCouldntResolveProxyException\(string, string\) Constructor
+
+```csharp
+public CurlCouldntResolveProxyException(string proxyHost, string command=null);
+```
+#### Parameters
+
+<a name='CurlDotNet.Exceptions.CurlCouldntResolveProxyException.CurlCouldntResolveProxyException(string,string).proxyHost'></a>
+
+`proxyHost` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='CurlDotNet.Exceptions.CurlCouldntResolveProxyException.CurlCouldntResolveProxyException(string,string).command'></a>
+
+`command` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+### Properties
+
+<a name='CurlDotNet.Exceptions.CurlCouldntResolveProxyException.ProxyHost'></a>
+
+## CurlCouldntResolveProxyException\.ProxyHost Property
+
+```csharp
+public string ProxyHost { get; }
+```
+
+#### Property Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')

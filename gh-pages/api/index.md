@@ -1,29 +1,62 @@
 ---
-layout: page
+layout: default
 title: API Reference
-permalink: /api/
 ---
 
 # CurlDotNet API Reference
 
-Complete API documentation for all namespaces, classes, and methods.
+Complete API documentation for all classes and namespaces.
 
-## Main Namespaces
+## Key Classes
 
-- [CurlDotNet](CurlDotNet.md) - Main namespace
-- [CurlDotNet.Core](CurlDotNet.Core.md) - Core functionality
-- [CurlDotNet.Exceptions](CurlDotNet.Exceptions.md) - Exception types
-- [CurlDotNet.Extensions](CurlDotNet.Extensions.md) - Extension methods
-- [CurlDotNet.Middleware](CurlDotNet.Middleware.md) - Middleware pipeline
+### Main Entry Points
+- [Curl](CurlDotNet.Curl.md) - Static methods for simple operations
+- [CurlRequestBuilder](CurlDotNet.Core.CurlRequestBuilder.md) - Fluent API for complex requests
 
-## Quick Links
+### Core Types
+- [CurlResult](CurlDotNet.Core.CurlResult.md) - Response object with rich functionality
+- [CurlOptions](CurlDotNet.Core.CurlOptions.md) - All available curl options
+- [CurlSettings](CurlDotNet.Core.CurlSettings.md) - Configuration settings
 
-### Essential Classes
-- [Curl](CurlDotNet.Curl.md) - Main entry point
-- [CurlResult](CurlDotNet.Core.CurlResult.md) - Request results
-- [CurlOptions](CurlDotNet.Core.CurlOptions.md) - Configuration
+### Exceptions
+- [CurlException](CurlDotNet.Exceptions.CurlException.md) - Base exception class
+- [CurlHttpException](CurlDotNet.Exceptions.CurlHttpException.md) - HTTP-specific errors
+- [CurlTimeoutException](CurlDotNet.Exceptions.CurlTimeoutException.md) - Timeout errors
 
 ### Middleware
 - [ICurlMiddleware](CurlDotNet.Middleware.ICurlMiddleware.md) - Middleware interface
 - [RetryMiddleware](CurlDotNet.Middleware.RetryMiddleware.md) - Retry logic
 - [RateLimitMiddleware](CurlDotNet.Middleware.RateLimitMiddleware.md) - Rate limiting
+
+## Namespaces
+
+- **[CurlDotNet](CurlDotNet.md)** - Main namespace with public API
+- **[CurlDotNet.Core](CurlDotNet.Core.md)** - Core functionality
+- **[CurlDotNet.Exceptions](CurlDotNet.Exceptions.md)** - Exception types
+- **[CurlDotNet.Middleware](CurlDotNet.Middleware.md)** - Middleware components
+- **[CurlDotNet.Extensions](CurlDotNet.Extensions.md)** - Extension methods
+- **[CurlDotNet.Lib](CurlDotNet.Lib.md)** - Internal implementation
+
+## Quick Examples
+
+### Simple GET Request
+```csharp
+var response = await Curl.GetAsync("https://api.example.com/data");
+Console.WriteLine(response.Body);
+```
+
+### POST with JSON
+```csharp
+var data = new { name = "John", age = 30 };
+var response = await Curl.PostJsonAsync("https://api.example.com/users", data);
+```
+
+### Using the Fluent Builder
+```csharp
+var response = await new CurlRequestBuilder()
+    .Post("https://api.example.com/data")
+    .WithHeader("Authorization", "Bearer token")
+    .WithTimeout(TimeSpan.FromSeconds(30))
+    .WithRetry(3)
+    .ExecuteAsync();
+```

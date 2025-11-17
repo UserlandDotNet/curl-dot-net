@@ -1,5 +1,5 @@
 #### [CurlDotNet](index.md 'index')
-### [CurlDotNet\.Exceptions](CurlDotNet.Exceptions.md 'CurlDotNet\.Exceptions')
+### [CurlDotNet\.Exceptions](index.md#CurlDotNet.Exceptions 'CurlDotNet\.Exceptions')
 
 ## CurlSslException Class
 
@@ -19,11 +19,47 @@ Derived
 &#8627; [CurlSslEngineNotFoundException](CurlDotNet.Exceptions.CurlSslEngineNotFoundException.md 'CurlDotNet\.Exceptions\.CurlSslEngineNotFoundException')  
 &#8627; [CurlSslEngineSetFailedException](CurlDotNet.Exceptions.CurlSslEngineSetFailedException.md 'CurlDotNet\.Exceptions\.CurlSslEngineSetFailedException')  
 &#8627; [CurlUseSslFailedException](CurlDotNet.Exceptions.CurlUseSslFailedException.md 'CurlDotNet\.Exceptions\.CurlUseSslFailedException')
+### Constructors
 
-| Constructors | |
-| :--- | :--- |
-| [CurlSslException\(string, string, string\)](CurlDotNet.Exceptions.CurlSslException.CurlSslException(string,string,string).md 'CurlDotNet\.Exceptions\.CurlSslException\.CurlSslException\(string, string, string\)') | Initializes a new instance of CurlSslException\. |
+<a name='CurlDotNet.Exceptions.CurlSslException.CurlSslException(string,string,string)'></a>
 
-| Properties | |
-| :--- | :--- |
-| [CertificateError](CurlDotNet.Exceptions.CurlSslException.CertificateError.md 'CurlDotNet\.Exceptions\.CurlSslException\.CertificateError') | Details about the certificate error that occurred\. |
+## CurlSslException\(string, string, string\) Constructor
+
+Initializes a new instance of CurlSslException\.
+
+```csharp
+public CurlSslException(string message, string? certError=null, string? command=null);
+```
+#### Parameters
+
+<a name='CurlDotNet.Exceptions.CurlSslException.CurlSslException(string,string,string).message'></a>
+
+`message` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The error message\.
+
+<a name='CurlDotNet.Exceptions.CurlSslException.CurlSslException(string,string,string).certError'></a>
+
+`certError` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+Details about the certificate error\.
+
+<a name='CurlDotNet.Exceptions.CurlSslException.CurlSslException(string,string,string).command'></a>
+
+`command` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The curl command that failed\.
+### Properties
+
+<a name='CurlDotNet.Exceptions.CurlSslException.CertificateError'></a>
+
+## CurlSslException\.CertificateError Property
+
+Details about the certificate error that occurred\.
+
+```csharp
+public string? CertificateError { get; }
+```
+
+#### Property Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')

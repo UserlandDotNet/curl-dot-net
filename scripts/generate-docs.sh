@@ -8,78 +8,66 @@ echo "================================================"
 
 # Clean and create gh-pages folder
 rm -rf gh-pages
-mkdir -p gh-pages
+mkdir -p gh-pages/api
 
 # 1. Build the project to generate XML docs
 echo "🔨 Building project to generate XML documentation..."
-dotnet build src/CurlDotNet/CurlDotNet.csproj -c Release -p:GenerateDocumentationFile=true
+dotnet build src/CurlDotNet/CurlDotNet.csproj -c Release -p:GenerateDocumentationFile=true -v quiet || {
+    echo "❌ Build failed"
+    exit 1
+}
 
-# 2. Generate API documentation from XML comments
-echo "📝 Generating API documentation from XML comments..."
-mkdir -p gh-pages/api
+# 2. Generate API documentation
+echo "📝 Generating API documentation..."
 
-# Install DefaultDocumentation if not installed
-if ! command -v defaultdocumentation &> /dev/null; then
-    echo "Installing DefaultDocumentation tool..."
-    dotnet tool install -g DefaultDocumentation.Console
-fi
-
-# Generate comprehensive API docs with all members
+# Use DefaultDocumentation for API docs
 defaultdocumentation \
     -a src/CurlDotNet/obj/Release/netstandard2.0/CurlDotNet.dll \
     -o gh-pages/api \
-    --GeneratedPages "Namespaces, Types, Members" \
+    --GeneratedPages "Types" \
     --IncludeUndocumentedItems true \
-    --GeneratedAccessModifiers "Public, Protected, Internal"
+    --GeneratedAccessModifiers "Public, Protected" || {
+    echo "❌ Documentation generation failed"
+    exit 1
+}
 
 echo "✅ Generated $(find gh-pages/api -name "*.md" | wc -l) API documentation files"
 
 # 3. Create Jekyll configuration
 echo "⚙️  Creating Jekyll configuration..."
 cat > gh-pages/_config.yml << 'EOF'
-# Jekyll configuration for CurlDotNet
-title: CurlDotNet
+title: CurlDotNet Documentation
 description: Pure .NET implementation of curl for C#
 baseurl: "/curl-dot-net"
 url: "https://jacob-mellor.github.io"
-
-# Theme
 theme: jekyll-theme-cayman
-
-# Plugins supported by GitHub Pages
 plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
   - jekyll-sitemap
-
-# Exclude files
+  - jekyll-seo-tag
 exclude:
-  - Gemfile
-  - Gemfile.lock
-  - node_modules
-  - vendor
+  - README.md
+  - .gitignore
+  - generate-docs.csx
 EOF
 
 # 4. Create main index page
 echo "📄 Creating main index page..."
 cat > gh-pages/index.md << 'EOF'
 ---
-layout: home
+layout: default
 title: CurlDotNet - Pure .NET curl for C#
 ---
 
-# CurlDotNet
+# CurlDotNet Documentation
 
-A pure .NET implementation of curl for C#, supporting .NET Standard 2.0, .NET 8.0, and .NET 10.0.
+A pure .NET implementation of curl for C#. No native dependencies, just clean C# code.
 
 ## Quick Start
 
 ```csharp
-using CurlDotNet;
-
-var curl = new Curl();
-var result = await curl.GetAsync("https://api.example.com/data");
-Console.WriteLine(result.Body);
+// Simple GET request
+var response = await Curl.GetAsync("https://api.example.com/data");
+Console.WriteLine(response.Body);
 ```
 
 ## Documentation
@@ -87,7 +75,9 @@ Console.WriteLine(result.Body);
 - [API Reference](api/) - Complete API documentation
 - [Getting Started](getting-started/) - Installation and first steps
 - [Tutorials](tutorials/) - Step-by-step guides
-- [Examples](examples/) - Code samples
+- [Cookbook](cookbook/) - Common recipes
+- [Guides](guides/) - Advanced topics
+- [Reference](reference/) - Technical reference
 
 ## Installation
 
@@ -101,6 +91,14 @@ Or via Package Manager:
 Install-Package CurlDotNet
 ```
 
+## Why CurlDotNet?
+
+- **Pure C#** - No P/Invoke, no native dependencies
+- **curl Compatible** - Use curl command syntax directly
+- **Cross Platform** - Works on Windows, Linux, macOS
+- **Well Documented** - Comprehensive documentation with examples
+- **Feature Complete** - Supports all major curl options
+
 ## Links
 
 - [GitHub Repository](https://github.com/jacob-mellor/curl-dot-net)
@@ -108,64 +106,96 @@ Install-Package CurlDotNet
 - [Report Issues](https://github.com/jacob-mellor/curl-dot-net/issues)
 EOF
 
-# 5. Copy existing documentation
-echo "📂 Copying existing documentation..."
-if [ -d "docs" ]; then
-    # Copy specific documentation folders
-    [ -d "docs/tutorials" ] && cp -r docs/tutorials gh-pages/
-    [ -d "docs/cookbook" ] && cp -r docs/cookbook gh-pages/
-    [ -d "docs/getting-started" ] && cp -r docs/getting-started gh-pages/
-    [ -d "docs/samples" ] && cp -r docs/samples gh-pages/
-
-    # Copy important docs
-    [ -f "docs/ADVANCED.md" ] && cp docs/ADVANCED.md gh-pages/
-    [ -f "docs/USAGE_GUIDE.md" ] && cp docs/USAGE_GUIDE.md gh-pages/
-    [ -f "docs/DOCUMENTATION.md" ] && cp docs/DOCUMENTATION.md gh-pages/
-fi
-
-# 6. Create API index
+# 5. Create API index
 echo "📋 Creating API index page..."
 cat > gh-pages/api/index.md << 'EOF'
 ---
-layout: page
+layout: default
 title: API Reference
-permalink: /api/
 ---
 
 # CurlDotNet API Reference
 
-Complete API documentation for all namespaces, classes, and methods.
+Complete API documentation for all classes and namespaces.
 
-## Main Namespaces
+## Key Classes
 
-- [CurlDotNet](CurlDotNet.md) - Main namespace
-- [CurlDotNet.Core](CurlDotNet.Core.md) - Core functionality
-- [CurlDotNet.Exceptions](CurlDotNet.Exceptions.md) - Exception types
-- [CurlDotNet.Extensions](CurlDotNet.Extensions.md) - Extension methods
-- [CurlDotNet.Middleware](CurlDotNet.Middleware.md) - Middleware pipeline
+### Main Entry Points
+- [Curl](CurlDotNet.Curl.md) - Static methods for simple operations
+- [CurlRequestBuilder](CurlDotNet.Core.CurlRequestBuilder.md) - Fluent API for complex requests
 
-## Quick Links
+### Core Types
+- [CurlResult](CurlDotNet.Core.CurlResult.md) - Response object with rich functionality
+- [CurlOptions](CurlDotNet.Core.CurlOptions.md) - All available curl options
+- [CurlSettings](CurlDotNet.Core.CurlSettings.md) - Configuration settings
 
-### Essential Classes
-- [Curl](CurlDotNet.Curl.md) - Main entry point
-- [CurlResult](CurlDotNet.Core.CurlResult.md) - Request results
-- [CurlOptions](CurlDotNet.Core.CurlOptions.md) - Configuration
+### Exceptions
+- [CurlException](CurlDotNet.Exceptions.CurlException.md) - Base exception class
+- [CurlHttpException](CurlDotNet.Exceptions.CurlHttpException.md) - HTTP-specific errors
+- [CurlTimeoutException](CurlDotNet.Exceptions.CurlTimeoutException.md) - Timeout errors
 
 ### Middleware
 - [ICurlMiddleware](CurlDotNet.Middleware.ICurlMiddleware.md) - Middleware interface
 - [RetryMiddleware](CurlDotNet.Middleware.RetryMiddleware.md) - Retry logic
 - [RateLimitMiddleware](CurlDotNet.Middleware.RateLimitMiddleware.md) - Rate limiting
+
+## Namespaces
+
+- **[CurlDotNet](CurlDotNet.md)** - Main namespace with public API
+- **[CurlDotNet.Core](CurlDotNet.Core.md)** - Core functionality
+- **[CurlDotNet.Exceptions](CurlDotNet.Exceptions.md)** - Exception types
+- **[CurlDotNet.Middleware](CurlDotNet.Middleware.md)** - Middleware components
+- **[CurlDotNet.Extensions](CurlDotNet.Extensions.md)** - Extension methods
+- **[CurlDotNet.Lib](CurlDotNet.Lib.md)** - Internal implementation
+
+## Quick Examples
+
+### Simple GET Request
+```csharp
+var response = await Curl.GetAsync("https://api.example.com/data");
+Console.WriteLine(response.Body);
+```
+
+### POST with JSON
+```csharp
+var data = new { name = "John", age = 30 };
+var response = await Curl.PostJsonAsync("https://api.example.com/users", data);
+```
+
+### Using the Fluent Builder
+```csharp
+var response = await new CurlRequestBuilder()
+    .Post("https://api.example.com/data")
+    .WithHeader("Authorization", "Bearer token")
+    .WithTimeout(TimeSpan.FromSeconds(30))
+    .WithRetry(3)
+    .ExecuteAsync();
+```
 EOF
 
-# 7. Add .gitignore for gh-pages folder
-echo "📝 Creating .gitignore for gh-pages..."
-cat > gh-pages/.gitignore << 'EOF'
-_site/
-.sass-cache/
-.jekyll-cache/
-.jekyll-metadata
-vendor/
-EOF
+# 6. Copy existing documentation
+echo "📂 Copying existing documentation..."
+for dir in tutorials cookbook getting-started guides reference; do
+    if [ -d "docs/$dir" ]; then
+        cp -r "docs/$dir" gh-pages/
+        echo "✅ Copied $dir"
+    fi
+done
+
+# 7. Ensure all directories have index files
+echo "📝 Ensuring all directories have index files..."
+for dir in gh-pages/*/; do
+    if [ ! -f "$dir/index.md" ] && [ ! -f "$dir/README.md" ]; then
+        dirname=$(basename "$dir")
+        echo "# $dirname" > "$dir/index.md"
+        echo "" >> "$dir/index.md"
+        echo "Documentation for $dirname." >> "$dir/index.md"
+        echo "✅ Created index for $dirname"
+    fi
+done
+
+# 8. Clean up any temporary files
+rm -f generate-docs.csx
 
 echo ""
 echo "========================================="
@@ -174,8 +204,8 @@ echo ""
 echo "📊 Summary:"
 echo "  - Location: ./gh-pages/"
 echo "  - API docs: $(find gh-pages/api -name "*.md" 2>/dev/null | wc -l) files"
-echo "  - Ready for deployment to GitHub Pages"
+echo "  - Total size: $(du -sh gh-pages | cut -f1)"
 echo ""
-echo "📝 The gh-pages folder is ready to be deployed"
+echo "📝 The gh-pages folder is ready for deployment"
 echo "   by the GitHub workflow on push/merge"
 echo "========================================="

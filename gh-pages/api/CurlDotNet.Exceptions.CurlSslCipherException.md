@@ -1,5 +1,5 @@
 #### [CurlDotNet](index.md 'index')
-### [CurlDotNet\.Exceptions](CurlDotNet.Exceptions.md 'CurlDotNet\.Exceptions')
+### [CurlDotNet\.Exceptions](index.md#CurlDotNet.Exceptions 'CurlDotNet\.Exceptions')
 
 ## CurlSslCipherException Class
 
@@ -10,11 +10,33 @@ public class CurlSslCipherException : CurlDotNet.Exceptions.CurlSslException
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.Exception](https://learn.microsoft.com/en-us/dotnet/api/system.exception 'System\.Exception') &#129106; [CurlException](CurlDotNet.Exceptions.CurlException.md 'CurlDotNet\.Exceptions\.CurlException') &#129106; [CurlSslException](CurlDotNet.Exceptions.CurlSslException.md 'CurlDotNet\.Exceptions\.CurlSslException') &#129106; CurlSslCipherException
+### Constructors
 
-| Constructors | |
-| :--- | :--- |
-| [CurlSslCipherException\(string, string\)](CurlDotNet.Exceptions.CurlSslCipherException.CurlSslCipherException(string,string).md 'CurlDotNet\.Exceptions\.CurlSslCipherException\.CurlSslCipherException\(string, string\)') | |
+<a name='CurlDotNet.Exceptions.CurlSslCipherException.CurlSslCipherException(string,string)'></a>
 
-| Properties | |
-| :--- | :--- |
-| [CipherName](CurlDotNet.Exceptions.CurlSslCipherException.CipherName.md 'CurlDotNet\.Exceptions\.CurlSslCipherException\.CipherName') | |
+## CurlSslCipherException\(string, string\) Constructor
+
+```csharp
+public CurlSslCipherException(string cipher, string command=null);
+```
+#### Parameters
+
+<a name='CurlDotNet.Exceptions.CurlSslCipherException.CurlSslCipherException(string,string).cipher'></a>
+
+`cipher` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='CurlDotNet.Exceptions.CurlSslCipherException.CurlSslCipherException(string,string).command'></a>
+
+`command` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+### Properties
+
+<a name='CurlDotNet.Exceptions.CurlSslCipherException.CipherName'></a>
+
+## CurlSslCipherException\.CipherName Property
+
+```csharp
+public string CipherName { get; }
+```
+
+#### Property Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')

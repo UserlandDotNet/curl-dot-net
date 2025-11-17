@@ -1,5 +1,5 @@
 #### [CurlDotNet](index.md 'index')
-### [CurlDotNet\.Exceptions](CurlDotNet.Exceptions.md 'CurlDotNet\.Exceptions')
+### [CurlDotNet\.Exceptions](index.md#CurlDotNet.Exceptions 'CurlDotNet\.Exceptions')
 
 ## CurlRateLimitException Class
 
@@ -10,12 +10,52 @@ public class CurlRateLimitException : CurlDotNet.Exceptions.CurlHttpException
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.Exception](https://learn.microsoft.com/en-us/dotnet/api/system.exception 'System\.Exception') &#129106; [CurlException](CurlDotNet.Exceptions.CurlException.md 'CurlDotNet\.Exceptions\.CurlException') &#129106; [CurlHttpException](CurlDotNet.Exceptions.CurlHttpException.md 'CurlDotNet\.Exceptions\.CurlHttpException') &#129106; CurlRateLimitException
+### Constructors
 
-| Constructors | |
-| :--- | :--- |
-| [CurlRateLimitException\(string, Nullable&lt;TimeSpan&gt;, Nullable&lt;int&gt;, string\)](CurlDotNet.Exceptions.CurlRateLimitException.CurlRateLimitException(string,System.Nullable_System.TimeSpan_,System.Nullable_int_,string).md 'CurlDotNet\.Exceptions\.CurlRateLimitException\.CurlRateLimitException\(string, System\.Nullable\<System\.TimeSpan\>, System\.Nullable\<int\>, string\)') | |
+<a name='CurlDotNet.Exceptions.CurlRateLimitException.CurlRateLimitException(string,System.Nullable_System.TimeSpan_,System.Nullable_int_,string)'></a>
 
-| Properties | |
-| :--- | :--- |
-| [RemainingLimit](CurlDotNet.Exceptions.CurlRateLimitException.RemainingLimit.md 'CurlDotNet\.Exceptions\.CurlRateLimitException\.RemainingLimit') | |
-| [RetryAfter](CurlDotNet.Exceptions.CurlRateLimitException.RetryAfter.md 'CurlDotNet\.Exceptions\.CurlRateLimitException\.RetryAfter') | |
+## CurlRateLimitException\(string, Nullable\<TimeSpan\>, Nullable\<int\>, string\) Constructor
+
+```csharp
+public CurlRateLimitException(string message, System.Nullable<System.TimeSpan> retryAfter=null, System.Nullable<int> remainingLimit=null, string command=null);
+```
+#### Parameters
+
+<a name='CurlDotNet.Exceptions.CurlRateLimitException.CurlRateLimitException(string,System.Nullable_System.TimeSpan_,System.Nullable_int_,string).message'></a>
+
+`message` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='CurlDotNet.Exceptions.CurlRateLimitException.CurlRateLimitException(string,System.Nullable_System.TimeSpan_,System.Nullable_int_,string).retryAfter'></a>
+
+`retryAfter` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
+
+<a name='CurlDotNet.Exceptions.CurlRateLimitException.CurlRateLimitException(string,System.Nullable_System.TimeSpan_,System.Nullable_int_,string).remainingLimit'></a>
+
+`remainingLimit` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
+
+<a name='CurlDotNet.Exceptions.CurlRateLimitException.CurlRateLimitException(string,System.Nullable_System.TimeSpan_,System.Nullable_int_,string).command'></a>
+
+`command` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+### Properties
+
+<a name='CurlDotNet.Exceptions.CurlRateLimitException.RemainingLimit'></a>
+
+## CurlRateLimitException\.RemainingLimit Property
+
+```csharp
+public System.Nullable<int> RemainingLimit { get; }
+```
+
+#### Property Value
+[System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
+
+<a name='CurlDotNet.Exceptions.CurlRateLimitException.RetryAfter'></a>
+
+## CurlRateLimitException\.RetryAfter Property
+
+```csharp
+public System.Nullable<System.TimeSpan> RetryAfter { get; }
+```
+
+#### Property Value
+[System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')

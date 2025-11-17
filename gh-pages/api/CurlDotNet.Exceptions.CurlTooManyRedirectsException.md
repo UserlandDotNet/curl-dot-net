@@ -1,5 +1,5 @@
 #### [CurlDotNet](index.md 'index')
-### [CurlDotNet\.Exceptions](CurlDotNet.Exceptions.md 'CurlDotNet\.Exceptions')
+### [CurlDotNet\.Exceptions](index.md#CurlDotNet.Exceptions 'CurlDotNet\.Exceptions')
 
 ## CurlTooManyRedirectsException Class
 
@@ -10,11 +10,33 @@ public class CurlTooManyRedirectsException : CurlDotNet.Exceptions.CurlException
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.Exception](https://learn.microsoft.com/en-us/dotnet/api/system.exception 'System\.Exception') &#129106; [CurlException](CurlDotNet.Exceptions.CurlException.md 'CurlDotNet\.Exceptions\.CurlException') &#129106; CurlTooManyRedirectsException
+### Constructors
 
-| Constructors | |
-| :--- | :--- |
-| [CurlTooManyRedirectsException\(int, string\)](CurlDotNet.Exceptions.CurlTooManyRedirectsException.CurlTooManyRedirectsException(int,string).md 'CurlDotNet\.Exceptions\.CurlTooManyRedirectsException\.CurlTooManyRedirectsException\(int, string\)') | |
+<a name='CurlDotNet.Exceptions.CurlTooManyRedirectsException.CurlTooManyRedirectsException(int,string)'></a>
 
-| Properties | |
-| :--- | :--- |
-| [RedirectCount](CurlDotNet.Exceptions.CurlTooManyRedirectsException.RedirectCount.md 'CurlDotNet\.Exceptions\.CurlTooManyRedirectsException\.RedirectCount') | |
+## CurlTooManyRedirectsException\(int, string\) Constructor
+
+```csharp
+public CurlTooManyRedirectsException(int count, string command=null);
+```
+#### Parameters
+
+<a name='CurlDotNet.Exceptions.CurlTooManyRedirectsException.CurlTooManyRedirectsException(int,string).count'></a>
+
+`count` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+<a name='CurlDotNet.Exceptions.CurlTooManyRedirectsException.CurlTooManyRedirectsException(int,string).command'></a>
+
+`command` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+### Properties
+
+<a name='CurlDotNet.Exceptions.CurlTooManyRedirectsException.RedirectCount'></a>
+
+## CurlTooManyRedirectsException\.RedirectCount Property
+
+```csharp
+public int RedirectCount { get; }
+```
+
+#### Property Value
+[System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')

@@ -1,5 +1,5 @@
 #### [CurlDotNet](index.md 'index')
-### [CurlDotNet\.Exceptions](CurlDotNet.Exceptions.md 'CurlDotNet\.Exceptions')
+### [CurlDotNet\.Exceptions](index.md#CurlDotNet.Exceptions 'CurlDotNet\.Exceptions')
 
 ## CurlBadContentEncodingException Class
 
@@ -10,11 +10,33 @@ public class CurlBadContentEncodingException : CurlDotNet.Exceptions.CurlExcepti
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.Exception](https://learn.microsoft.com/en-us/dotnet/api/system.exception 'System\.Exception') &#129106; [CurlException](CurlDotNet.Exceptions.CurlException.md 'CurlDotNet\.Exceptions\.CurlException') &#129106; CurlBadContentEncodingException
+### Constructors
 
-| Constructors | |
-| :--- | :--- |
-| [CurlBadContentEncodingException\(string, string\)](CurlDotNet.Exceptions.CurlBadContentEncodingException.CurlBadContentEncodingException(string,string).md 'CurlDotNet\.Exceptions\.CurlBadContentEncodingException\.CurlBadContentEncodingException\(string, string\)') | |
+<a name='CurlDotNet.Exceptions.CurlBadContentEncodingException.CurlBadContentEncodingException(string,string)'></a>
 
-| Properties | |
-| :--- | :--- |
-| [Encoding](CurlDotNet.Exceptions.CurlBadContentEncodingException.Encoding.md 'CurlDotNet\.Exceptions\.CurlBadContentEncodingException\.Encoding') | |
+## CurlBadContentEncodingException\(string, string\) Constructor
+
+```csharp
+public CurlBadContentEncodingException(string encoding, string command=null);
+```
+#### Parameters
+
+<a name='CurlDotNet.Exceptions.CurlBadContentEncodingException.CurlBadContentEncodingException(string,string).encoding'></a>
+
+`encoding` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='CurlDotNet.Exceptions.CurlBadContentEncodingException.CurlBadContentEncodingException(string,string).command'></a>
+
+`command` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+### Properties
+
+<a name='CurlDotNet.Exceptions.CurlBadContentEncodingException.Encoding'></a>
+
+## CurlBadContentEncodingException\.Encoding Property
+
+```csharp
+public string Encoding { get; }
+```
+
+#### Property Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')

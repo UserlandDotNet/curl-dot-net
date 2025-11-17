@@ -1,5 +1,5 @@
 #### [CurlDotNet](index.md 'index')
-### [CurlDotNet\.Core](CurlDotNet.Core.md 'CurlDotNet\.Core')
+### [CurlDotNet\.Core](index.md#CurlDotNet.Core 'CurlDotNet\.Core')
 
 ## ValidationResult Class
 
@@ -10,9 +10,43 @@ public class ValidationResult
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; ValidationResult
+### Properties
 
-| Properties | |
-| :--- | :--- |
-| [Error](CurlDotNet.Core.ValidationResult.Error.md 'CurlDotNet\.Core\.ValidationResult\.Error') | Error message if validation failed, null if valid\. |
-| [IsValid](CurlDotNet.Core.ValidationResult.IsValid.md 'CurlDotNet\.Core\.ValidationResult\.IsValid') | Whether the validation succeeded\. |
-| [ParsedOptions](CurlDotNet.Core.ValidationResult.ParsedOptions.md 'CurlDotNet\.Core\.ValidationResult\.ParsedOptions') | Parsed options if validation succeeded, null if invalid\. |
+<a name='CurlDotNet.Core.ValidationResult.Error'></a>
+
+## ValidationResult\.Error Property
+
+Error message if validation failed, null if valid\.
+
+```csharp
+public string? Error { get; set; }
+```
+
+#### Property Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='CurlDotNet.Core.ValidationResult.IsValid'></a>
+
+## ValidationResult\.IsValid Property
+
+Whether the validation succeeded\.
+
+```csharp
+public bool IsValid { get; set; }
+```
+
+#### Property Value
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+<a name='CurlDotNet.Core.ValidationResult.ParsedOptions'></a>
+
+## ValidationResult\.ParsedOptions Property
+
+Parsed options if validation succeeded, null if invalid\.
+
+```csharp
+public CurlDotNet.Core.CurlOptions? ParsedOptions { get; set; }
+```
+
+#### Property Value
+[CurlOptions](CurlDotNet.Core.CurlOptions.md 'CurlDotNet\.Core\.CurlOptions')
