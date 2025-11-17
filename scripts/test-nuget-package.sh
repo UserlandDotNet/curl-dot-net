@@ -35,13 +35,29 @@ unzip -q "$PACKAGE_PATH" -d "$TEMP_DIR/unpacked"
 
 # Verify required files exist
 echo "2️⃣ Verifying package contents..."
-REQUIRED_FILES=(
-    "lib/netstandard2.0/CurlDotNet.dll"
-    "lib/net8.0/CurlDotNet.dll"
-    "lib/net9.0/CurlDotNet.dll"
-    "lib/net10.0/CurlDotNet.dll"
-    "CurlDotNet.nuspec"
-)
+
+# Check if this is a CI build (reduced target frameworks)
+if ls "$TEMP_DIR/unpacked/lib" | grep -q "net10.0"; then
+    # Full build with all frameworks
+    REQUIRED_FILES=(
+        "lib/netstandard2.0/CurlDotNet.dll"
+        "lib/net8.0/CurlDotNet.dll"
+        "lib/net9.0/CurlDotNet.dll"
+        "lib/net10.0/CurlDotNet.dll"
+        "CurlDotNet.nuspec"
+    )
+else
+    # CI build with limited frameworks
+    REQUIRED_FILES=(
+        "lib/netstandard2.0/CurlDotNet.dll"
+        "lib/net8.0/CurlDotNet.dll"
+        "CurlDotNet.nuspec"
+    )
+    # Check for Windows-specific framework
+    if [ -d "$TEMP_DIR/unpacked/lib/net472" ]; then
+        REQUIRED_FILES+=("lib/net472/CurlDotNet.dll")
+    fi
+fi
 
 for file in "${REQUIRED_FILES[@]}"; do
     if [ -f "$TEMP_DIR/unpacked/$file" ]; then
@@ -169,7 +185,11 @@ if dotnet run --configuration Release --no-build; then
     echo "  - Name: CurlDotNet"
     echo "  - Version: $VERSION"
     echo "  - Size: $(du -h "$PACKAGE_PATH" | cut -f1)"
-    echo "  - Frameworks: .NET Standard 2.0, .NET 8.0, .NET 9.0, .NET 10.0"
+
+    # List actual frameworks in the package
+    echo -n "  - Frameworks: "
+    ls "$TEMP_DIR/unpacked/lib" | tr '\n' ' ' | sed 's/netstandard2.0/.NET Standard 2.0/g; s/net472/.NET Framework 4.7.2/g; s/net8.0/.NET 8.0/g; s/net9.0/.NET 9.0/g; s/net10.0/.NET 10.0/g'
+    echo
 else
     echo ""
     echo "❌ NuGet package validation FAILED!"

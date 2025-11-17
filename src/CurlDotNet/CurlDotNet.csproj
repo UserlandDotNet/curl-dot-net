@@ -108,6 +108,11 @@ NuGet: https://www.nuget.org/packages/CurlDotNet/</PackageReleaseNotes>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
   </ItemGroup>
 
+  <!-- Conditional package references for .NET Framework 4.7.2 -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+  </ItemGroup>
+
   <!-- Suppress nullable warnings for .NET Standard 2.0 -->
   <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <NoWarn>$(NoWarn);CS8618;CS8603;CS8625;CS8601;CS8604;CS8602;CS8600;CS8619;CS8620;CS8714;CS8762</NoWarn>
