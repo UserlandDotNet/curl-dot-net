@@ -8,6 +8,7 @@
 ## Quick Start
 
 ```csharp
+// NuGet: https://www.nuget.org/packages/CurlDotNet/
 using CurlDotNet;
 
 // It's this simple!
@@ -15,9 +16,42 @@ var result = await Curl.ExecuteAsync("curl https://api.github.com");
 Console.WriteLine(result.Body);
 ```
 
+## 🎯 Understanding the Result Object
+
+**The Result object is the heart of CurlDotNet** - every operation returns a `CurlResult` containing everything you need:
+
+```csharp
+// NuGet: https://www.nuget.org/packages/CurlDotNet/
+using CurlDotNet;
+
+var result = await Curl.GetAsync("https://api.example.com/data");
+
+// Everything you need is in the result
+if (result.IsSuccess)          // Was it successful?
+{
+    var body = result.Body;     // Get the response text
+    var data = result.ParseJson<MyType>();  // Parse as JSON
+    result.SaveToFile("data.json");         // Save to disk
+}
+```
+
+[→ Learn more about the Result object](articles/understanding-result.html)
+
 ## 📚 Documentation Sections
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 2rem 0;">
+
+<div style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px;">
+  <h3>⚡ Quickstart</h3>
+  <p>Hello World in 5 minutes</p>
+  <a href="articles/quickstart.html">Start Here →</a>
+</div>
+
+<div style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px;">
+  <h3>🎯 Result Object</h3>
+  <p>Master the CurlResult API</p>
+  <a href="articles/understanding-result.html">Learn More →</a>
+</div>
 
 <div style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px;">
   <h3>📖 User Manual</h3>
@@ -28,7 +62,7 @@ Console.WriteLine(result.Body);
 <div style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px;">
   <h3>🚀 Getting Started</h3>
   <p>Installation and first steps</p>
-  <a href="manual/getting-started/index.html">Start Here →</a>
+  <a href="manual/getting-started/index.html">Start Guide →</a>
 </div>
 
 <div style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px;">

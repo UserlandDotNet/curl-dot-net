@@ -8,34 +8,47 @@ on:
 
 jobs:
   build-and-test:
+    name: Build & Test
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         dotnet-version: ['8.0.x']
+      fail-fast: false
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ matrix.dotnet-version }}
 
-    - name: Restore dependencies
-      run: dotnet restore
+    # Linux and macOS use bash script
+    - name: Make scripts executable (Unix)
+      if: runner.os != 'Windows'
+      run: chmod +x scripts/*.sh
 
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
+    - name: Build and Test (Unix)
+      if: runner.os != 'Windows'
+      run: ./scripts/build-and-test.sh
 
-    - name: Test
-      run: dotnet test --no-build --configuration Release --verbosity normal --collect:"XPlat Code Coverage"
+    # Windows needs different handling
+    - name: Build and Test (Windows)
+      if: runner.os == 'Windows'
+      run: |
+        dotnet clean --verbosity quiet
+        dotnet restore
+        dotnet build --configuration Release --no-restore
+        dotnet test --no-build --configuration Release --verbosity normal --collect:"XPlat Code Coverage"
 
     - name: Upload coverage to Codecov
       if: matrix.os == 'ubuntu-latest'
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       with:
-        file: '**/coverage.cobertura.xml'
+        files: '**/coverage.cobertura.xml'
         flags: unittests
-        name: codecov-umbrella
+        name: codecov-${{ matrix.os }}
         fail_ci_if_error: false
+        token: ${{ secrets.CODECOV_TOKEN }}
