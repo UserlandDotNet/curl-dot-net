@@ -16,9 +16,9 @@
 
     <!-- Package Metadata -->
     <PackageId>CurlDotNet</PackageId>
-    <Version>1.2.11</Version>
-    <AssemblyVersion>1.2.11.0</AssemblyVersion>
-    <FileVersion>1.2.11.0</FileVersion>
+    <Version>1.2.12</Version>
+    <AssemblyVersion>1.2.12.0</AssemblyVersion>
+    <FileVersion>1.2.12.0</FileVersion>
 
     <!-- Authors and Sponsorship -->
     <Authors>Jacob Mellor;IronSoftware;Daniel Stenberg and curl contributors</Authors>
@@ -105,6 +105,11 @@ NuGet: https://www.nuget.org/packages/CurlDotNet/</PackageReleaseNotes>
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
   </ItemGroup>
+
+  <!-- Suppress nullable warnings for .NET Standard 2.0 -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <NoWarn>$(NoWarn);CS8618;CS8603;CS8625;CS8601;CS8604;CS8602;CS8600;CS8619;CS8620;CS8714;CS8762</NoWarn>
+  </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
