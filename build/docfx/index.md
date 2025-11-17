@@ -3,6 +3,7 @@
 <div style="text-align: center; padding: 2rem 0;">
   <h2>Pure .NET Implementation of curl for C#</h2>
   <p style="font-size: 1.2em; color: #666;">No WSL Required • No Native Dependencies • Pure C#</p>
+  <p style="font-size: 1.1em; color: #28a745; font-weight: bold;">✅ .NET 10, .NET 9 & .NET 8 LTS Ready</p>
 </div>
 
 ## Quick Start
