@@ -472,10 +472,10 @@ namespace CurlDotNet.Tests
         #region Edge Cases
 
         [Fact]
-        public async Task ExecuteAsync_NullCommand_ThrowsArgumentNullException()
+        public async Task ExecuteAsync_NullCommand_ThrowsArgumentException()
         {
             // Act & Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(
+            await Assert.ThrowsAsync<ArgumentException>(
                 () => _engine.ExecuteAsync((string)null!));
         }
 

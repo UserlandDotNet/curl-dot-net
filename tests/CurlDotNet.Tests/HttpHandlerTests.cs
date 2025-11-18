@@ -78,7 +78,11 @@ namespace CurlDotNet.Tests
             };
 
             HttpRequestMessage capturedRequest = null;
-            SetupHttpResponse(HttpStatusCode.OK, "[]", req => capturedRequest = req);
+            SetupHttpResponse(HttpStatusCode.OK, "[]", req =>
+            {
+                capturedRequest = req;
+                return Task.CompletedTask;
+            });
 
             // Act
             await _handler.ExecuteAsync(options, CancellationToken.None);
@@ -178,7 +182,11 @@ namespace CurlDotNet.Tests
             };
 
             HttpRequestMessage capturedRequest = null;
-            SetupHttpResponse(HttpStatusCode.OK, "", req => capturedRequest = req);
+            SetupHttpResponse(HttpStatusCode.OK, "", req =>
+            {
+                capturedRequest = req;
+                return Task.CompletedTask;
+            });
 
             // Act
             await _handler.ExecuteAsync(options, CancellationToken.None);
@@ -202,7 +210,11 @@ namespace CurlDotNet.Tests
             };
 
             HttpRequestMessage capturedRequest = null;
-            SetupHttpResponse(HttpStatusCode.OK, "", req => capturedRequest = req);
+            SetupHttpResponse(HttpStatusCode.OK, "", req =>
+            {
+                capturedRequest = req;
+                return Task.CompletedTask;
+            });
 
             // Act
             await _handler.ExecuteAsync(options, CancellationToken.None);
@@ -230,7 +242,11 @@ namespace CurlDotNet.Tests
             };
 
             HttpRequestMessage capturedRequest = null;
-            SetupHttpResponse(HttpStatusCode.OK, "", req => capturedRequest = req);
+            SetupHttpResponse(HttpStatusCode.OK, "", req =>
+            {
+                capturedRequest = req;
+                return Task.CompletedTask;
+            });
 
             // Act
             await _handler.ExecuteAsync(options, CancellationToken.None);
@@ -377,7 +393,11 @@ namespace CurlDotNet.Tests
             };
 
             HttpRequestMessage capturedRequest = null;
-            SetupHttpResponse(HttpStatusCode.OK, "", req => capturedRequest = req);
+            SetupHttpResponse(HttpStatusCode.OK, "", req =>
+            {
+                capturedRequest = req;
+                return Task.CompletedTask;
+            });
 
             // Act
             await _handler.ExecuteAsync(options, CancellationToken.None);
@@ -393,7 +413,7 @@ namespace CurlDotNet.Tests
         private void SetupHttpResponse(
             HttpStatusCode statusCode,
             string content,
-            Action<HttpRequestMessage> callback = null,
+            Func<HttpRequestMessage, Task> callback = null,
             Dictionary<string, string> headers = null)
         {
             var response = new HttpResponseMessage(statusCode)
@@ -422,9 +442,12 @@ namespace CurlDotNet.Tests
                     "SendAsync",
                     ItExpr.IsAny<HttpRequestMessage>(),
                     ItExpr.IsAny<CancellationToken>())
-                .ReturnsAsync((HttpRequestMessage request, CancellationToken token) =>
+                .Returns(async (HttpRequestMessage request, CancellationToken token) =>
                 {
-                    callback?.Invoke(request);
+                    if (callback != null)
+                    {
+                        await callback(request);
+                    }
                     return response;
                 });
         }

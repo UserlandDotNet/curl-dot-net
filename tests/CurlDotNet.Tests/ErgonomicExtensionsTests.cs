@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using CurlDotNet;
 using CurlDotNet.Core;
@@ -497,7 +498,10 @@ namespace CurlDotNet.Tests
 
         private class TestUser
         {
+            [JsonPropertyName("id")]
             public int Id { get; set; }
+
+            [JsonPropertyName("name")]
             public string Name { get; set; }
         }
     }

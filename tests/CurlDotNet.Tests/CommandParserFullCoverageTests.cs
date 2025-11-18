@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CurlDotNet.Core;
+using CurlDotNet.Exceptions;
 using FluentAssertions;
 using Xunit;
 
@@ -562,7 +563,7 @@ namespace CurlDotNet.Tests
         {
             // Act & Assert
             Action act = () => _parser.Parse("curl -X POST");
-            act.Should().Throw<ArgumentException>().WithMessage("*URL*");
+            act.Should().Throw<CurlInvalidCommandException>().WithMessage("*URL*");
         }
 
         [Fact]
