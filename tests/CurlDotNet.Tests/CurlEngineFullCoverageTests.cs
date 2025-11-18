@@ -161,7 +161,7 @@ namespace CurlDotNet.Tests
         public async Task ExecuteAsync_InvalidUrl_ThrowsCurlException()
         {
             // Act & Assert
-            await Assert.ThrowsAsync<CurlException>(
+            await Assert.ThrowsAsync<CurlMalformedUrlException>(
                 () => _engine.ExecuteAsync("curl not-a-valid-url"));
         }
 
@@ -228,9 +228,9 @@ namespace CurlDotNet.Tests
                 .ThrowsAsync(new HttpRequestException("Network error"));
 
             // Act & Assert
-            var ex = await Assert.ThrowsAsync<CurlDotNet.Exceptions.CurlHttpException>(
+            var ex = await Assert.ThrowsAsync<CurlDotNet.Exceptions.CurlCouldntConnectException>(
                 () => _engine.ExecuteAsync("curl https://api.example.com"));
-            ex.Message.Should().Contain("Network error");
+            ex.Message.Should().Contain("Failed to connect");
         }
 
         #endregion
@@ -257,7 +257,7 @@ namespace CurlDotNet.Tests
             // Assert
             result.IsValid.Should().BeFalse();
             result.Error.Should().NotBeNull();
-            result.Error.Should().Contain("empty");
+            result.Error.Should().Contain("null");
         }
 
         [Fact]

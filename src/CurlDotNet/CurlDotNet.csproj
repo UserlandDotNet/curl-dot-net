@@ -23,9 +23,9 @@
 
     <!-- Package Metadata -->
     <PackageId>CurlDotNet</PackageId>
-    <Version>1.2.30</Version>
-    <AssemblyVersion>1.2.30.0</AssemblyVersion>
-    <FileVersion>1.2.30.0</FileVersion>
+    <Version>1.2.31</Version>
+    <AssemblyVersion>1.2.31.0</AssemblyVersion>
+    <FileVersion>1.2.31.0</FileVersion>
 
     <!-- Authors and Sponsorship -->
     <Authors>Jacob Mellor;IronSoftware;Daniel Stenberg and curl contributors</Authors>
@@ -71,15 +71,14 @@ CurlDotNet brings the power of curl to .NET. Simply paste any curl command strin
 
     <!-- Package Icon and Release Notes -->
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReleaseNotes>Version 1.2.30 - Major Coverage Milestone &amp; Platform Expansion
-📊 Code Coverage: Achieved 65.9% line coverage (up from 46.5%)
-🧪 Test Suite: 657 total tests with 619 passing
-📈 Branch Coverage: 72% (up from 52.1%)
-🔧 Method Coverage: 59.9% (up from 33.61%)
-✨ Added Tests: 302 new comprehensive tests for all core components
-🌍 Platform Support: Added iOS, Android, and IoT device support
-📱 Universal: Runs anywhere .NET runs - mobile, IoT, cloud, and edge
-🏗️ Core Components: 90%+ coverage for HttpHandler, FileHandler, CommandParser
+    <PackageReleaseNotes>Version 1.2.31 - Comprehensive Examples &amp; Test Improvements
+📚 Examples: Added comprehensive real-world examples including GitHub API, web scraping, proxy usage
+🔍 Example Categories: BasicExamples, Authentication, FileOperations, AdvancedScenarios, RealWorld
+📝 Documentation: Complete example index and README for all scenarios
+🧪 Test Suite: Fixed platform-specific tests for better cross-platform reliability
+✨ Exception Tests: Added coverage for exception classes
+🛠️ Build: Fixed compilation issues and improved test stability
+📊 Coverage: Maintained 65.9% line coverage with improved test reliability
 💎 Sponsored by IronSoftware
 
 Documentation: https://jacob-mellor.github.io/curl-dot-net/

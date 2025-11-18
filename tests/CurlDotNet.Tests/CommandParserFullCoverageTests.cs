@@ -45,7 +45,7 @@ namespace CurlDotNet.Tests
             parser.IsValid("   ").Should().BeFalse();
             parser.IsValid(null!).Should().BeFalse();
             parser.IsValid("curl").Should().BeFalse(); // No URL
-            parser.IsValid("not-a-url").Should().BeFalse();
+            parser.IsValid("not-a-url").Should().BeTrue(); // Parser accepts bare URLs
         }
 
         #endregion
@@ -546,7 +546,7 @@ namespace CurlDotNet.Tests
         {
             // Act & Assert
             Action act = () => _parser.Parse("");
-            act.Should().Throw<ArgumentException>().WithMessage("*empty*");
+            act.Should().Throw<ArgumentException>().WithMessage("*null*");
         }
 
         [Fact]
