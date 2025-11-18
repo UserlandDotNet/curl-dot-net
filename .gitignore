@@ -61,6 +61,18 @@ TestResults/
 *.trx
 *.coverage
 
+# Code Coverage Reports
+coverage-report/
+test-results/
+coverage/
+*.cobertura.xml
+*.opencover.xml
+coverage.json
+coverage.*.json
+coverage.*.xml
+lcov.info
+.nyc_output/
+
 # DocFX / Documentation
 _site/
 _api/

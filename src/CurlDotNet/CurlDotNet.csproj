@@ -23,9 +23,9 @@
 
     <!-- Package Metadata -->
     <PackageId>CurlDotNet</PackageId>
-    <Version>1.2.27</Version>
-    <AssemblyVersion>1.2.27.0</AssemblyVersion>
-    <FileVersion>1.2.27.0</FileVersion>
+    <Version>1.2.28</Version>
+    <AssemblyVersion>1.2.28.0</AssemblyVersion>
+    <FileVersion>1.2.28.0</FileVersion>
 
     <!-- Authors and Sponsorship -->
     <Authors>Jacob Mellor;IronSoftware;Daniel Stenberg and curl contributors</Authors>
@@ -71,14 +71,14 @@ CurlDotNet brings the power of curl to .NET. Simply paste any curl command strin
 
     <!-- Package Icon and Release Notes -->
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReleaseNotes>Version 1.2.27 - Windows/.NET-Friendly Development Experience
-🎯 CSX Scripts: Migrated to C# scripts (.csx) for Windows/.NET-friendly development
-🖼️ Promotional Materials: Integrated featured image and branding
-💜 .NET Foundation: Added thank you section with C# evolution history
-🛠️ Script Improvements: Fixed test-all-locally.csx process handling
-📚 Documentation: Enhanced with 88 generated API docs and improved structure
-✅ Testing: 255 tests passing across all platforms
-🔧 Developer Experience: CSX scripts with Spectre.Console for rich terminal UI
+    <PackageReleaseNotes>Version 1.2.28 - Enhanced Code Coverage &amp; Testing Infrastructure
+📊 Code Coverage: Increased to 43.25% line coverage with 325 passing tests
+🧪 Comprehensive Testing: Added full coverage tests for CurlResult and Curl static methods
+📈 Coverage Reporting: New code-coverage.csx script with HTML reports and badge generation
+🖼️ Improved Icons: Added icon128.png with proper GitHub raw URLs for package visibility
+✅ Test Infrastructure: All 325 tests passing with 0 failures
+🔧 Developer Tools: Enhanced CSX scripts for coverage analysis
+📝 Documentation: Updated READMEs with coverage badges and statistics
 💎 Sponsored by IronSoftware
 
 Documentation: https://jacob-mellor.github.io/curl-dot-net/
