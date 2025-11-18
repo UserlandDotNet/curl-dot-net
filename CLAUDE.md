@@ -9,6 +9,8 @@
 - **Author Metadata**: Ensure Jacob Mellor's author info is present
 - **Index Files**: Always update directory index files when adding new content
 - **Never Create Broken Links**: Verify all linked files exist before creating links
+- **Promotional Image**: Uses external URL: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1o4hlr4tbp6b8k86ew6c.jpg
+- **Promotional Materials**: Maintain gh-pages/promotional-materials.md with press kit info
 
 ### ALWAYS Generate API Documentation
 - **Every build**: Run `./scripts/generate-docs.sh` after EVERY build
@@ -84,6 +86,14 @@
 - `scripts/smoke-test.sh` - Quick validation (30 seconds)
 - `scripts/test-local.sh` - Basic test runner
 - `scripts/sync-upstream.sh` - Sync with upstream fork
+
+### .NET-Friendly CSX Scripts (NEW)
+- `scripts/test-all-locally.csx` - .NET-native test runner with Spectre.Console UI
+- `scripts/generate-docs.csx` - Documentation generator in C#
+- `scripts/smoke-test.csx` - Quick validation with rich output
+- `scripts/test-nuget-package.csx` - NuGet validator with progress indicators
+- `scripts/prepare-nuget-readme.csx` - README converter for NuGet packages
+- **Note**: Keep both .sh and .csx versions for maximum compatibility
 
 ## Documentation Best Practices
 

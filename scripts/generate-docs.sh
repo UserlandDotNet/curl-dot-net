@@ -76,6 +76,8 @@ title: CurlDotNet - Pure .NET curl for C#
 
 # CurlDotNet Documentation
 
+![CurlDotNet - Why .NET Needs a POSIX/GNU Userland](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1o4hlr4tbp6b8k86ew6c.jpg)
+
 A pure .NET implementation of curl for C#. No native dependencies, just clean C# code.
 
 ## Quick Start
@@ -86,6 +88,35 @@ var response = await Curl.GetAsync("https://api.example.com/data");
 Console.WriteLine(response.Body);
 ```
 
+## 🆕 New to curl?
+
+**[Start Here: New to curl? Complete Guide →](new-to-curl.md)**
+
+Learn what curl is, how it works, and how to use curl commands in C# with comprehensive examples.
+
+## 💜 Thank You .NET Foundation!
+
+<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 12px; margin: 30px 0; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+  <a href="https://dotnetfoundation.org" target="_blank" rel="noopener" style="text-decoration: none;">
+    <img src="https://dotnetfoundation.org/img/logo_big.svg" alt=".NET Foundation" style="max-width: 300px; margin-bottom: 20px; filter: brightness(0) invert(1);">
+  </a>
+  <h3 style="color: white; margin: 20px 0; font-size: 24px;">We ❤️ the .NET Foundation!</h3>
+  <p style="color: rgba(255,255,255,0.9); font-size: 16px; line-height: 1.6; max-width: 600px; margin: 0 auto 20px;">
+    Thank you to the <a href="https://dotnetfoundation.org" style="color: #ffd700; font-weight: bold;" target="_blank">.NET Foundation</a> for their incredible work in developing and maintaining C# and the .NET ecosystem!
+    From the early days of C# 1.0 (2000) evolving from Anders Hejlsberg's experience with Delphi, C++, and Java, to today's C# 13 and .NET 9, the journey has been remarkable.
+    Parallel to this, we've witnessed the evolution of typed JavaScript/ECMAScript - from Macromedia's ActionScript 2.0 (2003) which pioneered optional static typing for ECMAScript, through Adobe's ActionScript 3.0 (2006) with full static typing, to Microsoft's TypeScript (2012) - also created by Anders Hejlsberg - bringing modern type safety to JavaScript.
+    While these are separate language families with different roots, seeing both ecosystems mature from the late 90s/early 2000s to where they are today - with C# becoming truly cross-platform and TypeScript becoming the de facto standard for large-scale JavaScript development - represents an incredible achievement in programming language evolution.
+  </p>
+  <p style="color: rgba(255,255,255,0.9); font-size: 16px;">
+    <strong>Thank you for making .NET open source, cross-platform, and amazing! 🚀</strong>
+  </p>
+  <div style="margin-top: 20px;">
+    <a href="https://dotnetfoundation.org/projects" target="_blank" style="background: white; color: #667eea; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: bold; display: inline-block; transition: transform 0.2s;">
+      Explore .NET Foundation Projects →
+    </a>
+  </div>
+</div>
+
 ## Documentation
 
 - [API Reference](api/) - Complete API documentation
@@ -95,6 +126,7 @@ Console.WriteLine(response.Body);
 - [Guides](guides/) - Advanced topics
 - [Reference](reference/) - Technical reference
 - [Exception Documentation](exceptions/) - Detailed error handling guides
+- [Promotional Materials](promotional-materials) - Press kit and marketing assets
 
 ## Installation
 

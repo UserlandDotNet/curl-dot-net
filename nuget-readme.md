@@ -5,6 +5,8 @@
 [![Build Status](https://img.shields.io/github/actions/workflow/status/jacob-mellor/curl-dot-net/ci-smoke.yml?branch=master)](https://github.com/jacob-mellor/curl-dot-net/actions)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jacob-mellor/curl-dot-net/blob/master/LICENSE)
 
+![CurlDotNet - Why .NET Needs a POSIX/GNU Userland](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1o4hlr4tbp6b8k86ew6c.jpg)
+
 ## 🆕 New to curl? Start Here!
 
 **[📖 Complete Beginner's Guide to curl in C# →](https://jacob-mellor.github.io/curl-dot-net/new-to-curl)**
