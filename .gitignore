@@ -1,3 +1,6 @@
+# Private documentation
+JACOB.md
+
 # Build results
 bin/
 obj/
@@ -6,6 +9,12 @@ obj/
 x64/
 x86/
 build/
+# Exception for build documentation, icon, and DocFX configuration
+!build/README.md
+!build/icon-128.png
+!build/docfx/
+build/docfx/_site/
+build/docfx/obj/
 bld/
 [Bb]in/
 [Oo]bj/
@@ -19,8 +28,9 @@ bld/
 *.userprefs
 
 # NuGet
-*.nupkg
-*.snupkg
+# Commented out to keep nupkg folder in repo for simplified deployment
+# *.nupkg
+# *.snupkg
 packages/
 .nuget/
 
@@ -51,11 +61,18 @@ TestResults/
 *.trx
 *.coverage
 
-# DocFX
+# DocFX / Documentation
 _site/
 _api/
 *.log
 jacob/
+docs/_site/
+sitemap.xml
+gh-pages/  # Generated documentation folder
+# Prevent built HTML files in docs
+docs/**/*.html
+docs/api/*.html
+docs/articles/*.html
 
 # Benchmark Results
 BenchmarkDotNet.Artifacts/
@@ -76,3 +93,9 @@ promotion.md
 # Work planning documents (internal use)
 work.md
 ACHIEVED.md
+# Keep nupkg folder in repo for simplified deployment
+# nupkg/
+# *.nupkg
+# *.snupkg
+build_output.txt
+*.lock
