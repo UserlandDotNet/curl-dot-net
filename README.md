@@ -327,6 +327,54 @@ Console.WriteLine($"First Byte: {result.Timings.FirstByte}ms");
 Console.WriteLine($"Total: {result.Timings.Total}ms");
 ```
 
+### Code Generation
+CurlDotNet can transpile curl commands into code for other languages. This is perfect for building developer tools or converting documentation examples.
+
+```csharp
+// Convert curl to PowerShell
+var powershellCode = Curl.ToPowershellCode("curl -X POST https://api.example.com -d 'data'");
+
+// Convert curl to Python Requests
+var pythonCode = Curl.ToPythonCode("curl -X POST https://api.example.com -d 'data'");
+
+// Convert curl to JavaScript Fetch
+var jsCode = Curl.ToFetchCode("curl -X POST https://api.example.com -d 'data'");
+
+// Convert curl to C# HttpClient
+var csharpCode = Curl.ToHttpClientCode("curl -X POST https://api.example.com -d 'data'");
+```
+
+## ❓ Troubleshooting
+
+### SSL/TLS Issues
+If you encounter SSL errors (e.g., self-signed certificates), you can disable verification for development:
+
+```csharp
+// Global setting (affects all requests)
+Curl.DefaultInsecure = true;
+
+// Per-request setting
+await Curl.Execute("curl -k https://self-signed.local");
+```
+
+### Timeouts
+If requests are timing out, increase the timeout settings:
+
+```csharp
+// Set global timeout to 60 seconds
+Curl.DefaultMaxTimeSeconds = 60;
+
+// Or per request
+await Curl.Execute("curl --max-time 60 https://slow-api.example.com");
+```
+
+### Proxy Authentication
+If your proxy requires authentication:
+
+```csharp
+await Curl.Execute("curl -x http://user:pass@proxy.example.com:8080 https://api.example.com");
+```
+
 ## 🤝 Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
