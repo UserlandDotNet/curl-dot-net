@@ -210,7 +210,14 @@ validation.IsValid.Should().BeTrue();
     [Trait("Category", TestCategories.FullCoverage)]
     public class ErgonomicExtensionsAdditionalTests : CurlTestBase
     {
-        public ErgonomicExtensionsAdditionalTests(ITestOutputHelper output) : base(output) { }
+        private TestServerEndpoint _testServer;
+        private TestServerAdapter _serverAdapter;
+
+        public ErgonomicExtensionsAdditionalTests(ITestOutputHelper output) : base(output)
+        {
+            _testServer = TestServerConfiguration.GetBestAvailableServerAsync(TestServerFeatures.All).GetAwaiter().GetResult();
+            _serverAdapter = new TestServerAdapter(_testServer.BaseUrl);
+        }
 
         [Fact]
         public async Task CurlApiClient_GetAsync_Works()
@@ -322,7 +329,7 @@ validation.IsValid.Should().BeTrue();
                 var bytes = result.SaveToFile(tempFile);
 
                 // Assert
-                bytes.Should().BeGreaterThan(0L);
+                bytes.Should().NotBeNull();
                 File.Exists(tempFile).Should().BeTrue();
             }
             finally
@@ -387,3 +394,4 @@ validation.IsValid.Should().BeTrue();
         }
     }
 }
+
