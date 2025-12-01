@@ -80,14 +80,14 @@ CurlDotNet brings the power of curl to .NET. Simply paste any curl command strin
 
     <!-- Package Icon and Release Notes -->
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReleaseNotes>Version 9.2.0 - Perfect README & Documentation Links
-✅ FIXED: All GitHub Pages documentation links working
-🔗 VERIFIED: Every link tested and functional
-📖 SYNCED: Main and NuGet READMEs fully synchronized
-🖼️ ICON: NuGet-hosted icon (100% trusted)
-📚 DOCS: Complete documentation accessible
-📦 Frameworks: netstandard2.0, net472, net48, net8.0, net9.0, net10.0
-💎 Sponsored by IronSoftware
+    <PackageReleaseNotes>Version 9.2.0 - Perfect README and Documentation Links
+FIXED: All GitHub Pages documentation links working
+VERIFIED: Every link tested and functional
+SYNCED: Main and NuGet READMEs fully synchronized
+ICON: NuGet-hosted icon (100% trusted)
+DOCS: Complete documentation accessible
+Frameworks: netstandard2.0, net472, net48, net8.0, net9.0, net10.0
+Sponsored by IronSoftware
 
 Documentation: https://jacob-mellor.github.io/curl-dot-net/
 Repository: https://github.com/jacob-mellor/curl-dot-net
