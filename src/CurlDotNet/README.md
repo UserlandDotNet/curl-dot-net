@@ -8,10 +8,6 @@
 
 ![CurlDotNet - Why .NET Needs a POSIX/GNU Userland](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1o4hlr4tbp6b8k86ew6c.jpg)
 
-<div align="center">
-  <img src="https://github.com/jacob-mellor/curl-dot-net/blob/master/src/CurlDotNet/icon128.png?raw=true" alt="CurlDotNet Icon" width="128" height="128"/>
-</div>
-
 ## 🆕 New to curl? Start Here!
 
 **[📖 Complete Beginner's Guide to curl in C# →](https://jacob-mellor.github.io/curl-dot-net/new-to-curl)**
