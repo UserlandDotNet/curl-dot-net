@@ -1,47 +1,29 @@
 title: CurlDotNet Documentation
-description: Pure .NET implementation of curl for C#
+description: Pure .NET implementation of curl - Paste any curl command directly into your C# application
 baseurl: "/curl-dot-net"
 url: "https://jacob-mellor.github.io"
-theme: jekyll-theme-cayman
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+# Theme
+remote_theme: pages-themes/cayman@v0.2.0
 plugins:
-  - jekyll-sitemap
+  - jekyll-remote-theme
   - jekyll-seo-tag
 
-# Author information
-author:
-  name: Jacob Mellor
-  url: https://github.com/jacob-mellor
-  github: jacob-mellor
+# Exclude files
+exclude:
+  - README.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
 
-# Social links
-social:
-  name: Jacob Mellor
-  links:
-    - https://github.com/jacob-mellor
-    - https://ironsoftware.com/about-us/authors/jacobmellor/
-
-# Markdown processing
-markdown: kramdown
-kramdown:
-  input: GFM
-  hard_wrap: false
-  syntax_highlighter: rouge
-
-# Collections - enable navigation
-collections:
-  docs:
-    output: true
-    permalink: /:path/
-
-# Default layout
+# Default layout for markdown files
 defaults:
   - scope:
       path: ""
+      type: "pages"
     values:
-      layout: default
-
-# Exclude from build
-exclude:
-  - toc.yml
-  - "*.yml"
-  - README.md
+      layout: "default"

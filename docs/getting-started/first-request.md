@@ -8,7 +8,7 @@ Before you begin, ensure you have:
 - CurlDotNet installed (`dotnet add package CurlDotNet`)
 - A .NET project ready to go
 
-See the [Installation Guide](installation.md) if you need help setting up.
+See the [Installation Guide](installation.html) if you need help setting up.
 
 ## The Simplest Request
 
@@ -214,13 +214,13 @@ class Program
 
 Now that you've made your first request:
 
-1. [Configure CurlDotNet](configuration.md) - Set timeouts, proxies, and more
-2. [Browse the Cookbook](../cookbook/README.md) - Ready-to-use recipes
-3. [Learn More Tutorials](../tutorials/README.md) - Deep dive into features
-4. [API Reference](../api/index.md) - Complete API documentation
+1. [Configure CurlDotNet](configuration.html) - Set timeouts, proxies, and more
+2. [Browse the Cookbook](../cookbook/) - Ready-to-use recipes
+3. [Learn More Tutorials](../tutorials/) - Deep dive into features
+4. [API Reference](../api/index.html) - Complete API documentation
 
 ## Need Help?
 
-- [Common Issues](../troubleshooting/common-issues.md) - Solutions to frequent problems
-- [FAQ](../troubleshooting/faq.md) - Frequently asked questions
+- [Common Issues](../troubleshooting/common-issues.html) - Solutions to frequent problems
+- [FAQ](../troubleshooting/faq.html) - Frequently asked questions
 - [GitHub Issues](https://github.com/jacob-mellor/curl-dot-net/issues) - Report bugs or ask questions

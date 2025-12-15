@@ -10,41 +10,41 @@ Welcome to CurlDotNet! This file provides quick access to all documentation, whe
 All documentation is available directly in this repository. You can read it on GitHub without leaving this page:
 
 ### 🚀 Getting Started
-- [**Installation Guide**](../getting-started/installation.md) - Get CurlDotNet installed and configured
-- [**Quick Start Tutorial**](../tutorials/04-your-first-request.md) - Make your first request in 5 minutes
-- [**README**](../getting-started/README.md) - Overview of getting started
+- [**Installation Guide**](../getting-started/installation.html) - Get CurlDotNet installed and configured
+- [**Quick Start Tutorial**](../tutorials/04-your-first-request.html) - Make your first request in 5 minutes
+- [**README**](../getting-started/) - Overview of getting started
 
 ### 📘 User Manual
 Complete user manual with all documentation:
 
 #### Core Concepts
-- [**What is .NET?**](../tutorials/01-what-is-dotnet.md) - For developers new to .NET
-- [**What is curl?**](../tutorials/02-what-is-curl.md) - Understanding curl basics
-- [**Async Programming**](../tutorials/03-what-is-async.md) - Understanding async/await
+- [**What is .NET?**](../tutorials/01-what-is-dotnet.html) - For developers new to .NET
+- [**What is curl?**](../tutorials/02-what-is-curl.html) - Understanding curl basics
+- [**Async Programming**](../tutorials/03-what-is-async.html) - Understanding async/await
 
 #### API Documentation
-- [**API Guide**](../api-guide/README.md) - Complete API reference
-- [**API Reference**](../api/index.md) - Generated API documentation
+- [**API Guide**](../api-guide/) - Complete API reference
+- [**API Reference**](../api/index.html) - Generated API documentation
 
 #### Practical Examples
-- [**Cookbook**](../cookbook/README.md) - Ready-to-use code recipes
-- [**Simple GET Request**](../cookbook/beginner/simple-get.md) - Basic HTTP GET
-- [**POST JSON Data**](../cookbook/beginner/send-json.md) - Sending JSON
-- [**File Upload**](../cookbook/beginner/upload-file.md) - Uploading files
-- [**Error Handling**](../cookbook/beginner/handle-errors.md) - Handle errors properly
+- [**Cookbook**](../cookbook/) - Ready-to-use code recipes
+- [**Simple GET Request**](../cookbook/beginner/simple-get.html) - Basic HTTP GET
+- [**POST JSON Data**](../cookbook/beginner/send-json.html) - Sending JSON
+- [**File Upload**](../cookbook/beginner/upload-file.html) - Uploading files
+- [**Error Handling**](../cookbook/beginner/handle-errors.html) - Handle errors properly
 
 #### Authentication
-- [**Authentication Tutorial**](../tutorials/09-authentication-basics.md) - All auth methods explained
-- [**Call API with Auth**](../cookbook/beginner/call-api.md) - Bearer tokens and API keys
+- [**Authentication Tutorial**](../tutorials/09-authentication-basics.html) - All auth methods explained
+- [**Call API with Auth**](../cookbook/beginner/call-api.html) - Bearer tokens and API keys
 
 #### Migration Guides
-- [**From HttpClient**](../migration/httpclient.md) - Migrate from HttpClient
-- [**From RestSharp**](../migration/restsharp.md) - Migrate from RestSharp
+- [**From HttpClient**](../migration/httpclient.html) - Migrate from HttpClient
+- [**From RestSharp**](../migration/restsharp.html) - Migrate from RestSharp
 
 #### Troubleshooting
-- [**Common Issues**](../troubleshooting/common-issues.md) - Solutions to common problems
-- [**Error Reference**](../troubleshooting/error-reference.md) - All exception types
-- [**FAQ**](../troubleshooting/faq.md) - Frequently asked questions
+- [**Common Issues**](../troubleshooting/common-issues.html) - Solutions to common problems
+- [**Error Reference**](../troubleshooting/error-reference.html) - All exception types
+- [**FAQ**](../troubleshooting/faq.html) - Frequently asked questions
 
 ## 🔍 Quick Code Examples
 
@@ -113,12 +113,12 @@ docs/
 
 | I want to... | Go to... |
 |-------------|----------|
-| Install CurlDotNet | [Installation Guide](../getting-started/installation.md) |
-| Learn the basics | [Tutorials](../tutorials/README.md) |
-| See code examples | [Cookbook](../cookbook/README.md) |
-| Read API docs | [API Guide](../api-guide/README.md) |
-| Solve a problem | [Troubleshooting](../troubleshooting/README.md) |
-| Migrate from HttpClient | [Migration Guide](../migration/httpclient.md) |
+| Install CurlDotNet | [Installation Guide](../getting-started/installation.html) |
+| Learn the basics | [Tutorials](../tutorials/) |
+| See code examples | [Cookbook](../cookbook/) |
+| Read API docs | [API Guide](../api-guide/) |
+| Solve a problem | [Troubleshooting](../troubleshooting/) |
+| Migrate from HttpClient | [Migration Guide](../migration/httpclient.html) |
 
 ## 💡 Why Read Docs on GitHub?
 

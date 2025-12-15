@@ -346,7 +346,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## Next Steps
 
-- [First Request](first-request.md) - Make your first request
-- [Cookbook](../cookbook/README.md) - Practical examples
-- [Troubleshooting](../troubleshooting/README.md) - Solve common issues
-- [API Reference](../api/index.md) - Complete API documentation
+- [First Request](first-request.html) - Make your first request
+- [Cookbook](../cookbook/) - Practical examples
+- [Troubleshooting](../troubleshooting/) - Solve common issues
+- [API Reference](../api/index.html) - Complete API documentation

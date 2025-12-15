@@ -311,7 +311,7 @@ string psCode = Curl.ToPowershellCode("curl https://api.example.com");
 
 ## Still Have Questions?
 
-- [Common Issues](common-issues.md) - Solutions to frequent problems
-- [Error Reference](error-reference.md) - All exception types explained
+- [Common Issues](common-issues.html) - Solutions to frequent problems
+- [Error Reference](error-reference.html) - All exception types explained
 - [GitHub Issues](https://github.com/jacob-mellor/curl-dot-net/issues) - Ask questions or report bugs
 - [GitHub Discussions](https://github.com/jacob-mellor/curl-dot-net/discussions) - Community help

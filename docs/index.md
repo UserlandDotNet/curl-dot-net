@@ -30,35 +30,35 @@ dotnet add package CurlDotNet
 
 ## Getting Started
 
-- [Installation Guide](getting-started/installation.md) - Set up CurlDotNet in your project
-- [Quick Start](getting-started/quickstart.md) - Make your first request in minutes
-- [First Request](getting-started/first-request.md) - Step-by-step walkthrough
-- [Configuration](getting-started/configuration.md) - Configure timeouts, SSL, proxies
+- [Installation Guide](getting-started/installation.html) - Set up CurlDotNet in your project
+- [Quick Start](getting-started/quickstart.html) - Make your first request in minutes
+- [First Request](getting-started/first-request.html) - Step-by-step walkthrough
+- [Configuration](getting-started/configuration.html) - Configure timeouts, SSL, proxies
 
 ## Learning Paths
 
 ### New to Programming?
 
-1. [What is .NET?](tutorials/01-what-is-dotnet.md)
-2. [What is curl?](tutorials/02-what-is-curl.md)
-3. [Understanding async/await](tutorials/03-what-is-async.md)
-4. [Your First Request](tutorials/04-your-first-request.md)
+1. [What is .NET?](tutorials/01-what-is-dotnet.html)
+2. [What is curl?](tutorials/02-what-is-curl.html)
+3. [Understanding async/await](tutorials/03-what-is-async.html)
+4. [Your First Request](tutorials/04-your-first-request.html)
 
 ### Experienced Developer?
 
-1. [Quick Start](getting-started/quickstart.md)
-2. [API Guide](api-guide/README.md)
-3. [Cookbook](cookbook/README.md)
+1. [Quick Start](getting-started/quickstart.html)
+2. [API Guide](api-guide/)
+3. [Cookbook](cookbook/)
 
 ## Documentation Sections
 
 | Section | Description |
 |---------|-------------|
-| [Tutorials](tutorials/README.md) | Step-by-step learning for beginners |
-| [Cookbook](cookbook/README.md) | Copy-paste recipes for common tasks |
-| [API Guide](api-guide/README.md) | Complete API reference with examples |
-| [API Reference](api/index.md) | Generated API documentation |
-| [Troubleshooting](troubleshooting/README.md) | Solutions to common problems |
+| [Tutorials](tutorials/) | Step-by-step learning for beginners |
+| [Cookbook](cookbook/) | Copy-paste recipes for common tasks |
+| [API Guide](api-guide/) | Complete API reference with examples |
+| [API Reference](api/index.html) | Generated API documentation |
+| [Troubleshooting](troubleshooting/) | Solutions to common problems |
 
 ## The Three Ways to Use CurlDotNet
 
@@ -98,8 +98,8 @@ var result = await curl.GetAsync("https://api.example.com");
 ## Getting Help
 
 - [GitHub Issues](https://github.com/jacob-mellor/curl-dot-net/issues)
-- [Troubleshooting Guide](troubleshooting/README.md)
-- [FAQ](troubleshooting/faq.md)
+- [Troubleshooting Guide](troubleshooting/)
+- [FAQ](troubleshooting/faq.html)
 
 ---
 

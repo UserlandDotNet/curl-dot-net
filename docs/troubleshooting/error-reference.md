@@ -325,6 +325,6 @@ catch (CurlException ex)
 
 ## Related Topics
 
-- [Common Issues](common-issues.md) - Solutions to frequent problems
-- [FAQ](faq.md) - Frequently asked questions
-- [Configuration](../getting-started/configuration.md) - Set timeouts and other options
+- [Common Issues](common-issues.html) - Solutions to frequent problems
+- [FAQ](faq.html) - Frequently asked questions
+- [Configuration](../getting-started/configuration.html) - Set timeouts and other options
