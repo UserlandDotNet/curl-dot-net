@@ -31,9 +31,9 @@
 
     <!-- Package Metadata -->
     <PackageId>CurlDotNet</PackageId>
-    <Version>9.2.1</Version>
-    <AssemblyVersion>9.2.1.0</AssemblyVersion>
-    <FileVersion>9.2.1.0</FileVersion>
+    <Version>9.3.0</Version>
+    <AssemblyVersion>9.3.0.0</AssemblyVersion>
+    <FileVersion>9.3.0.0</FileVersion>
 
     <!-- Authors and Sponsorship -->
     <Authors>Jacob Mellor;IronSoftware;Daniel Stenberg and curl contributors</Authors>
@@ -80,11 +80,13 @@ CurlDotNet brings the power of curl to .NET. Simply paste any curl command strin
 
     <!-- Package Icon and Release Notes -->
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReleaseNotes>Version 9.2.1 - Clean README Display
-FIXED: Removed broken icon URL from README
-CLEAN: NuGet.org displays package icon automatically
-VERIFIED: All documentation links working
-SYNCED: READMEs optimized for NuGet display
+    <PackageReleaseNotes>Version 9.3.0 - Documentation Overhaul
+NEW: Complete Getting Started guide with first-request.md and configuration.md
+NEW: Error Reference documentation for all 91 exception types
+NEW: FAQ documentation with common questions answered
+FIXED: All broken links in GitHub Pages documentation
+FIXED: toc.yml files now reference correct markdown files
+UPDATED: Jekyll configuration for GitHub Pages
 Frameworks: netstandard2.0, net472, net48, net8.0, net9.0, net10.0
 Sponsored by IronSoftware
 
