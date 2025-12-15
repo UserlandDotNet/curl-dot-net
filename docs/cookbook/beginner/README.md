@@ -1,6 +1,6 @@
-# ueginner
+# Beginner Recipes
 
-Welcome to the ueginner section of CurlDotNet documentation.
+Welcome to the Beginner section of CurlDotNet cookbook. These recipes cover common tasks for getting started.
 
 ## Contents
 
