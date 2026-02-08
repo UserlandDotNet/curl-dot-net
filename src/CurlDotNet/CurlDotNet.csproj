@@ -31,9 +31,9 @@
 
     <!-- Package Metadata -->
     <PackageId>CurlDotNet</PackageId>
-    <Version>9.3.2</Version>
-    <AssemblyVersion>9.3.2.0</AssemblyVersion>
-    <FileVersion>9.3.2.0</FileVersion>
+    <Version>9.3.3</Version>
+    <AssemblyVersion>9.3.3.0</AssemblyVersion>
+    <FileVersion>9.3.3.0</FileVersion>
 
     <!-- Authors and Sponsorship -->
     <Authors>Jacob Mellor;IronSoftware;Daniel Stenberg and curl contributors</Authors>
@@ -80,13 +80,17 @@ CurlDotNet brings the power of curl to .NET. Simply paste any curl command strin
 
     <!-- Package Icon and Release Notes -->
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReleaseNotes>Version 9.3.0 - Documentation Overhaul
-NEW: Complete Getting Started guide with first-request.md and configuration.md
-NEW: Error Reference documentation for all 91 exception types
-NEW: FAQ documentation with common questions answered
-FIXED: All broken links in GitHub Pages documentation
-FIXED: toc.yml files now reference correct markdown files
-UPDATED: Jekyll configuration for GitHub Pages
+    <PackageReleaseNotes>Version 9.3.3 - Fix binary content detection for Office documents
+BUGFIX: .xlsx, .docx, .pptx files no longer corrupted when downloaded
+   - Root cause: "xml" substring in "openxmlformats" MIME type triggered text detection
+   - Now uses precise MIME type matching instead of substring matching
+NEW: Comprehensive known-binary MIME type registry (100+ types)
+   - Office documents, PDFs, archives, images, audio, video, fonts, and more
+NEW: ForceBinary option to override content type detection
+   - CurlRequestBuilder.AsBinary() - force binary mode
+   - CurlRequestBuilder.WithBinaryContentType() - register custom binary MIME types
+   - CurlRequestBuilder.WithTextContentType() - register custom text MIME types
+FIXED: Null Content-Type now defaults to binary (previously defaulted to text)
 Frameworks: netstandard2.0, net472, net48, net8.0, net9.0, net10.0
 Sponsored by IronSoftware
 
