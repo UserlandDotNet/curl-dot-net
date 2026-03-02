@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>&#128104;‍&#127859; CurlDotNet Cookbook | CurlDotNet - Pure .NET curl for C# </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="&#128104;‍&#127859; CurlDotNet Cookbook | CurlDotNet - Pure .NET curl for C# ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/jacob-mellor/curl-dot-net/blob/master/docs/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="CurlDotNet">
+            CurlDotNet
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="-curldotnet-cookbook">👨‍🍳 CurlDotNet Cookbook</h1>
+
+<p>Welcome to the CurlDotNet Cookbook! Find ready-to-use recipes for common tasks.</p>
+<h2 id="-recipe-categories">📚 Recipe Categories</h2>
+<h3 id="-beginner-recipes">🆕 <a href="beginner/">Beginner Recipes</a></h3>
+<p>Perfect for getting started</p>
+<ul>
+<li><a href="beginner/simple-get.html">Simple GET Request</a></li>
+<li><a href="beginner/send-json.html">POST JSON Data</a></li>
+<li><a href="beginner/download-file.html">Download a File</a></li>
+<li><a href="beginner/upload-file.html">Upload a File</a></li>
+<li><a href="beginner/post-form.html">Submit a Form</a></li>
+<li><a href="beginner/call-api.html">Call an API</a></li>
+<li><a href="beginner/handle-errors.html">Handle Errors Gracefully</a></li>
+</ul>
+<h2 id="-quick-recipe-finder">🔍 Quick Recipe Finder</h2>
+<h3 id="by-task">By Task</h3>
+<p><strong>&quot;I want to...&quot;</strong></p>
+<h4 id="download-something">Download Something</h4>
+<ul>
+<li><a href="beginner/simple-get.html">Download a webpage</a></li>
+<li><a href="beginner/download-file.html">Download a file</a></li>
+</ul>
+<h4 id="upload-something">Upload Something</h4>
+<ul>
+<li><a href="beginner/upload-file.html">Upload a file</a></li>
+<li><a href="beginner/post-form.html">Upload with form data</a></li>
+</ul>
+<h4 id="work-with-apis">Work with APIs</h4>
+<ul>
+<li><a href="beginner/call-api.html">Call a REST API</a></li>
+<li><a href="beginner/send-json.html">Send JSON data</a></li>
+<li><a href="beginner/handle-errors.html">Handle API errors</a></li>
+<li>Check the API Guide for advanced patterns</li>
+</ul>
+<h4 id="authentication">Authentication</h4>
+<ul>
+<li><a href="beginner/call-api.html">API keys and bearer tokens</a></li>
+</ul>
+<h4 id="error-handling">Error Handling</h4>
+<ul>
+<li><a href="beginner/handle-errors.html">Basic error handling</a></li>
+</ul>
+<h2 id="-recipe-format">📝 Recipe Format</h2>
+<p>Each recipe includes:</p>
+<ol>
+<li><strong>What You'll Build</strong> - Clear description</li>
+<li><strong>Ingredients</strong> - What you need (packages, API keys, etc.)</li>
+<li><strong>The Recipe</strong> - Step-by-step instructions</li>
+<li><strong>Complete Code</strong> - Full working example</li>
+<li><strong>Variations</strong> - Different approaches</li>
+<li><strong>Troubleshooting</strong> - Common issues</li>
+<li><strong>Next Steps</strong> - Where to go from here</li>
+</ol>
+<h2 id="-how-to-use-this-cookbook">🎯 How to Use This Cookbook</h2>
+<h3 id="for-beginners">For Beginners</h3>
+<ol>
+<li>Start with <a href="beginner/simple-get.html">Simple GET Request</a></li>
+<li>Try each beginner recipe in order</li>
+<li>Move to intermediate when comfortable</li>
+</ol>
+<h3 id="for-specific-tasks">For Specific Tasks</h3>
+<ol>
+<li>Use the Quick Recipe Finder above</li>
+<li>Jump directly to what you need</li>
+<li>Check &quot;Variations&quot; for alternatives</li>
+</ol>
+<h3 id="for-learning">For Learning</h3>
+<ol>
+<li>Pick a real-world example</li>
+<li>Build it step-by-step</li>
+<li>Modify it for your needs</li>
+</ol>
+<h2 id="-tips-for-success">💡 Tips for Success</h2>
+<h3 id="always-test-first">Always Test First</h3>
+<pre><code class="lang-csharp">// Test with a simple request first
+var test = await Curl.ExecuteAsync(&quot;curl https://httpbin.org/get&quot;);
+if (test.IsSuccess)
+{
+    Console.WriteLine(&quot;Connection works!&quot;);
+}
+</code></pre>
+<h3 id="start-simple">Start Simple</h3>
+<pre><code class="lang-csharp">// Start with basic version
+var result = await Curl.ExecuteAsync(&quot;curl https://api.example.com&quot;);
+
+// Then add features
+var result = await Curl.ExecuteAsync(@&quot;
+    curl https://api.example.com \
+    -H 'Authorization: Bearer token' \
+    -H 'Accept: application/json'
+&quot;);
+</code></pre>
+<h3 id="use-httpbinorg-for-testing">Use httpbin.org for Testing</h3>
+<pre><code class="lang-csharp">// httpbin.org is perfect for testing
+var result = await Curl.ExecuteAsync(@&quot;
+    curl -X POST https://httpbin.org/post \
+    -d 'test=data'
+&quot;);
+
+// It echoes back what you sent
+Console.WriteLine(result.Body);
+</code></pre>
+<h2 id="-getting-help">🆘 Getting Help</h2>
+<h3 id="cant-find-a-recipe">Can't Find a Recipe?</h3>
+<ul>
+<li>Browse <a href="../api-guide/README.html">API Guide</a></li>
+<li>Check <a href="../tutorials/README.html">Tutorials</a></li>
+<li>Ask in <a href="https://github.com/jacob-mellor/curl-dot-net/discussions">Discussions</a></li>
+</ul>
+<h3 id="recipe-not-working">Recipe Not Working?</h3>
+<ul>
+<li>Check <a href="../troubleshooting/README.html">Troubleshooting</a></li>
+<li>Verify your CurlDotNet version</li>
+<li>Make sure you have all required packages</li>
+</ul>
+<h2 id="-contributing-recipes">🤝 Contributing Recipes</h2>
+<p>Have a great recipe? We'd love to include it!</p>
+<ol>
+<li>Follow the recipe format</li>
+<li>Include complete, working code</li>
+<li>Test thoroughly</li>
+<li>Submit a pull request</li>
+</ol>
+<h2 id="-related-resources">📚 Related Resources</h2>
+<ul>
+<li><a href="../tutorials/README.html">Tutorials</a> - Learn the basics</li>
+<li><a href="../api-guide/README.html">API Guide</a> - Detailed reference</li>
+<li><a href="../troubleshooting/README.html">Troubleshooting</a> - Fix common issues</li>
+</ul>
+<hr>
+<p><strong>Ready to cook?</strong> Start with → <a href="beginner/simple-get.html">Simple GET Request</a></p>
+<p><em>All recipes are tested with CurlDotNet 1.0.1+ and work on .NET Framework 4.7.2+, .NET Core 2.0+, and .NET 5-10</em></p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/jacob-mellor/curl-dot-net/blob/master/docs/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright © 2024 CurlDotNet | <a href='https://www.nuget.org/packages/CurlDotNet/'>NuGet</a> | <a href='https://github.com/jacob-mellor/curl-dot-net'>GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
