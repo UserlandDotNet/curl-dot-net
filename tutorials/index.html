@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>CurlDotNet Tutorials | CurlDotNet - Pure .NET curl for C# </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="CurlDotNet Tutorials | CurlDotNet - Pure .NET curl for C# ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/jacob-mellor/curl-dot-net/blob/master/docs/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="CurlDotNet">
+            CurlDotNet
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="curldotnet-tutorials">CurlDotNet Tutorials</h1>
+
+<p>Welcome to the CurlDotNet tutorials! These step-by-step guides will help you learn how to use CurlDotNet effectively.</p>
+<h2 id="what-is-curldotnet">What is CurlDotNet?</h2>
+<p><strong>CurlDotNet</strong> is the pure .NET implementation of curl that allows C# developers to execute curl commands directly in their applications. No translation required, no shell execution, just paste any curl command and it works!</p>
+<h2 id="installation">Installation</h2>
+<p>Install CurlDotNet from NuGet: <strong><a href="https://www.nuget.org/packages/CurlDotNet/">CurlDotNet on NuGet</a></strong></p>
+<pre><code class="lang-bash">dotnet add package CurlDotNet
+</code></pre>
+<h2 id="tutorial-series">Tutorial Series</h2>
+<h3 id="getting-started-with-net-and-curldotnet">Getting Started with .NET and CurlDotNet</h3>
+<ol>
+<li><strong><a href="01-what-is-dotnet.html">What is .NET and C#?</a></strong> - Understanding the .NET ecosystem</li>
+<li><strong><a href="02-what-is-curl.html">What is curl?</a></strong> - Learn about the curl command-line tool</li>
+<li><strong><a href="03-what-is-async.html">Understanding Async/Await</a></strong> - Asynchronous programming in C#</li>
+<li><strong><a href="04-your-first-request.html">Your First Request</a></strong> - Make your first HTTP request with CurlDotNet</li>
+</ol>
+<h2 id="learning-path">Learning Path</h2>
+<h3 id="complete-beginner">Complete Beginner?</h3>
+<p>Start with tutorial #1 to understand .NET, then progress through each tutorial in order.</p>
+<h3 id="know-net-but-new-to-curl">Know .NET but New to curl?</h3>
+<p>Jump to tutorial #2 to understand curl, then move to tutorial #4 for practical examples.</p>
+<h3 id="experienced-developer">Experienced Developer?</h3>
+<p>Go straight to tutorial #4 to see CurlDotNet in action.</p>
+<h2 id="quick-example">Quick Example</h2>
+<p>Here's a simple example to get you started:</p>
+<pre><code class="lang-csharp">using CurlDotNet;
+
+// Your first CurlDotNet request
+var result = await Curl.ExecuteAsync(&quot;curl https://api.github.com&quot;);
+Console.WriteLine(result.Body);
+</code></pre>
+<h2 id="what-youll-learn">What You'll Learn</h2>
+<p>By completing these tutorials, you'll understand:</p>
+<ul>
+<li>✅ The .NET ecosystem and C# basics</li>
+<li>✅ How curl works and why it's powerful</li>
+<li>✅ Asynchronous programming patterns</li>
+<li>✅ Making HTTP requests with CurlDotNet</li>
+<li>✅ Handling responses and errors</li>
+<li>✅ Best practices for API integration</li>
+</ul>
+<h2 id="additional-resources">Additional Resources</h2>
+<ul>
+<li><strong><a href="../cookbook/">Cookbook</a></strong> - Practical recipes for common tasks</li>
+<li><strong><a href="../api/">API Reference</a></strong> - Complete API documentation</li>
+<li><strong><a href="../troubleshooting/">Troubleshooting</a></strong> - Solutions to common issues</li>
+<li><strong><a href="https://github.com/jacob-mellor/curl-dot-net">GitHub Repository</a></strong> - Source code and examples</li>
+</ul>
+<h2 id="need-help">Need Help?</h2>
+<ul>
+<li>Check our <a href="../troubleshooting/">Troubleshooting Guide</a></li>
+<li>Ask questions in <a href="https://github.com/jacob-mellor/curl-dot-net/discussions">GitHub Discussions</a></li>
+<li>Report issues on <a href="https://github.com/jacob-mellor/curl-dot-net/issues">GitHub Issues</a></li>
+</ul>
+<hr>
+<p>Ready to start? Begin with <strong><a href="01-what-is-dotnet.html">What is .NET and C#?</a></strong> →</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/jacob-mellor/curl-dot-net/blob/master/docs/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright © 2024 CurlDotNet | <a href='https://www.nuget.org/packages/CurlDotNet/'>NuGet</a> | <a href='https://github.com/jacob-mellor/curl-dot-net'>GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
