@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/USAGE_GUIDE.html</loc>
+    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/index.html</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -13,73 +13,19 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/api-guide/index.html</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/images/index.html</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/api/index.html</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://jacob-mellor.github.io/curl-dot-net/manual/LIBCURL_MAPPING.html</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/troubleshooting/common-issues.html</loc>
+    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/api-guide/index.html</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/troubleshooting/index.html</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/tutorials/01-what-is-dotnet.html</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/tutorials/index.html</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/tutorials/04-your-first-request.html</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/tutorials/03-what-is-async.html</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/tutorials/02-what-is-curl.html</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/tutorials/index.html</loc>
+    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/USAGE_GUIDE.html</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -91,19 +37,37 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/cookbook/beginner/upload-file.html</loc>
+    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/cookbook/index.html</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/cookbook/beginner/send-json.html</loc>
+    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/cookbook/beginner/index.html</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/cookbook/beginner/post-form.html</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/cookbook/beginner/call-api.html</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://jacob-mellor.github.io/curl-dot-net/manual/cookbook/beginner/download-file.html</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/cookbook/beginner/upload-file.html</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -121,31 +85,55 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/cookbook/beginner/post-form.html</loc>
+    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/cookbook/beginner/send-json.html</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/cookbook/beginner/index.html</loc>
+    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/images/index.html</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/cookbook/beginner/call-api.html</loc>
+    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/api/index.html</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/cookbook/index.html</loc>
+    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/tutorials/index.html</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/getting-started/installation.html</loc>
+    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/tutorials/index.html</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/tutorials/03-what-is-async.html</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/tutorials/01-what-is-dotnet.html</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/tutorials/04-your-first-request.html</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/tutorials/02-what-is-curl.html</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -157,7 +145,19 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/index.html</loc>
+    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/getting-started/installation.html</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/troubleshooting/index.html</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://jacob-mellor.github.io/curl-dot-net/manual/troubleshooting/common-issues.html</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
