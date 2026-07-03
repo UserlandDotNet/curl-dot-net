@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>CurlDotNet Documentation | CurlDotNet - Pure .NET curl for C# </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="CurlDotNet Documentation | CurlDotNet - Pure .NET curl for C# ">
+      
+      
+      <link rel="icon" href="favicon.ico">
+      <link rel="stylesheet" href="public/docfx.min.css">
+      <link rel="stylesheet" href="public/main.css">
+      <meta name="docfx:navrel" content="toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/jacob-mellor/curl-dot-net/blob/master/docs/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="index.html">
+            <img id="logo" class="svg" src="logo.svg" alt="CurlDotNet">
+            CurlDotNet
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="curldotnet-documentation">CurlDotNet Documentation</h1>
+
+<div style="text-align: center; padding: 2rem 0;">
+  <h2>Pure .NET Implementation of curl for C#</h2>
+  <p style="font-size: 1.2em; color: #666;">No WSL Required • No Native Dependencies • Pure C#</p>
+</div>
+<h2 id="quick-start">Quick Start</h2>
+<pre><code class="lang-csharp">// NuGet: https://www.nuget.org/packages/CurlDotNet/
+using CurlDotNet;
+
+// It's this simple!
+var result = await Curl.ExecuteAsync(&quot;curl https://api.github.com&quot;);
+Console.WriteLine(result.Body);
+</code></pre>
+<h2 id="-understanding-the-result-object">🎯 Understanding the Result Object</h2>
+<p><strong>The Result object is the heart of CurlDotNet</strong> - every operation returns a <code>CurlResult</code> containing everything you need:</p>
+<pre><code class="lang-csharp">// NuGet: https://www.nuget.org/packages/CurlDotNet/
+using CurlDotNet;
+
+var result = await Curl.GetAsync(&quot;https://api.example.com/data&quot;);
+
+// Everything you need is in the result
+if (result.IsSuccess)          // Was it successful?
+{
+    var body = result.Body;     // Get the response text
+    var data = result.ParseJson&lt;MyType&gt;();  // Parse as JSON
+    result.SaveToFile(&quot;data.json&quot;);         // Save to disk
+}
+</code></pre>
+<p><a href="articles/understanding-result.html">→ Learn more about the Result object</a></p>
+<h2 id="-documentation-sections">📚 Documentation Sections</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 2rem 0;">
+<div style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px;">
+  <h3>⚡ Quickstart</h3>
+  <p>Hello World in 5 minutes</p>
+  <a href="articles/quickstart.html">Start Here →</a>
+</div>
+<div style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px;">
+  <h3>🎯 Result Object</h3>
+  <p>Master the CurlResult API</p>
+  <a href="articles/understanding-result.html">Learn More →</a>
+</div>
+<div style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px;">
+  <h3>📖 User Manual</h3>
+  <p>Complete guide to using CurlDotNet</p>
+  <a href="manual/index.html">Browse Manual →</a>
+</div>
+<div style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px;">
+  <h3>🚀 Getting Started</h3>
+  <p>Installation and first steps</p>
+  <a href="manual/getting-started/index.html">Start Guide →</a>
+</div>
+<div style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px;">
+  <h3>📘 Tutorials</h3>
+  <p>Step-by-step learning path</p>
+  <a href="manual/tutorials/index.html">Learn More →</a>
+</div>
+<div style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px;">
+  <h3>🍳 Cookbook</h3>
+  <p>Ready-to-use code recipes</p>
+  <a href="manual/cookbook/index.html">View Recipes →</a>
+</div>
+<div style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px;">
+  <h3>📋 API Reference</h3>
+  <p>Complete API documentation</p>
+  <a href="api/index.html">API Docs →</a>
+</div>
+<div style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px;">
+  <h3>🔧 Troubleshooting</h3>
+  <p>Solutions to common issues</p>
+  <a href="manual/troubleshooting/index.html">Get Help →</a>
+</div>
+</div>
+<h2 id="why-curldotnet">Why CurlDotNet?</h2>
+<ul>
+<li><strong>🚀 Familiar Syntax</strong> - Use curl commands you already know</li>
+<li><strong>📦 Pure .NET</strong> - No WSL, no native dependencies, just C#</li>
+<li><strong>⚡ Modern Async</strong> - Full async/await support throughout</li>
+<li><strong>🎯 Type Safe</strong> - Strongly typed responses and options</li>
+<li><strong>🔧 Flexible APIs</strong> - String, Builder, or Low-level access</li>
+<li><strong>💪 Production Ready</strong> - Battle-tested in real applications</li>
+</ul>
+<h2 id="three-ways-to-use-curldotnet">Three Ways to Use CurlDotNet</h2>
+<h3 id="1-string-api---use-curl-commands-directly">1. String API - Use curl commands directly</h3>
+<pre><code class="lang-csharp">var result = await Curl.ExecuteAsync(&quot;curl -X POST https://api.example.com -d 'data'&quot;);
+</code></pre>
+<h3 id="2-builder-api---fluent-interface">2. Builder API - Fluent interface</h3>
+<pre><code class="lang-csharp">var result = await new CurlRequestBuilder()
+    .WithUrl(&quot;https://api.example.com&quot;)
+    .WithMethod(&quot;POST&quot;)
+    .WithBody(&quot;data&quot;)
+    .ExecuteAsync();
+</code></pre>
+<h3 id="3-libcurl-api---low-level-control">3. LibCurl API - Low-level control</h3>
+<pre><code class="lang-csharp">using var curl = new LibCurl();
+var result = await curl.PostAsync(&quot;https://api.example.com&quot;, &quot;data&quot;);
+</code></pre>
+<h2 id="installation">Installation</h2>
+<pre><code class="lang-bash">dotnet add package CurlDotNet
+</code></pre>
+<p>Or via Package Manager:</p>
+<pre><code class="lang-powershell">Install-Package CurlDotNet
+</code></pre>
+<h2 id="popular-topics">Popular Topics</h2>
+<ul>
+<li><a href="manual/tutorials/04-your-first-request.html">Making Your First Request</a></li>
+<li><a href="manual/authentication/index.html">Authentication Methods</a></li>
+<li><a href="manual/cookbook/beginner/handle-errors.html">Error Handling</a></li>
+<li><a href="manual/cookbook/beginner/send-json.html">Working with JSON</a></li>
+<li><a href="manual/cookbook/beginner/upload-file.html">File Uploads</a></li>
+<li><a href="manual/advanced/performance.html">Performance Optimization</a></li>
+</ul>
+<h2 id="get-help">Get Help</h2>
+<ul>
+<li>📖 <a href="manual/index.html">User Manual</a> - Complete documentation</li>
+<li>💬 <a href="https://github.com/jacob-mellor/curl-dot-net/discussions">GitHub Discussions</a> - Ask questions</li>
+<li>🐛 <a href="https://github.com/jacob-mellor/curl-dot-net/issues">Report Issues</a> - Report bugs</li>
+<li>📦 <a href="https://www.nuget.org/packages/CurlDotNet/">NuGet Package</a> - Package details</li>
+</ul>
+<hr>
+<div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #f8f9fa;">
+  <p><strong>Ready to get started?</strong></p>
+  <a href="manual/getting-started/index.html" style="display: inline-block; padding: 0.75rem 2rem; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">Get Started with CurlDotNet →</a>
+</div>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/jacob-mellor/curl-dot-net/blob/master/docs/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright © 2024 CurlDotNet | <a href='https://www.nuget.org/packages/CurlDotNet/'>NuGet</a> | <a href='https://github.com/jacob-mellor/curl-dot-net'>GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
