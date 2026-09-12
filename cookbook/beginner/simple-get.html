@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Recipe: Simple GET Request | CurlDotNet - Pure .NET curl for C# </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Recipe: Simple GET Request | CurlDotNet - Pure .NET curl for C# ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/jacob-mellor/curl-dot-net/blob/master/docs/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="CurlDotNet">
+            CurlDotNet
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="recipe-simple-get-request">Recipe: Simple GET Request</h1>
+
+<h2 id="-what-youll-build">🎯 What You'll Build</h2>
+<p>A program that fetches data from a web API using a GET request - the most common HTTP operation using <strong>CurlDotNet</strong>, the pure .NET implementation of curl.</p>
+<h2 id="-ingredients">🥘 Ingredients</h2>
+<ul>
+<li>CurlDotNet package - Install from <a href="https://www.nuget.org/packages/CurlDotNet/">NuGet</a>: <code>dotnet add package CurlDotNet</code></li>
+<li>5 minutes</li>
+<li>Internet connection</li>
+</ul>
+<h2 id="-what-is-a-get-request">📖 What is a GET Request?</h2>
+<p>A GET request is how you ask a server to send you data. Think of it like:</p>
+<ul>
+<li>Opening a webpage in your browser</li>
+<li>Asking a librarian for a book</li>
+<li>Looking up a word in a dictionary</li>
+</ul>
+<p>GET requests:</p>
+<ul>
+<li><strong>Don't change anything</strong> on the server (read-only)</li>
+<li><strong>Can be bookmarked</strong> and shared</li>
+<li><strong>Can be cached</strong> by browsers and proxies</li>
+<li><strong>Are the default</strong> HTTP method</li>
+</ul>
+<h2 id="-the-recipe">🍳 The Recipe</h2>
+<h3 id="step-1-simplest-possible-get">Step 1: Simplest Possible GET</h3>
+<pre><code class="lang-csharp">using System;
+using System.Threading.Tasks;
+using CurlDotNet;
+
+class Program
+{
+    static async Task Main()
+    {
+        // Just fetch a URL
+        var result = await Curl.ExecuteAsync(&quot;https://api.github.com&quot;);
+
+        Console.WriteLine(result.Body);
+    }
+}
+</code></pre>
+<p>That's it! The simplest GET request possible.</p>
+<h3 id="step-2-get-with-status-check">Step 2: GET with Status Check</h3>
+<pre><code class="lang-csharp">using System;
+using System.Threading.Tasks;
+using CurlDotNet;
+
+class Program
+{
+    static async Task Main()
+    {
+        var result = await Curl.ExecuteAsync(&quot;curl https://api.github.com&quot;);
+
+        if (result.IsSuccess)
+        {
+            Console.WriteLine(&quot;Success!&quot;);
+            Console.WriteLine(result.Body);
+        }
+        else
+        {
+            Console.WriteLine($&quot;Failed with status: {result.StatusCode}&quot;);
+        }
+    }
+}
+</code></pre>
+<h3 id="step-3-get-with-headers">Step 3: GET with Headers</h3>
+<pre><code class="lang-csharp">using System;
+using System.Threading.Tasks;
+using CurlDotNet;
+
+class Program
+{
+    static async Task Main()
+    {
+        // Add custom headers
+        var result = await Curl.ExecuteAsync(@&quot;
+            curl https://api.github.com \
+              -H 'Accept: application/json' \
+              -H 'User-Agent: MyApp/1.0'
+        &quot;);
+
+        if (result.IsSuccess)
+        {
+            Console.WriteLine($&quot;Content-Type: {result.ContentType}&quot;);
+            Console.WriteLine($&quot;Response Length: {result.Body.Length}&quot;);
+        }
+    }
+}
+</code></pre>
+<h2 id="-complete-examples">🎨 Complete Examples</h2>
+<h3 id="example-1-fetch-user-data">Example 1: Fetch User Data</h3>
+<pre><code class="lang-csharp">using System;
+using System.Threading.Tasks;
+using CurlDotNet;
+
+class FetchUser
+{
+    static async Task Main()
+    {
+        Console.WriteLine(&quot;Fetching user data from GitHub...\n&quot;);
+
+        // GET request to GitHub API
+        var result = await Curl.ExecuteAsync(
+            &quot;curl https://api.github.com/users/octocat&quot;
+        );
+
+        if (result.IsSuccess)
+        {
+            // Parse JSON response
+            dynamic user = result.AsJsonDynamic();
+
+            Console.WriteLine($&quot;Username: {user.login}&quot;);
+            Console.WriteLine($&quot;Name: {user.name}&quot;);
+            Console.WriteLine($&quot;Location: {user.location}&quot;);
+            Console.WriteLine($&quot;Public Repos: {user.public_repos}&quot;);
+            Console.WriteLine($&quot;Followers: {user.followers}&quot;);
+            Console.WriteLine($&quot;Following: {user.following}&quot;);
+        }
+        else
+        {
+            Console.WriteLine($&quot;Error: {result.StatusCode}&quot;);
+        }
+    }
+}
+</code></pre>
+<h3 id="example-2-fetch-list-of-items">Example 2: Fetch List of Items</h3>
+<pre><code class="lang-csharp">using System;
+using System.Threading.Tasks;
+using System.Text.Json;
+using CurlDotNet;
+
+public class Post
+{
+    public int UserId { get; set; }
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Body { get; set; }
+}
+
+class FetchPosts
+{
+    static async Task Main()
+    {
+        Console.WriteLine(&quot;Fetching posts...\n&quot;);
+
+        // GET request to JSONPlaceholder API
+        var result = await Curl.ExecuteAsync(
+            &quot;curl https://jsonplaceholder.typicode.com/posts&quot;
+        );
+
+        if (result.IsSuccess)
+        {
+            // Parse JSON array
+            var posts = result.ParseJson&lt;Post[]&gt;();
+
+            Console.WriteLine($&quot;Retrieved {posts.Length} posts:\n&quot;);
+
+            // Show first 5 posts
+            foreach (var post in posts.Take(5))
+            {
+                Console.WriteLine($&quot;#{post.Id}: {post.Title}&quot;);
+                Console.WriteLine($&quot;   {post.Body.Substring(0, 60)}...\n&quot;);
+            }
+        }
+    }
+}
+</code></pre>
+<h3 id="example-3-get-with-query-parameters">Example 3: GET with Query Parameters</h3>
+<pre><code class="lang-csharp">using System;
+using System.Threading.Tasks;
+using CurlDotNet;
+
+class SearchExample
+{
+    static async Task Main()
+    {
+        // Search with query parameters
+        string searchTerm = &quot;dotnet&quot;;
+        int page = 1;
+        int perPage = 10;
+
+        // Build URL with query parameters
+        string url = $&quot;https://api.github.com/search/repositories?q={searchTerm}&amp;page={page}&amp;per_page={perPage}&quot;;
+
+        Console.WriteLine($&quot;Searching for '{searchTerm}'...\n&quot;);
+
+        var result = await Curl.ExecuteAsync($&quot;curl '{url}'&quot;);
+
+        if (result.IsSuccess)
+        {
+            dynamic data = result.AsJsonDynamic();
+
+            Console.WriteLine($&quot;Found {data.total_count} repositories:\n&quot;);
+
+            foreach (var repo in data.items)
+            {
+                Console.WriteLine($&quot;{repo.full_name}&quot;);
+                Console.WriteLine($&quot;  ⭐ {repo.stargazers_count} stars&quot;);
+                Console.WriteLine($&quot;  {repo.description}&quot;);
+                Console.WriteLine();
+            }
+        }
+    }
+}
+</code></pre>
+<h3 id="example-4-get-with-authentication">Example 4: GET with Authentication</h3>
+<pre><code class="lang-csharp">using System;
+using System.Threading.Tasks;
+using CurlDotNet;
+
+class AuthenticatedGet
+{
+    static async Task Main()
+    {
+        // Your API token (keep this secret!)
+        string apiToken = Environment.GetEnvironmentVariable(&quot;GITHUB_TOKEN&quot;)
+                          ?? &quot;your-token-here&quot;;
+
+        Console.WriteLine(&quot;Fetching authenticated user data...\n&quot;);
+
+        // GET with Bearer token authentication
+        var result = await Curl.ExecuteAsync($@&quot;
+            curl https://api.github.com/user \
+              -H 'Authorization: Bearer {apiToken}' \
+              -H 'Accept: application/vnd.github.v3+json'
+        &quot;);
+
+        if (result.IsSuccess)
+        {
+            dynamic user = result.AsJsonDynamic();
+            Console.WriteLine($&quot;Hello, {user.name}!&quot;);
+            Console.WriteLine($&quot;Email: {user.email}&quot;);
+            Console.WriteLine($&quot;Private repos: {user.total_private_repos}&quot;);
+        }
+        else if (result.StatusCode == 401)
+        {
+            Console.WriteLine(&quot;Authentication failed. Check your token.&quot;);
+        }
+        else
+        {
+            Console.WriteLine($&quot;Error: {result.StatusCode}&quot;);
+        }
+    }
+}
+</code></pre>
+<h3 id="example-5-multiple-get-requests">Example 5: Multiple GET Requests</h3>
+<pre><code class="lang-csharp">using System;
+using System.Threading.Tasks;
+using CurlDotNet;
+
+class MultipleRequests
+{
+    static async Task Main()
+    {
+        Console.WriteLine(&quot;Checking multiple services...\n&quot;);
+
+        string[] endpoints = {
+            &quot;https://api.github.com&quot;,
+            &quot;https://httpbin.org/status/200&quot;,
+            &quot;https://jsonplaceholder.typicode.com/posts/1&quot;
+        };
+
+        foreach (var endpoint in endpoints)
+        {
+            try
+            {
+                var result = await Curl.ExecuteAsync($&quot;curl {endpoint}&quot;);
+
+                Console.WriteLine($&quot;✓ {endpoint}&quot;);
+                Console.WriteLine($&quot;  Status: {result.StatusCode}&quot;);
+                Console.WriteLine($&quot;  Size: {result.Body.Length} bytes&quot;);
+                Console.WriteLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($&quot;✗ {endpoint}&quot;);
+                Console.WriteLine($&quot;  Error: {ex.Message}&quot;);
+                Console.WriteLine();
+            }
+        }
+    }
+}
+</code></pre>
+<h2 id="-variations">🎨 Variations</h2>
+<h3 id="using-fluent-api">Using Fluent API</h3>
+<pre><code class="lang-csharp">using CurlDotNet.Core;
+
+// Instead of curl string
+var result = await CurlRequestBuilder
+    .Get(&quot;https://api.github.com/users/octocat&quot;)
+    .WithHeader(&quot;Accept&quot;, &quot;application/json&quot;)
+    .WithHeader(&quot;User-Agent&quot;, &quot;MyApp/1.0&quot;)
+    .ExecuteAsync();
+</code></pre>
+<h3 id="get-with-timeout">GET with Timeout</h3>
+<pre><code class="lang-csharp">// Set a 10-second timeout
+var result = await Curl.ExecuteAsync(@&quot;
+    curl --connect-timeout 10 \
+         --max-time 30 \
+         https://api.example.com
+&quot;);
+</code></pre>
+<h3 id="get-with-redirect-following">GET with Redirect Following</h3>
+<pre><code class="lang-csharp">// Follow redirects automatically
+var result = await Curl.ExecuteAsync(@&quot;
+    curl -L https://bit.ly/some-shortened-url
+&quot;);
+</code></pre>
+<h3 id="get-and-save-to-file">GET and Save to File</h3>
+<pre><code class="lang-csharp">// Save directly to file
+var result = await Curl.ExecuteAsync(@&quot;
+    curl -o data.json https://api.example.com/data
+&quot;);
+
+// Or save after fetching
+var result = await Curl.ExecuteAsync(&quot;curl https://api.example.com/data&quot;);
+result.SaveToFile(&quot;data.json&quot;);
+</code></pre>
+<h2 id="-working-with-different-response-types">🔧 Working with Different Response Types</h2>
+<h3 id="json-response">JSON Response</h3>
+<pre><code class="lang-csharp">var result = await Curl.ExecuteAsync(&quot;curl https://api.github.com&quot;);
+
+// Method 1: Parse to dynamic
+dynamic data = result.AsJsonDynamic();
+Console.WriteLine(data.current_user_url);
+
+// Method 2: Parse to strongly-typed object
+var apiInfo = result.ParseJson&lt;GitHubApiInfo&gt;();
+Console.WriteLine(apiInfo.CurrentUserUrl);
+</code></pre>
+<h3 id="xml-response">XML Response</h3>
+<pre><code class="lang-csharp">var result = await Curl.ExecuteAsync(&quot;curl https://example.com/data.xml&quot;);
+string xml = result.Body;
+
+// Parse using your preferred XML library
+var doc = System.Xml.Linq.XDocument.Parse(xml);
+</code></pre>
+<h3 id="plain-text-response">Plain Text Response</h3>
+<pre><code class="lang-csharp">var result = await Curl.ExecuteAsync(&quot;curl https://example.com/readme.txt&quot;);
+string text = result.Body;
+Console.WriteLine(text);
+</code></pre>
+<h3 id="binary-response">Binary Response</h3>
+<pre><code class="lang-csharp">var result = await Curl.ExecuteAsync(&quot;curl https://example.com/image.jpg&quot;);
+
+// Save binary data
+await File.WriteAllBytesAsync(&quot;image.jpg&quot;,
+    System.Text.Encoding.UTF8.GetBytes(result.Body));
+</code></pre>
+<h2 id="-troubleshooting">🐛 Troubleshooting</h2>
+<h3 id="problem-404-not-found">Problem: &quot;404 Not Found&quot;</h3>
+<p><strong>Cause:</strong> The URL doesn't exist or is wrong.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="lang-csharp">var result = await Curl.ExecuteAsync(&quot;curl https://api.github.com/users/octocat&quot;);
+
+if (result.StatusCode == 404)
+{
+    Console.WriteLine(&quot;User not found. Check the username.&quot;);
+}
+</code></pre>
+<p>For more details, see our <a href="https://jacob-mellor.github.io/curl-dot-net/troubleshooting/common-issues.html#http-errors">HTTP error troubleshooting guide</a>.</p>
+<h3 id="problem-403-forbidden">Problem: &quot;403 Forbidden&quot;</h3>
+<p><strong>Cause:</strong> You need authentication or don't have permission.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="lang-csharp">// Add authentication
+var result = await Curl.ExecuteAsync(@&quot;
+    curl https://api.github.com/user \
+      -H 'Authorization: Bearer YOUR_TOKEN'
+&quot;);
+</code></pre>
+<p>For more details, see our <a href="https://jacob-mellor.github.io/curl-dot-net/troubleshooting/common-issues.html#authentication-errors">authentication troubleshooting guide</a>.</p>
+<h3 id="problem-response-is-empty">Problem: Response is Empty</h3>
+<p><strong>Cause:</strong> The endpoint might not return data, or there's an error.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="lang-csharp">var result = await Curl.ExecuteAsync(&quot;curl https://api.example.com&quot;);
+
+if (string.IsNullOrEmpty(result.Body))
+{
+    Console.WriteLine(&quot;Empty response received&quot;);
+    Console.WriteLine($&quot;Status: {result.StatusCode}&quot;);
+    Console.WriteLine($&quot;Headers: {string.Join(&quot;, &quot;, result.Headers.Keys)}&quot;);
+}
+</code></pre>
+<h3 id="problem-invalid-json">Problem: Invalid JSON</h3>
+<p><strong>Cause:</strong> The response isn't valid JSON.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="lang-csharp">try
+{
+    var data = result.ParseJson&lt;MyType&gt;();
+}
+catch (System.Text.Json.JsonException ex)
+{
+    Console.WriteLine(&quot;Response is not valid JSON:&quot;);
+    Console.WriteLine(result.Body);
+}
+</code></pre>
+<p>For more details, see our <a href="https://jacob-mellor.github.io/curl-dot-net/troubleshooting/common-issues.html#json-parsing-errors">JSON troubleshooting guide</a>.</p>
+<h3 id="problem-timeout">Problem: Timeout</h3>
+<p><strong>Cause:</strong> Server is slow or not responding.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="lang-csharp">// Increase timeout
+var result = await Curl.ExecuteAsync(@&quot;
+    curl --connect-timeout 30 \
+         --max-time 60 \
+         https://slow-api.example.com
+&quot;);
+</code></pre>
+<p>For more details, see our <a href="https://jacob-mellor.github.io/curl-dot-net/troubleshooting/common-issues.html#timeout-errors">timeout troubleshooting guide</a>.</p>
+<h2 id="-query-parameters-guide">📊 Query Parameters Guide</h2>
+<h3 id="building-urls-with-parameters">Building URLs with Parameters</h3>
+<pre><code class="lang-csharp">// Method 1: Manual string building
+string url = $&quot;https://api.example.com/search?q={searchTerm}&amp;limit={limit}&quot;;
+
+// Method 2: Uri.EscapeDataString for special characters
+string safeSearch = Uri.EscapeDataString(&quot;C# programming&quot;);
+string url = $&quot;https://api.example.com/search?q={safeSearch}&quot;;
+
+// Method 3: Using query builder
+var queryParams = new Dictionary&lt;string, string&gt;
+{
+    [&quot;q&quot;] = &quot;dotnet&quot;,
+    [&quot;page&quot;] = &quot;1&quot;,
+    [&quot;per_page&quot;] = &quot;20&quot;,
+    [&quot;sort&quot;] = &quot;stars&quot;
+};
+
+string query = string.Join(&quot;&amp;&quot;, queryParams.Select(p =&gt; $&quot;{p.Key}={Uri.EscapeDataString(p.Value)}&quot;));
+string url = $&quot;https://api.example.com/search?{query}&quot;;
+</code></pre>
+<h3 id="common-query-parameters">Common Query Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Purpose</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>q</code></td>
+<td>Search query</td>
+<td><code>?q=dotnet</code></td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td>Pagination page number</td>
+<td><code>?page=2</code></td>
+</tr>
+<tr>
+<td><code>per_page</code> / <code>limit</code></td>
+<td>Items per page</td>
+<td><code>?per_page=20</code></td>
+</tr>
+<tr>
+<td><code>sort</code></td>
+<td>Sort order</td>
+<td><code>?sort=created</code></td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>Ascending/descending</td>
+<td><code>?order=desc</code></td>
+</tr>
+<tr>
+<td><code>filter</code></td>
+<td>Filter results</td>
+<td><code>?filter=active</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="-best-practices">🎓 Best Practices</h2>
+<h3 id="1-always-check-status">1. Always Check Status</h3>
+<pre><code class="lang-csharp">var result = await Curl.ExecuteAsync(&quot;curl https://api.example.com&quot;);
+
+if (!result.IsSuccess)
+{
+    Console.WriteLine($&quot;Request failed: {result.StatusCode}&quot;);
+    return;
+}
+
+// Proceed with result.Body
+</code></pre>
+<h3 id="2-use-strong-types">2. Use Strong Types</h3>
+<pre><code class="lang-csharp">// Define your model
+public class User
+{
+    public string Login { get; set; }
+    public string Name { get; set; }
+    public int PublicRepos { get; set; }
+}
+
+// Parse to strong type
+var user = result.ParseJson&lt;User&gt;();
+Console.WriteLine(user.Name); // IntelliSense works!
+</code></pre>
+<h3 id="3-handle-exceptions">3. Handle Exceptions</h3>
+<pre><code class="lang-csharp">try
+{
+    var result = await Curl.ExecuteAsync(&quot;curl https://api.example.com&quot;);
+    // Process result
+}
+catch (CurlDnsException ex)
+{
+    Console.WriteLine($&quot;DNS error: {ex.Message}&quot;);
+    // See: https://jacob-mellor.github.io/curl-dot-net/troubleshooting/common-issues.html#dns-errors
+}
+catch (CurlTimeoutException ex)
+{
+    Console.WriteLine($&quot;Timeout: {ex.Message}&quot;);
+    // See: https://jacob-mellor.github.io/curl-dot-net/troubleshooting/common-issues.html#timeout-errors
+}
+catch (CurlException ex)
+{
+    Console.WriteLine($&quot;Curl error: {ex.Message}&quot;);
+    // See: https://jacob-mellor.github.io/curl-dot-net/troubleshooting/
+}
+</code></pre>
+<h3 id="4-set-appropriate-headers">4. Set Appropriate Headers</h3>
+<pre><code class="lang-csharp">var result = await Curl.ExecuteAsync(@&quot;
+    curl https://api.example.com \
+      -H 'Accept: application/json' \
+      -H 'User-Agent: MyApp/1.0' \
+      -H 'Accept-Language: en-US'
+&quot;);
+</code></pre>
+<h3 id="5-use-environment-variables-for-secrets">5. Use Environment Variables for Secrets</h3>
+<pre><code class="lang-csharp">// Never hardcode tokens!
+string apiKey = Environment.GetEnvironmentVariable(&quot;API_KEY&quot;);
+
+var result = await Curl.ExecuteAsync($@&quot;
+    curl https://api.example.com \
+      -H 'Authorization: Bearer {apiKey}'
+&quot;);
+</code></pre>
+<h2 id="-next-steps">🚀 Next Steps</h2>
+<p>Now that you can make GET requests:</p>
+<ol>
+<li>Learn to <a href="send-json.html">Send JSON Data</a> with POST requests</li>
+<li>Try <a href="download-file.html">Downloading Files</a></li>
+<li>Explore <a href="handle-errors.html">Handling Errors</a></li>
+<li>Build an <a href="call-api.html">API Client</a></li>
+</ol>
+<h2 id="-related-recipes">📚 Related Recipes</h2>
+<ul>
+<li><a href="call-api.html">Call an API</a> - Building a complete API client</li>
+<li><a href="send-json.html">Send JSON</a> - POST requests with JSON</li>
+<li><a href="handle-errors.html">Handle Errors</a> - Robust error handling</li>
+<li><a href="download-file.html">Download Files</a> - Saving files from URLs</li>
+</ul>
+<h2 id="-key-takeaways">🎓 Key Takeaways</h2>
+<ul>
+<li>GET is for reading data (doesn't change anything)</li>
+<li>Simplest form: <code>Curl.ExecuteAsync(url)</code></li>
+<li>Always check <code>result.IsSuccess</code> before using data</li>
+<li>Use query parameters for filtering and pagination</li>
+<li>Add headers for authentication and content negotiation</li>
+<li>Parse JSON with <code>ParseJson&lt;T&gt;()</code> or <code>AsJsonDynamic()</code></li>
+<li>Handle exceptions for robust applications</li>
+</ul>
+<h2 id="-quick-reference">📖 Quick Reference</h2>
+<pre><code class="lang-csharp">// Basic GET
+var result = await Curl.ExecuteAsync(&quot;https://api.example.com&quot;);
+
+// GET with headers
+var result = await Curl.ExecuteAsync(@&quot;
+    curl https://api.example.com \
+      -H 'Accept: application/json' \
+      -H 'Authorization: Bearer token'
+&quot;);
+
+// GET with query parameters
+var result = await Curl.ExecuteAsync(
+    &quot;curl 'https://api.example.com/search?q=test&amp;limit=10'&quot;
+);
+
+// Parse response
+if (result.IsSuccess)
+{
+    var data = result.ParseJson&lt;MyType&gt;();
+    // or
+    dynamic data = result.AsJsonDynamic();
+}
+</code></pre>
+<hr>
+<p><strong>Need help?</strong> Check <a href="../../troubleshooting/common-issues.html">Troubleshooting</a> | <strong>Have questions?</strong> Ask in <a href="https://github.com/jacob-mellor/curl-dot-net/discussions">Discussions</a></p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/jacob-mellor/curl-dot-net/blob/master/docs/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright © 2024 CurlDotNet | <a href='https://www.nuget.org/packages/CurlDotNet/'>NuGet</a> | <a href='https://github.com/jacob-mellor/curl-dot-net'>GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

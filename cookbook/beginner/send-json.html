@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Recipe: Send JSON Data | CurlDotNet - Pure .NET curl for C# </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Recipe: Send JSON Data | CurlDotNet - Pure .NET curl for C# ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/jacob-mellor/curl-dot-net/blob/master/docs/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="CurlDotNet">
+            CurlDotNet
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="recipe-send-json-data">Recipe: Send JSON Data</h1>
+
+<h2 id="-what-youll-build">🎯 What You'll Build</h2>
+<p>A program that sends JSON data to an API - one of the most common tasks in modern web development.</p>
+<h2 id="-ingredients">🥘 Ingredients</h2>
+<ul>
+<li>CurlDotNet package</li>
+<li>An API endpoint that accepts JSON</li>
+<li>5 minutes</li>
+</ul>
+<h2 id="-the-recipe">📖 The Recipe</h2>
+<h3 id="understanding-json">Understanding JSON</h3>
+<p>JSON (JavaScript Object Notation) is how APIs share data. It looks like this:</p>
+<pre><code class="lang-json">{
+  &quot;name&quot;: &quot;Alice&quot;,
+  &quot;age&quot;: 30,
+  &quot;email&quot;: &quot;alice@example.com&quot;
+}
+</code></pre>
+<h3 id="step-1-simple-json-post">Step 1: Simple JSON POST</h3>
+<pre><code class="lang-csharp">using System;
+using System.Threading.Tasks;
+using CurlDotNet;
+
+class Program
+{
+    static async Task Main()
+    {
+        // Send JSON to an API
+        var result = await Curl.ExecuteAsync(@&quot;
+            curl -X POST https://httpbin.org/post \
+            -H 'Content-Type: application/json' \
+            -d '{&quot;&quot;name&quot;&quot;: &quot;&quot;Alice&quot;&quot;, &quot;&quot;age&quot;&quot;: 30}'
+        &quot;);
+
+        if (result.IsSuccess)
+        {
+            Console.WriteLine(&quot;JSON sent successfully!&quot;);
+            Console.WriteLine(result.Body);  // httpbin echoes back what you sent
+        }
+    }
+}
+</code></pre>
+<h3 id="step-2-using-c-objects">Step 2: Using C# Objects</h3>
+<p>Instead of writing JSON strings, use C# objects:</p>
+<pre><code class="lang-csharp">using System;
+using System.Text.Json;
+using System.Threading.Tasks;
+using CurlDotNet;
+
+// Define your data structure
+public class User
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public string Email { get; set; }
+}
+
+class Program
+{
+    static async Task Main()
+    {
+        // Create a C# object
+        var user = new User
+        {
+            Name = &quot;Alice&quot;,
+            Age = 30,
+            Email = &quot;alice@example.com&quot;
+        };
+
+        // Convert to JSON
+        var json = JsonSerializer.Serialize(user);
+
+        // Send it
+        var result = await Curl.ExecuteAsync($@&quot;
+            curl -X POST https://httpbin.org/post \
+            -H 'Content-Type: application/json' \
+            -d '{json}'
+        &quot;);
+
+        if (result.IsSuccess)
+        {
+            Console.WriteLine(&quot;User data sent!&quot;);
+        }
+    }
+}
+</code></pre>
+<h2 id="-complete-examples">🍳 Complete Examples</h2>
+<h3 id="example-1-create-a-user">Example 1: Create a User</h3>
+<pre><code class="lang-csharp">using System;
+using System.Threading.Tasks;
+using CurlDotNet;
+
+public class CreateUserRequest
+{
+    public string Username { get; set; }
+    public string Password { get; set; }
+    public string Email { get; set; }
+    public string FullName { get; set; }
+}
+
+public class CreateUserResponse
+{
+    public int Id { get; set; }
+    public string Username { get; set; }
+    public string Message { get; set; }
+}
+
+class UserRegistration
+{
+    static async Task Main()
+    {
+        Console.WriteLine(&quot;=== User Registration ===&quot;);
+
+        Console.Write(&quot;Username: &quot;);
+        var username = Console.ReadLine();
+
+        Console.Write(&quot;Email: &quot;);
+        var email = Console.ReadLine();
+
+        Console.Write(&quot;Password: &quot;);
+        var password = Console.ReadLine();
+
+        Console.Write(&quot;Full Name: &quot;);
+        var fullName = Console.ReadLine();
+
+        // Create registration request
+        var registration = new CreateUserRequest
+        {
+            Username = username,
+            Password = password,
+            Email = email,
+            FullName = fullName
+        };
+
+        // Convert to JSON
+        var json = System.Text.Json.JsonSerializer.Serialize(registration);
+
+        // Send to API
+        var result = await Curl.ExecuteAsync($@&quot;
+            curl -X POST https://reqres.in/api/users \
+            -H 'Content-Type: application/json' \
+            -d '{json}'
+        &quot;);
+
+        if (result.IsSuccess)
+        {
+            var response = result.ParseJson&lt;CreateUserResponse&gt;();
+            Console.WriteLine($&quot;✅ User created! ID: {response.Id}&quot;);
+        }
+        else
+        {
+            Console.WriteLine($&quot;❌ Failed: {result.StatusCode}&quot;);
+        }
+    }
+}
+</code></pre>
+<h3 id="example-2-update-settings">Example 2: Update Settings</h3>
+<pre><code class="lang-csharp">using System;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Threading.Tasks;
+using CurlDotNet;
+
+public class Settings
+{
+    public bool Notifications { get; set; }
+    public string Theme { get; set; }
+    public string Language { get; set; }
+    public Dictionary&lt;string, bool&gt; Features { get; set; }
+}
+
+class UpdateSettings
+{
+    static async Task Main()
+    {
+        // Create settings object
+        var settings = new Settings
+        {
+            Notifications = true,
+            Theme = &quot;dark&quot;,
+            Language = &quot;en-US&quot;,
+            Features = new Dictionary&lt;string, bool&gt;
+            {
+                [&quot;beta_features&quot;] = true,
+                [&quot;analytics&quot;] = false,
+                [&quot;recommendations&quot;] = true
+            }
+        };
+
+        // Convert to JSON
+        var json = JsonSerializer.Serialize(settings, new JsonSerializerOptions
+        {
+            WriteIndented = true  // Pretty print
+        });
+
+        Console.WriteLine(&quot;Sending settings:&quot;);
+        Console.WriteLine(json);
+
+        // Send to API
+        var result = await Curl.ExecuteAsync($@&quot;
+            curl -X PUT https://httpbin.org/put \
+            -H 'Content-Type: application/json' \
+            -H 'Authorization: Bearer your-token-here' \
+            -d '{json}'
+        &quot;);
+
+        if (result.IsSuccess)
+        {
+            Console.WriteLine(&quot;✅ Settings updated!&quot;);
+        }
+    }
+}
+</code></pre>
+<h3 id="example-3-complex-nested-json">Example 3: Complex Nested JSON</h3>
+<pre><code class="lang-csharp">using System;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Threading.Tasks;
+using CurlDotNet;
+
+public class Order
+{
+    public string OrderId { get; set; }
+    public Customer Customer { get; set; }
+    public List&lt;Item&gt; Items { get; set; }
+    public Address ShippingAddress { get; set; }
+    public decimal Total { get; set; }
+}
+
+public class Customer
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Email { get; set; }
+}
+
+public class Item
+{
+    public string ProductId { get; set; }
+    public string Name { get; set; }
+    public int Quantity { get; set; }
+    public decimal Price { get; set; }
+}
+
+public class Address
+{
+    public string Street { get; set; }
+    public string City { get; set; }
+    public string State { get; set; }
+    public string ZipCode { get; set; }
+}
+
+class ComplexJsonExample
+{
+    static async Task Main()
+    {
+        // Create complex order object
+        var order = new Order
+        {
+            OrderId = &quot;ORD-12345&quot;,
+            Customer = new Customer
+            {
+                Id = 1001,
+                Name = &quot;John Smith&quot;,
+                Email = &quot;john@example.com&quot;
+            },
+            Items = new List&lt;Item&gt;
+            {
+                new Item
+                {
+                    ProductId = &quot;PROD-001&quot;,
+                    Name = &quot;Laptop&quot;,
+                    Quantity = 1,
+                    Price = 999.99m
+                },
+                new Item
+                {
+                    ProductId = &quot;PROD-002&quot;,
+                    Name = &quot;Mouse&quot;,
+                    Quantity = 2,
+                    Price = 25.99m
+                }
+            },
+            ShippingAddress = new Address
+            {
+                Street = &quot;123 Main St&quot;,
+                City = &quot;Springfield&quot;,
+                State = &quot;IL&quot;,
+                ZipCode = &quot;62701&quot;
+            },
+            Total = 1051.97m
+        };
+
+        // Convert to JSON with formatting
+        var json = JsonSerializer.Serialize(order, new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        });
+
+        Console.WriteLine(&quot;Sending order:&quot;);
+        Console.WriteLine(json);
+
+        // Send to API
+        var result = await Curl.ExecuteAsync($@&quot;
+            curl -X POST https://httpbin.org/post \
+            -H 'Content-Type: application/json' \
+            -H 'X-API-Key: your-api-key' \
+            -d '{json.Replace(&quot;\&quot;&quot;, &quot;\\\&quot;&quot;)}'  // Escape quotes for shell
+        &quot;);
+
+        if (result.IsSuccess)
+        {
+            Console.WriteLine(&quot;✅ Order submitted!&quot;);
+
+            // Parse response
+            dynamic response = result.AsJsonDynamic();
+            Console.WriteLine($&quot;Server received: {response.json.orderId}&quot;);
+        }
+    }
+}
+</code></pre>
+<h2 id="-variations">🎨 Variations</h2>
+<h3 id="using-different-http-methods">Using Different HTTP Methods</h3>
+<pre><code class="lang-csharp">// POST - Create new resource
+var result = await Curl.ExecuteAsync($@&quot;
+    curl -X POST https://api.example.com/users \
+    -H 'Content-Type: application/json' \
+    -d '{json}'
+&quot;);
+
+// PUT - Update entire resource
+var result = await Curl.ExecuteAsync($@&quot;
+    curl -X PUT https://api.example.com/users/123 \
+    -H 'Content-Type: application/json' \
+    -d '{json}'
+&quot;);
+
+// PATCH - Partial update
+var result = await Curl.ExecuteAsync($@&quot;
+    curl -X PATCH https://api.example.com/users/123 \
+    -H 'Content-Type: application/json' \
+    -d '{json}'
+&quot;);
+</code></pre>
+<h3 id="with-authentication">With Authentication</h3>
+<pre><code class="lang-csharp">// Bearer token
+var result = await Curl.ExecuteAsync($@&quot;
+    curl -X POST https://api.example.com/data \
+    -H 'Content-Type: application/json' \
+    -H 'Authorization: Bearer {token}' \
+    -d '{json}'
+&quot;);
+
+// API key
+var result = await Curl.ExecuteAsync($@&quot;
+    curl -X POST https://api.example.com/data \
+    -H 'Content-Type: application/json' \
+    -H 'X-API-Key: {apiKey}' \
+    -d '{json}'
+&quot;);
+
+// Basic auth
+var result = await Curl.ExecuteAsync($@&quot;
+    curl -X POST https://api.example.com/data \
+    -H 'Content-Type: application/json' \
+    -u username:password \
+    -d '{json}'
+&quot;);
+</code></pre>
+<h3 id="json-from-file">JSON from File</h3>
+<pre><code class="lang-csharp">// Read JSON from file
+var json = await File.ReadAllTextAsync(&quot;data.json&quot;);
+
+var result = await Curl.ExecuteAsync($@&quot;
+    curl -X POST https://api.example.com/import \
+    -H 'Content-Type: application/json' \
+    -d '{json}'
+&quot;);
+</code></pre>
+<h2 id="-troubleshooting">🐛 Troubleshooting</h2>
+<h3 id="problem-400-bad-request">Problem: &quot;400 Bad Request&quot;</h3>
+<p><strong>Solution</strong>: Your JSON might be invalid</p>
+<pre><code class="lang-csharp">// Validate JSON first
+try
+{
+    var doc = JsonDocument.Parse(json);
+    // JSON is valid
+}
+catch (JsonException ex)
+{
+    Console.WriteLine($&quot;Invalid JSON: {ex.Message}&quot;);
+}
+</code></pre>
+<h3 id="problem-quotes-breaking-the-command">Problem: Quotes Breaking the Command</h3>
+<p><strong>Solution</strong>: Escape quotes properly</p>
+<pre><code class="lang-csharp">// Method 1: Escape quotes
+var escapedJson = json.Replace(&quot;\&quot;&quot;, &quot;\\\&quot;&quot;);
+
+// Method 2: Use single quotes outside
+var result = await Curl.ExecuteAsync($@&quot;
+    curl -X POST https://api.example.com \
+    -H 'Content-Type: application/json' \
+    -d '{escapedJson}'
+&quot;);
+
+// Method 3: Use CurlRequestBuilder instead
+var result = await new CurlRequestBuilder()
+    .WithUrl(&quot;https://api.example.com&quot;)
+    .WithMethod(HttpMethod.Post)
+    .WithJson(yourObject)
+    .ExecuteAsync();
+</code></pre>
+<h3 id="problem-415-unsupported-media-type">Problem: &quot;415 Unsupported Media Type&quot;</h3>
+<p><strong>Solution</strong>: Add Content-Type header</p>
+<pre><code class="lang-csharp">var result = await Curl.ExecuteAsync($@&quot;
+    curl -X POST https://api.example.com \
+    -H 'Content-Type: application/json' \  {/* Always include this! */}
+    -d '{json}'
+&quot;);
+</code></pre>
+<h3 id="problem-special-characters-in-json">Problem: Special Characters in JSON</h3>
+<p><strong>Solution</strong>: Properly escape special characters</p>
+<pre><code class="lang-csharp">// Use JsonSerializer to handle escaping
+var safeJson = JsonSerializer.Serialize(new
+{
+    message = &quot;Hello \&quot;World\&quot;&quot;,  // Quotes
+    path = @&quot;C:\Users\file.txt&quot;,  // Backslashes
+    unicode = &quot;Hello 世界 🌍&quot;      // Unicode
+});
+</code></pre>
+<h2 id="-common-json-patterns">📊 Common JSON Patterns</h2>
+<h3 id="single-object">Single Object</h3>
+<pre><code class="lang-json">{
+  &quot;name&quot;: &quot;Alice&quot;,
+  &quot;age&quot;: 30
+}
+</code></pre>
+<h3 id="array-of-objects">Array of Objects</h3>
+<pre><code class="lang-json">[
+  {&quot;id&quot;: 1, &quot;name&quot;: &quot;Alice&quot;},
+  {&quot;id&quot;: 2, &quot;name&quot;: &quot;Bob&quot;}
+]
+</code></pre>
+<h3 id="nested-objects">Nested Objects</h3>
+<pre><code class="lang-json">{
+  &quot;user&quot;: {
+    &quot;name&quot;: &quot;Alice&quot;,
+    &quot;address&quot;: {
+      &quot;city&quot;: &quot;New York&quot;,
+      &quot;country&quot;: &quot;USA&quot;
+    }
+  }
+}
+</code></pre>
+<h3 id="mixed-types">Mixed Types</h3>
+<pre><code class="lang-json">{
+  &quot;string&quot;: &quot;text&quot;,
+  &quot;number&quot;: 123,
+  &quot;boolean&quot;: true,
+  &quot;null&quot;: null,
+  &quot;array&quot;: [1, 2, 3],
+  &quot;object&quot;: {&quot;key&quot;: &quot;value&quot;}
+}
+</code></pre>
+<h2 id="-next-steps">🚀 Next Steps</h2>
+<p>Now that you can send JSON:</p>
+<ol>
+<li>Learn to <a href="handle-errors.html">Handle API Responses</a></li>
+<li>Try <a href="upload-file.html">Uploading Files</a></li>
+<li>Check the <a href="../../api-guide/README.html">API Guide</a> for bearer tokens and authentication</li>
+</ol>
+<h2 id="-related-recipes">📚 Related Recipes</h2>
+<ul>
+<li><a href="call-api.html">Call an API</a></li>
+<li><a href="simple-get.html">Simple GET Request</a></li>
+<li><a href="post-form.html">POST Form Data</a></li>
+<li><a href="handle-errors.html">Handle Errors</a></li>
+</ul>
+<h2 id="-key-takeaways">🎓 Key Takeaways</h2>
+<ul>
+<li>Always set <code>Content-Type: application/json</code></li>
+<li>Use C# objects and serialize to JSON</li>
+<li>Escape quotes in JSON strings</li>
+<li>Check response status before using data</li>
+<li>Use proper HTTP method (POST, PUT, PATCH)</li>
+</ul>
+<hr>
+<p><strong>Need help?</strong> Check <a href="../../troubleshooting/README.html">Troubleshooting</a> | <strong>Have questions?</strong> Ask in <a href="https://github.com/jacob-mellor/curl-dot-net/discussions">Discussions</a></p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/jacob-mellor/curl-dot-net/blob/master/docs/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright © 2024 CurlDotNet | <a href='https://www.nuget.org/packages/CurlDotNet/'>NuGet</a> | <a href='https://github.com/jacob-mellor/curl-dot-net'>GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
